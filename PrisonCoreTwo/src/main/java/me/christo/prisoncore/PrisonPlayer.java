@@ -269,4 +269,19 @@ public class PrisonPlayer {
         player.get().set(path, object);
         player.save();
     }
+
+   /*
+
+   Starter Tool Methods
+
+    */
+
+    public static boolean isHoldingTool() {
+
+        //if(p.getItemInHand equals starter tool)
+        //return true;
+        //return false
+        return false;
+
+    }
 }
