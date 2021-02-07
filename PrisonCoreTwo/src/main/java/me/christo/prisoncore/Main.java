@@ -2,6 +2,7 @@ package me.christo.prisoncore;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import me.christo.prisoncore.CoreEvents.FirstJoinEvent;
+import me.christo.prisoncore.Crates.Commands.CratesCommand;
 import me.christo.prisoncore.Economy.Commands.BalanceCommand;
 import me.christo.prisoncore.Economy.Commands.EconomyCommand;
 import me.christo.prisoncore.Economy.Commands.PayCommand;
@@ -55,6 +56,7 @@ public final class Main extends JavaPlugin {
         getCommand("createmine").setExecutor(new CreateMineCommand());
         getCommand("fill").setExecutor(new FillCommand());
         getCommand("zone").setExecutor(new ZoneCommand());
+        getCommand("crates").setExecutor(new CratesCommand());
 
 
         Gangs.loadFile();
