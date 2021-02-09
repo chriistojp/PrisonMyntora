@@ -48,6 +48,15 @@ public class Goals {
             e.printStackTrace();
         }
     }
+    public static void save() {
+        try {
+            goals.save(goalsFile);
+        } catch (IOException e) {
+            System.out.println("error");
+            e.printStackTrace();
+        }
+    }
+
 
 
 

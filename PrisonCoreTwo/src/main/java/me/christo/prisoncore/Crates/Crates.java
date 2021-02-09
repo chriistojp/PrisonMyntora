@@ -1,6 +1,7 @@
 package me.christo.prisoncore.Crates;
 
 import me.christo.prisoncore.Main;
+import me.christo.prisoncore.Utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -14,6 +15,7 @@ import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.material.Chest;
 
 import java.io.File;
@@ -70,7 +72,16 @@ public class Crates {
         Location chest = b.getLocation();
 
         Location loc = new Location(b.getWorld(), b.getX() + 1, b.getY() + .5, b.getZ() + .75);
+        Location locTwo = new Location(b.getWorld(), b.getX() + 1, b.getY() + .75, b.getZ() + .75);
+        locTwo.setYaw(90);
         loc.setYaw(90);
+
+
+        ArmorStand asTwo = (ArmorStand) b.getWorld().spawnEntity(locTwo, EntityType.ARMOR_STAND);
+        asTwo.setGravity(false);
+        asTwo.setCustomName("haha");
+        asTwo.setCustomNameVisible(true);
+
 
         ArmorStand as = (ArmorStand) b.getWorld().spawnEntity(loc, EntityType.ARMOR_STAND);
         as.getBodyPose().add(48, 0, 72);
@@ -78,7 +89,15 @@ public class Crates {
         as.setGravity(false);
         b.getWorld().getBlockAt(chest).setType(Material.CHEST);
 
-        Block block = p.getWorld().getBlockAt(chest);
+        Block block = p.getWorld().getBlockAt(b.getLocation());
+        org.bukkit.material.Chest chestData = new Chest(Material.CHEST);
+        org.bukkit.block.Chest chest1 = (org.bukkit.block.Chest) block.getState();
+
+        System.out.println(Util.getOppositeCardinal(p));
+        chestData.setFacingDirection(BlockFace.valueOf(Util.getOppositeCardinal(p)));
+        chest1.setData(chestData);
+        chest1.update();
+
 
 
         int count = 1;

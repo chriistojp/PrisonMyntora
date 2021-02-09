@@ -5,6 +5,8 @@ import me.christo.prisoncore.Utils.Gui;
 import me.christo.prisoncore.Utils.Util;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Arrays;
+
 public class InputRewardsGUI {
 
     public static Gui main(String goal) {
@@ -27,9 +29,15 @@ public class InputRewardsGUI {
             int count = 0;
             for(ItemStack i : rewards.getContents()) {
 
+                if(i == null) {
+                    continue;
+                }
+                System.out.println(i);
                 Goals.getFile().set("goals." + goal + ".rewards." + count, i);
                 e.getPlayer().sendMessage(Util.color(Goals.getFile().getString("messages.updatedRewards")
                 .replaceAll("%goal%", goal)));
+                Goals.save();
+                count++;
             }
 
         });

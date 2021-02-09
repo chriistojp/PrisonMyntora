@@ -140,5 +140,37 @@ public class Mines {
         });
 
     }
+    public static void fill(Material m, String mine) {
+
+        World w = Bukkit.getWorld(Objects.requireNonNull(Mines.getFile().getString("mines.world")));
+
+        ProtectedRegion r = Main.getWorldGuard().getRegionManager(w)
+                .getRegion(mine + "-mine");
+
+
+        assert w != null;
+        AsyncWorld world = AsyncWorld.create(new WorldCreator(w.getName()));
+
+        TaskManager.IMP.taskWhenFree(new Runnable() {
+            @Override
+            public void run() {
+                for (int x = r.getMinimumPoint().getBlockX(); x < r.getMaximumPoint().getBlockX() + 1; x++) {
+                    for (int y = r.getMinimumPoint().getBlockY(); y < r.getMaximumPoint().getBlockY()
+                            + 1; y++) {
+                        for (int z = r.getMinimumPoint().getBlockZ(); z < r.getMaximumPoint().getBlockZ()
+                                + 1; z++) {
+
+                                    world.getBlockAt(new Location(w, x, y, z)).setType(m);
+
+                        }
+                    }
+                }
+                world.commit();
+                world.clear();
+
+            }
+        });
+
+    }
 
 }

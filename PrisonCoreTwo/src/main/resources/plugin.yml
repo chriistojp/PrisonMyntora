@@ -26,3 +26,5 @@ commands:
     description: zone - test command.
     aliases: [zones]
   crates:
+  goals:
+  pickaxe:

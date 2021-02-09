@@ -12,12 +12,15 @@ import me.christo.prisoncore.Gangs.Commands.GangCommand;
 import me.christo.prisoncore.Gangs.Events.FriendlyFireEvent;
 import me.christo.prisoncore.Gangs.Events.GangChatEvent;
 import me.christo.prisoncore.Gangs.Gangs;
+import me.christo.prisoncore.Goals.Commands.GoalsCommand;
+import me.christo.prisoncore.Goals.Events.BlockGoalEvent;
 import me.christo.prisoncore.Goals.Goals;
 import me.christo.prisoncore.Mines.Commands.CreateMineCommand;
 import me.christo.prisoncore.Mines.Commands.FillCommand;
 import me.christo.prisoncore.Mines.Commands.GiveSelectorCommand;
 import me.christo.prisoncore.Mines.Events.SelectEvent;
 import me.christo.prisoncore.Mines.Mines;
+import me.christo.prisoncore.Pickaxe.Commands.GivePickaxeCommand;
 import me.christo.prisoncore.Pickaxe.Events.BlockCountEvent;
 import me.christo.prisoncore.Pickaxe.StarterPickaxe;
 import me.christo.prisoncore.Utils.Util;
@@ -51,11 +54,8 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FriendlyFireEvent(), this);
         getServer().getPluginManager().registerEvents(new GangChatEvent(), this);
         getServer().getPluginManager().registerEvents(new SelectEvent(), this);
-<<<<<<< Updated upstream
         getServer().getPluginManager().registerEvents(new BlockCountEvent(), this);
-=======
         getServer().getPluginManager().registerEvents(new CratesCommand(), this);
->>>>>>> Stashed changes
 
         getCommand("gang").setExecutor(new GangCommand());
         getCommand("eco").setExecutor(new EconomyCommand());
@@ -66,19 +66,19 @@ public final class Main extends JavaPlugin {
         getCommand("fill").setExecutor(new FillCommand());
         getCommand("zone").setExecutor(new ZoneCommand());
         getCommand("crates").setExecutor(new CratesCommand());
+        getCommand("pickaxe").setExecutor(new GivePickaxeCommand());
 
+        getCommand("goals").setExecutor(new GoalsCommand());
+        //getServer().getPluginManager().registerEvents(new BlockGoalEvent(), this);
 
 
         Gangs.loadFile();
         Economy.loadFile();
         Mines.loadFile();
         Zones.loadFile();
-<<<<<<< Updated upstream
         Goals.loadFile();
         StarterPickaxe.loadFile();
-=======
         Crates.loadFile();
->>>>>>> Stashed changes
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             Util.players.put(p.getUniqueId(), new me.christo.prisoncore.PlayerDataConfig(this, p.getUniqueId()));
