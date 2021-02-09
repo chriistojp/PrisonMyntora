@@ -17,6 +17,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -38,7 +39,7 @@ public class ZoneCommand implements CommandExecutor {
                 Zones.save();
             }
             if (args[0].equalsIgnoreCase("addchest")) {
-                if (p.getTargetBlock(null, 200).getType().equals(Material.CHEST)) {
+                if (p.getTargetBlock((HashSet<Byte>) null, 200).getType().equals(Material.CHEST)) {
 
                     int size;
                     if (Zones.getFile().getConfigurationSection("zones." + args[1] + ".chests") == null) {
@@ -48,7 +49,7 @@ public class ZoneCommand implements CommandExecutor {
                     }
 
 
-                    Zones.getFile().set("zones." + args[1] + ".chests." + size, p.getTargetBlock(null, 200).getLocation());
+                    Zones.getFile().set("zones." + args[1] + ".chests." + size, p.getTargetBlock((HashSet<Byte>) null, 200).getLocation());
                     Zones.save();
 
                     p.sendMessage(Zones.msg("addedChest").replaceAll("%zone%", args[1]));

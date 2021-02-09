@@ -14,6 +14,7 @@
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -73,8 +74,12 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.slf4j:slf4j-api:1.7.26" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: it.unimi.dsi:fastutil:8.2.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.antlr:antlr4-runtime:4.7.2" level="project" />
-    <orderEntry type="library" name="worldguard-6.2" level="project" />
     <orderEntry type="library" name="FastAsyncWorldEdit-bukkit-19.11.13-5505943-1282-22.3.5" level="project" />
+<<<<<<< Updated upstream
     <orderEntry type="library" name="spigot-1.8.8-R0.1-SNAPSHOT-latest" level="project" />
+=======
+    <orderEntry type="library" name="worldguard-6.2.1" level="project" />
+    <orderEntry type="library" name="spigot" level="project" />
+>>>>>>> Stashed changes
   </component>
 </module>

@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="worldguard-6.2">
+  <library name="worldguard-6.2.1">
     <CLASSES>
-      <root url="jar://$USER_HOME$/Downloads/worldguard-6.2.jar!/" />
+      <root url="jar://Z:/downloads/worldguard-6.2.1.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

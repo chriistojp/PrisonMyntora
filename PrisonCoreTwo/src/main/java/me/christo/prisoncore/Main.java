@@ -3,6 +3,7 @@ package me.christo.prisoncore;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import me.christo.prisoncore.CoreEvents.FirstJoinEvent;
 import me.christo.prisoncore.Crates.Commands.CratesCommand;
+import me.christo.prisoncore.Crates.Crates;
 import me.christo.prisoncore.Economy.Commands.BalanceCommand;
 import me.christo.prisoncore.Economy.Commands.EconomyCommand;
 import me.christo.prisoncore.Economy.Commands.PayCommand;
@@ -50,7 +51,11 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FriendlyFireEvent(), this);
         getServer().getPluginManager().registerEvents(new GangChatEvent(), this);
         getServer().getPluginManager().registerEvents(new SelectEvent(), this);
+<<<<<<< Updated upstream
         getServer().getPluginManager().registerEvents(new BlockCountEvent(), this);
+=======
+        getServer().getPluginManager().registerEvents(new CratesCommand(), this);
+>>>>>>> Stashed changes
 
         getCommand("gang").setExecutor(new GangCommand());
         getCommand("eco").setExecutor(new EconomyCommand());
@@ -68,8 +73,12 @@ public final class Main extends JavaPlugin {
         Economy.loadFile();
         Mines.loadFile();
         Zones.loadFile();
+<<<<<<< Updated upstream
         Goals.loadFile();
         StarterPickaxe.loadFile();
+=======
+        Crates.loadFile();
+>>>>>>> Stashed changes
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             Util.players.put(p.getUniqueId(), new me.christo.prisoncore.PlayerDataConfig(this, p.getUniqueId()));
