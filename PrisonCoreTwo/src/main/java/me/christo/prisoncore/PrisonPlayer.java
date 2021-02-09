@@ -2,6 +2,7 @@ package me.christo.prisoncore;
 
 
 import me.christo.prisoncore.Gangs.Gangs;
+import me.christo.prisoncore.Goals.Goals;
 import me.christo.prisoncore.Utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -272,16 +273,56 @@ public class PrisonPlayer {
 
    /*
 
-   Starter Tool Methods
+   Goals Methods
 
     */
 
-    public static boolean isHoldingTool() {
+    public void addGoalProgress(String goal, int amount) {
+        if(goal.equalsIgnoreCase("mining")) {
+            set("goals.mining.blocks", config.getInt("goals.mining.blocks") + amount);
+        }
+    }
 
-        //if(p.getItemInHand equals starter tool)
-        //return true;
-        //return false
-        return false;
+    public void startGoal(String goal) {
+
+        if (!hasActiveGoal(goal)) {
+            if(goal.equalsIgnoreCase("mining")) {
+                    set("goals.mining.blocks", 0);
+               }
+
+
+
+
+
+            p.sendMessage(Util.color(Goals.getFile().getString("messages.startedGoal").replaceAll("%goal%", goal)));
+           }
 
     }
+
+    public boolean hasActiveGoal(String goal) {
+        if(goal.equalsIgnoreCase("mining")) {
+            if (config.isSet("goals.mining.blocks")) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int getGoalProgress(String goal) {
+
+        if(goal.equalsIgnoreCase("mining")) {
+            if(hasActiveGoal("mining")) {
+                return config.getInt("goals.mining.blocks");
+            }
+        }
+
+        return 0;
+    }
+
+    public void startGoalCooldown(String goal) {
+
+
+
+    }
+
 }

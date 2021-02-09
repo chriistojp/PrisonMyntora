@@ -11,11 +11,14 @@ import me.christo.prisoncore.Gangs.Commands.GangCommand;
 import me.christo.prisoncore.Gangs.Events.FriendlyFireEvent;
 import me.christo.prisoncore.Gangs.Events.GangChatEvent;
 import me.christo.prisoncore.Gangs.Gangs;
+import me.christo.prisoncore.Goals.Goals;
 import me.christo.prisoncore.Mines.Commands.CreateMineCommand;
 import me.christo.prisoncore.Mines.Commands.FillCommand;
 import me.christo.prisoncore.Mines.Commands.GiveSelectorCommand;
 import me.christo.prisoncore.Mines.Events.SelectEvent;
 import me.christo.prisoncore.Mines.Mines;
+import me.christo.prisoncore.Pickaxe.Events.BlockCountEvent;
+import me.christo.prisoncore.Pickaxe.StarterPickaxe;
 import me.christo.prisoncore.Utils.Util;
 import me.christo.prisoncore.Zones.Commands.ZoneCommand;
 import me.christo.prisoncore.Zones.Zones;
@@ -47,6 +50,7 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FriendlyFireEvent(), this);
         getServer().getPluginManager().registerEvents(new GangChatEvent(), this);
         getServer().getPluginManager().registerEvents(new SelectEvent(), this);
+        getServer().getPluginManager().registerEvents(new BlockCountEvent(), this);
 
         getCommand("gang").setExecutor(new GangCommand());
         getCommand("eco").setExecutor(new EconomyCommand());
@@ -59,10 +63,13 @@ public final class Main extends JavaPlugin {
         getCommand("crates").setExecutor(new CratesCommand());
 
 
+
         Gangs.loadFile();
         Economy.loadFile();
         Mines.loadFile();
         Zones.loadFile();
+        Goals.loadFile();
+        StarterPickaxe.loadFile();
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             Util.players.put(p.getUniqueId(), new me.christo.prisoncore.PlayerDataConfig(this, p.getUniqueId()));
