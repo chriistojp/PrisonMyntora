@@ -1,6 +1,7 @@
 package me.christo.prisoncore.Crates.Commands;
 
 import me.christo.prisoncore.Crates.Crates;
+import me.christo.prisoncore.Utils.Util;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,7 +15,7 @@ public class CratesCommand implements CommandExecutor, Listener {
     @EventHandler
     public void onCratePlace(BlockPlaceEvent e) {
 
-        Crates.spawnStand(e.getPlayer(), e.getBlock());
+        Crates.spawnStand(e.getPlayer(), e.getBlock(), "common");
 
     }
 
@@ -22,6 +23,9 @@ public class CratesCommand implements CommandExecutor, Listener {
     public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
 
         Player p = (Player) sender;
+
+        Util.createRewardsGui(p, "crates", "common", Crates.getFile(), Crates.cratesFile);
+                //    public static Gui createRewardsGui(Player player, String configSection, String configSectionSubName, FileConfiguration file, File baseFile) {
 
 
 

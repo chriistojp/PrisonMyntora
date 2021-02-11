@@ -23,6 +23,9 @@ import me.christo.prisoncore.Mines.Mines;
 import me.christo.prisoncore.Pickaxe.Commands.GivePickaxeCommand;
 import me.christo.prisoncore.Pickaxe.Events.BlockCountEvent;
 import me.christo.prisoncore.Pickaxe.StarterPickaxe;
+import me.christo.prisoncore.Sets.Commands.GiveSetCommand;
+import me.christo.prisoncore.Sets.IndivdualSets.ZeusSet;
+import me.christo.prisoncore.Sets.Sets;
 import me.christo.prisoncore.Utils.Util;
 import me.christo.prisoncore.Zones.Commands.ZoneCommand;
 import me.christo.prisoncore.Zones.Zones;
@@ -56,6 +59,7 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new SelectEvent(), this);
         getServer().getPluginManager().registerEvents(new BlockCountEvent(), this);
         getServer().getPluginManager().registerEvents(new CratesCommand(), this);
+        getServer().getPluginManager().registerEvents(new ZeusSet(), this);
 
         getCommand("gang").setExecutor(new GangCommand());
         getCommand("eco").setExecutor(new EconomyCommand());
@@ -67,11 +71,12 @@ public final class Main extends JavaPlugin {
         getCommand("zone").setExecutor(new ZoneCommand());
         getCommand("crates").setExecutor(new CratesCommand());
         getCommand("pickaxe").setExecutor(new GivePickaxeCommand());
+        getCommand("set").setExecutor(new GiveSetCommand());
 
         getCommand("goals").setExecutor(new GoalsCommand());
         //getServer().getPluginManager().registerEvents(new BlockGoalEvent(), this);
 
-
+        Sets.loadFile();
         Gangs.loadFile();
         Economy.loadFile();
         Mines.loadFile();
@@ -79,7 +84,6 @@ public final class Main extends JavaPlugin {
         Goals.loadFile();
         StarterPickaxe.loadFile();
         Crates.loadFile();
-
         for (Player p : Bukkit.getOnlinePlayers()) {
             Util.players.put(p.getUniqueId(), new me.christo.prisoncore.PlayerDataConfig(this, p.getUniqueId()));
         }

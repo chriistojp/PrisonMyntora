@@ -60,7 +60,7 @@ public class StarterPickaxe {
         for (String s : getFile().getStringList("pickaxe.lore")) {
             lore.add(Util.color(s).replaceAll("%blocks%", "0"));
         }
-        meta.addEnchant(Enchantment.DIG_SPEED, 10, true);
+        meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
         meta.addEnchant(Enchantment.DURABILITY, 1, true);
         meta.setLore(lore);
         i.setItemMeta(meta);

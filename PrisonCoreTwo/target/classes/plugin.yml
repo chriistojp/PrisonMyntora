@@ -28,3 +28,4 @@ commands:
   crates:
   goals:
   pickaxe:
+  set:
