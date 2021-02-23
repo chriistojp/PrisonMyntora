@@ -8,6 +8,7 @@ import me.christo.prisoncore.Economy.Commands.BalanceCommand;
 import me.christo.prisoncore.Economy.Commands.EconomyCommand;
 import me.christo.prisoncore.Economy.Commands.PayCommand;
 import me.christo.prisoncore.Economy.Economy;
+import me.christo.prisoncore.Formatting.FormattedGUIs;
 import me.christo.prisoncore.Gangs.Commands.GangCommand;
 import me.christo.prisoncore.Gangs.Events.FriendlyFireEvent;
 import me.christo.prisoncore.Gangs.Events.GangChatEvent;
@@ -72,6 +73,7 @@ public final class Main extends JavaPlugin {
         getCommand("crates").setExecutor(new CratesCommand());
         getCommand("pickaxe").setExecutor(new GivePickaxeCommand());
         getCommand("set").setExecutor(new GiveSetCommand());
+        getCommand("format").setExecutor(new FormattedGUIs());
 
         getCommand("goals").setExecutor(new GoalsCommand());
         //getServer().getPluginManager().registerEvents(new BlockGoalEvent(), this);

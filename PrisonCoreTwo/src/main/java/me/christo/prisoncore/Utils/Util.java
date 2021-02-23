@@ -110,6 +110,9 @@ public class Util {
 
             System.out.println(file.getConfigurationSection(configSection + "." + configSectionSubName));
             for (String s : file.getConfigurationSection(configSection + "." + configSectionSubName).getKeys(false)) {
+                if(s.equalsIgnoreCase("item")) {
+                    continue;
+                }
                 System.out.println(s);
                 gui.i(Integer.parseInt(s),
                         file.getItemStack(configSection + "." + configSectionSubName + "." + s + ".itemStack"));
@@ -131,13 +134,10 @@ public class Util {
 
 
                 if(e.getInventory().getItem(i) == null) {
+                    System.out.println(i);
+                    file.set(configSection + "." + configSectionSubName + "." + i, null);
                     continue;
                 }
-
-                //rewards
-                //  items:
-                //    1:
-                //    chance:
                 if (!file.isSet(configSection + "." + configSectionSubName + "." + i + ".chance")) {
                     file.set(configSection + "." + configSectionSubName + "." + i + ".chance", 100);
                 }

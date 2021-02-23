@@ -71,16 +71,42 @@ public class Crates {
 
         p.sendMessage(Util.color("&a&lCRATES &8| &7You are now opening a crate!"));
 
-        int rotation = (int) ((p.getLocation().getYaw() - 180) % 360);
 
         String face = Util.getOppositeCardinal(p);
 
         Location loc = null;
         Location locTwo = null;
 
+
+        //loc two is the one with the hologram
+
+
         if (face.equalsIgnoreCase("NORTH")) {
             loc = new Location(b.getWorld(), b.getX() + .05, b.getY() + .5, b.getZ() + 1);
             locTwo = new Location(b.getWorld(), b.getX() + .5, b.getY() - .5, b.getZ() + .25);
+        }
+        if (face.equalsIgnoreCase("SOUTH")) {
+            loc = new Location(b.getWorld(), b.getX(), b.getY() + .5, b.getZ());
+            locTwo = new Location(b.getWorld(), b.getX() + .5, b.getY() - .5, b.getZ() + .5);
+        }
+
+
+
+        if (face.equalsIgnoreCase("EAST")) {
+            loc = new Location(b.getWorld(), b.getX(), b.getY() + .5, b.getZ());
+            locTwo = new Location(b.getWorld(), b.getX() + .5, b.getY() - .5, b.getZ() + .5);
+        }
+
+
+
+
+
+
+
+
+        if (face.equalsIgnoreCase("WEST")) {
+            loc = new Location(b.getWorld(), b.getX() + 1, b.getY() + .5, b.getZ() + 1);
+            locTwo = new Location(b.getWorld(), b.getX() + .5, b.getY() - .5, b.getZ() + .5);
         }
 
         Location chest = b.getLocation();
@@ -113,38 +139,40 @@ public class Crates {
 
 
         int count = 0;
-            for (String value : Crates.getFile().getConfigurationSection("crates." + crate).getKeys(false)) {
-                count++;
-                System.out.println(count);
+        for (String value : Crates.getFile().getConfigurationSection("crates." + crate).getKeys(false)) {
+            count++;
+            System.out.println(count);
+            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
+                for (int c = 0; c < 37; c++) {
+
+                    int lol = c > 34 ? (c % 5 * 20) + 120 : c > 30 ? (c % 5 * 10) + 60 : c * 2;
+
                     Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-                        for(int c = 0; c < 37; c++) {
-
-                            int lol = c > 34 ? (c % 5 * 20) + 120 : c > 30 ? (c % 5 * 10) + 60 : c * 2;
-
-                            Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
-                                ItemStack i = Crates.getFile().getItemStack("crates." + crate + "." + value + ".itemStack");
-                                ItemMeta meta = i.getItemMeta();
-                                if (!meta.hasDisplayName()) {
-                                    asTwo.setCustomName(i.getType().toString());
-                                } else {
-                                    asTwo.setCustomName(Util.color(meta.getDisplayName()));
-                                }
-                                as.setItemInHand(i);
-                                asTwo.setCustomNameVisible(true);
-                            }, lol);
+                        if (Crates.getFile().getItemStack("crates." + crate + "." + value + ".itemStack") != null) {
+                            ItemStack i = Crates.getFile().getItemStack("crates." + crate + "." + value + ".itemStack");
+                            ItemMeta meta = i.getItemMeta();
+                            if (!meta.hasDisplayName()) {
+                                asTwo.setCustomName(i.getType().toString());
+                            } else {
+                                asTwo.setCustomName(Util.color(meta.getDisplayName()));
+                            }
+                            as.setItemInHand(i);
+                            asTwo.setCustomNameVisible(true);
                         }
-                    }, 20L);
-            }
+                    }, lol - 10);
+                }
+            }, 10L);
+        }
 
         Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
 
-                ItemStack i = null;
+            ItemStack i = null;
 
-                for (String value : Crates.getFile().getConfigurationSection("crates." + crate).getKeys(false)) {
-                    int chance = ThreadLocalRandom.current().nextInt(0, 100);
-                    if (chance <= getFile().getInt("crates." + crate + "." + value + ".chance")) {
-                        i = getFile().getItemStack("crates." + crate + "." + value + ".itemStack");
-                        as.setItemInHand(i);
+            for (String value : Crates.getFile().getConfigurationSection("crates." + crate).getKeys(false)) {
+                int chance = ThreadLocalRandom.current().nextInt(0, 100);
+                if (chance <= getFile().getInt("crates." + crate + "." + value + ".chance")) {
+                    i = getFile().getItemStack("crates." + crate + "." + value + ".itemStack");
+                    as.setItemInHand(i);
                 }
 
             }
@@ -152,25 +180,24 @@ public class Crates {
             Bukkit.getScheduler().runTaskLater(Main.getInstance(), () -> {
 
 
+                Location spawnLoc = new Location(asTwo.getWorld(), asTwo.getLocation().getX(), asTwo.getLocation().getY() + 2, asTwo.getLocation().getZ());
 
-                        Location spawnLoc = new Location(asTwo.getWorld(), asTwo.getLocation().getX(), asTwo.getLocation().getY() + 2, asTwo.getLocation().getZ());
+                final Firework f = spawnLoc.getWorld().spawn(spawnLoc, Firework.class);
+                FireworkMeta fm = f.getFireworkMeta();
 
-                        final Firework f = spawnLoc.getWorld().spawn(spawnLoc, Firework.class);
-                        FireworkMeta fm = f.getFireworkMeta();
+                fm.addEffect(FireworkEffect.builder()
 
-                        fm.addEffect(FireworkEffect.builder()
+                        .flicker(true)
+                        .trail(true)
+                        .with(FireworkEffect.Type.STAR)
+                        .with(FireworkEffect.Type.BALL)
+                        .with(FireworkEffect.Type.BALL_LARGE)
+                        .withColor(Color.PURPLE)
+                        .withColor(Color.WHITE)
+                        .build());
 
-                                .flicker(true)
-                                .trail(true)
-                                .with(FireworkEffect.Type.STAR)
-                                .with(FireworkEffect.Type.BALL)
-                                .with(FireworkEffect.Type.BALL_LARGE)
-                                .withColor(Color.PURPLE)
-                                .withColor(Color.WHITE)
-                                .build());
-
-                        fm.setPower(0);
-                        f.setFireworkMeta(fm);
+                fm.setPower(0);
+                f.setFireworkMeta(fm);
 
 
                 p.getInventory().addItem(finalI);
