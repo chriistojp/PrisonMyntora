@@ -1,6 +1,6 @@
-name: PrisonCoreTwo
+name: MyntoraPrison
 version: 1.0-SNAPSHOT
-main: me.christo.prisoncore.Main
+main: me.christo.prisoncore.Prison
 api-version: 1.16
 authors: [ Christo ]
 description: Prison Core
@@ -13,9 +13,6 @@ commands:
     aliases: [eco]
   pay:
     description: Used for sending money to other players.
-  balance:
-    description: shows your balance
-    aliases: [bal, money]
   mineselector:
     description: Gives a player a mine selector.\
   createmine:

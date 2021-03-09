@@ -1,9 +1,10 @@
 package me.christo.prisoncore;
 
 
-import me.christo.prisoncore.Gangs.Gangs;
-import me.christo.prisoncore.Goals.Goals;
-import me.christo.prisoncore.Utils.Util;
+import me.christo.prisoncore.managers.Gangs;
+import me.christo.prisoncore.managers.Goals;
+import me.christo.prisoncore.utils.PlayerDataConfig;
+import me.christo.prisoncore.utils.Util;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -16,7 +17,7 @@ public class PrisonPlayer {
 
     Player p;
     FileConfiguration config;
-    me.christo.prisoncore.PlayerDataConfig player;
+    PlayerDataConfig player;
     DecimalFormat df = new DecimalFormat("#.##");
 
 
