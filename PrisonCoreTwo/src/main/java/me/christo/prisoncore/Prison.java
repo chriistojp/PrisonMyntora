@@ -6,12 +6,9 @@ import me.christo.prisoncore.commands.*;
 import me.christo.prisoncore.commands.admin.GenerateMinesCommand;
 import me.christo.prisoncore.commands.admin.PlayerInfoCommand;
 import me.christo.prisoncore.commands.admin.SetPlayerRankCommand;
-import me.christo.prisoncore.events.FirstJoinEvent;
+import me.christo.prisoncore.events.*;
 import me.christo.prisoncore.managers.*;
 import me.christo.prisoncore.guis.FormattedGUIs;
-import me.christo.prisoncore.events.FriendlyFireEvent;
-import me.christo.prisoncore.events.GangChatEvent;
-import me.christo.prisoncore.events.PlayerBlockBreakEvent;
 import me.christo.prisoncore.scoreboard.ScoreboardManager;
 import me.christo.prisoncore.sets.ZeusSet;
 import me.christo.prisoncore.utils.PlayerDataConfig;
@@ -57,6 +54,7 @@ public final class Prison extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerBlockBreakEvent(), this);
         getServer().getPluginManager().registerEvents(new CratesCommand(), this);
         getServer().getPluginManager().registerEvents(new ZeusSet(), this);
+        getServer().getPluginManager().registerEvents(new CellEvents(), this);
 
         getCommand("gang").setExecutor(new GangCommand());
         getCommand("zone").setExecutor(new ZoneCommand());
@@ -74,6 +72,7 @@ public final class Prison extends JavaPlugin {
         Zones.loadFile();
         Goals.loadFile();
         Crates.loadFile();
+        Cells.loadFile();
         for (Player p : Bukkit.getOnlinePlayers()) {
             Util.players.put(p.getUniqueId(), new PlayerDataConfig(this, p.getUniqueId()));
         }
@@ -121,7 +120,10 @@ public final class Prison extends JavaPlugin {
                 .register(new TeleportToMineCommand())
                 .register(new RankupCommand())
                 .register(new PlayerInfoCommand())
-                .register(new SetPlayerRankCommand());
+                .register(new SetPlayerRankCommand())
+                .register(new CellCommand())
+                .register(new GuiTestCommand())
+                .register(new AuctionCommand());
     }
 
 }

@@ -296,6 +296,15 @@ public class Gui implements Listener {
         }
         return this;
     }
+    public Gui i(int slot, ItemStack item, String name, InventoryClickEvent e, String... lore) {
+
+        onClick(event -> {
+            if(event.getSlot() == slot) {
+
+            }
+        });
+        return this;
+    }
 
     public Gui i(int row, int position, ItemStack item, String name, String... lore) {
         getInventory().setItem((position + (row * 9)), getItem(item, color(name)[0], color(lore)));
@@ -552,6 +561,8 @@ public class Gui implements Listener {
 
     public Gui onClick(clickEvent event) {
         this.click = event;
+
+
         return gui;
     }
 

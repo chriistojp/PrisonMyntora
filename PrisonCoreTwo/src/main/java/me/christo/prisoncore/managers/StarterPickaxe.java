@@ -116,12 +116,18 @@ public class StarterPickaxe {
 
     public static boolean holdingPickaxe(Player p) {
 
-        net.minecraft.server.v1_8_R3.ItemStack itemNMS = CraftItemStack.asNMSCopy(p.getItemInHand());
-        net.minecraft.server.v1_8_R3.NBTTagCompound itemC = (itemNMS.hasTag()) ? itemNMS.getTag()
-                : new net.minecraft.server.v1_8_R3.NBTTagCompound();
-
-        if (itemC.get("blocks") != null) {
+        if(p.getItemInHand().getType() == null) {
             return true;
+        }
+        if(p.getItemInHand().getType().equals(Material.DIAMOND_PICKAXE)) {
+
+            net.minecraft.server.v1_8_R3.ItemStack itemNMS = CraftItemStack.asNMSCopy(p.getItemInHand());
+            net.minecraft.server.v1_8_R3.NBTTagCompound itemC = (itemNMS.hasTag()) ? itemNMS.getTag()
+                    : new net.minecraft.server.v1_8_R3.NBTTagCompound();
+
+            if (itemC.get("blocks") != null) {
+                return true;
+            }
         }
         return false;
     }

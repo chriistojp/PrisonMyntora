@@ -107,7 +107,6 @@ public class ScoreboardManager extends Manager implements Listener {
                 }
             }
         };
-        Color.log("ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
     }
     public String color(String s) {
         return ChatColor.translateAlternateColorCodes('&', s);

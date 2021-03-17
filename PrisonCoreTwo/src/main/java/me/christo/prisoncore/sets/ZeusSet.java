@@ -21,28 +21,29 @@ import java.util.List;
 
 public class ZeusSet implements Listener {
 
-    @EventHandler
-    public void onRightClick(PlayerInteractEvent e) {
-
-        Player p = e.getPlayer();
-        if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
-
-            if (e.getPlayer().getItemInHand().hasItemMeta()) {
-                if (e.getPlayer().getItemInHand().getItemMeta().hasDisplayName()) {
-                    if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals(Sets.getString("zeus.boots.name"))) {
-                        if (e.getPlayer().getInventory().getBoots() == null) {
-                            p.sendMessage(Sets.getString("zeus.boots.equipped"));
-                          //  e.setCancelled(true);
-                            p.setAllowFlight(true);
-                            p.setFlying(true);
-                        }
-                    }
-                }
-            }
-
-        }
-
-    }
+//    @EventHandler
+//    public void onRightClick(PlayerInteractEvent e) {
+//
+//        Player p = e.getPlayer();
+//        if (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)) {
+//
+//
+//            if (e.getPlayer().getItemInHand().hasItemMeta()) {
+//                if (e.getPlayer().getItemInHand().getItemMeta().hasDisplayName()) {
+//                    if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equals(Sets.getString("zeus.boots.name"))) {
+//                        if (e.getPlayer().getInventory().getBoots() == null) {
+//                            p.sendMessage(Sets.getString("zeus.boots.equipped"));
+//                          //  e.setCancelled(true);
+//                            p.setAllowFlight(true);
+//                            p.setFlying(true);
+//                        }
+//                    }
+//                }
+//            }
+//
+//        }
+//
+//    }
 
 
 

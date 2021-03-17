@@ -17,7 +17,7 @@ public class PlayerBlockBreakEvent implements Listener {
         Profile profile = Core.getInstance().getProfileManager().getProfile(p);
 
 
-        if(e.getPlayer().getItemInHand() == null) {
+        if(e.getPlayer().getItemInHand().getType() == null) {
             return;
         }
 
