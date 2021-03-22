@@ -1,0 +1,5 @@
+messages:
+  gaveSelector: "&a&lSELECTOR > &7You gave a mine selector to &a%player%"
+  selected: "&a&lSELECTOR > &7Position &a#%pos% &7 set to &a%x%x %y%y %z%z"
+  invalidSelection: "&a&lSELECTOR > &7You haven't made selection &a#%selection%!"
+  createdMine: "&a&lMINE > &7Mine &a%mine% &7has successfully been created!"

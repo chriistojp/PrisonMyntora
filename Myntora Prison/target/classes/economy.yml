@@ -1,0 +1,24 @@
+prefix: '&e&lTOKENS &8&lÂ» &f'
+enabled: true
+messages:
+  moneyReset: You reset &e[player]'s money &fto &e0&f!
+  insufficientBalance: You do not have enough money to afford that!
+  insufficientMoney: That player does not have enough money!
+  setPlayerMoney: You set &e[player]'s money &fto &e[amount]&f!
+  givePlayerMoney: You gave &e[player] [amount] token(s)&f!
+  takePlayerMoney: You took &e[amount] token(s) &ffrom &e[player]&f!
+  moneyBalance: Your current token balance is &e[amount] dollars&f!
+  payedMoney: You paid &e[amount] money &fto &e[player]&f!
+  receivedMoney: You recieved &e[amount] money &ffrom &e[player]&f!
+  depositedMoney: You deposited &e[amount] money&f!
+  inventoryFull: Your inventory was full so your request was cancelled!
+  help:
+    - '&7&lPrison | &e&lMoney Help'
+    - '&e /money - &7Displays your current gem balance.'
+    - '&e /money help - &7Displays this message.'
+    - '&e /money pay (player) [amount] - &7Pay another player money.'
+    - '&e /money withdraw (amount) - &7Withdraw money into items.'
+    - '&e /money reset (player) - &7Reset a players money to 0.'
+    - '&e /money set (player) [amount] - &7Set a players money to a specific amount.'
+    - '&e /money give (player) [amount] - &7Give a player money.'
+    - '&e /money take (player) [amount] - &7Take a players money.'

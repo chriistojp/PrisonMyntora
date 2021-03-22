@@ -1,0 +1,30 @@
+name: MyntoraPrison
+version: ${project.version}
+main: me.christo.prisoncore.Prison
+api-version: 1.16
+authors: [ Christo ]
+description: Prison Core
+website: http://www.devchristo.com/
+commands:
+  gang:
+    description: /gang help
+  economy:
+    description: Main economy command
+    aliases: [eco]
+  pay:
+    description: Used for sending money to other players.
+  mineselector:
+    description: Gives a player a mine selector.\
+  createmine:
+    description: Creates a mine
+  fill:
+    description: fill a mine - test command.
+  zone:
+    description: zone - test command.
+    aliases: [zones]
+  crates:
+    aliases: [crate]
+  goals:
+  pickaxe:
+  set:
+  format:
