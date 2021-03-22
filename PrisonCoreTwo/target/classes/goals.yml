@@ -1,4 +1,0 @@
-messages:
-  miningCompleted: "u have completed mining goal"
-  updatedRewards: "u have updated %goal%"
-  startedGoal: "u have started goal %goal%"

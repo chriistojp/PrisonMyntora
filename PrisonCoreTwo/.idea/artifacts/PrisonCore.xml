@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="PrisonCore">
-    <output-path>$PROJECT_DIR$/../../../.Servers/PrisonCore2 Test/plugins</output-path>
-    <root id="archive" name="PrisonCore.jar">
-      <element id="module-output" name="MyntoraPrison" />
-    </root>
-  </artifact>
-</component>
