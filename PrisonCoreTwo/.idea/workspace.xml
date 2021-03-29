@@ -28,113 +28,63 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0e9e5d1-5848-4c83-8f00-2f88c1d11200" name="Default Changelist" comment="Major Updates">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/PrisonCore.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/FastAsyncWorldEdit_bukkit_19_11_13_5505943_1282_22_3_5.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_findbugs_jsr305_1_3_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_code_gson_gson_2_8_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_guava_guava_21_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_intellectualsites_fawe_FAWE_Bukkit_1_16_583.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_jchronic_0_2_4a.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_lib_jlibnoise_1_0_0.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sk89q_worldedit_worldedit_core_6_1_4_SNAPSHOT.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_thoughtworks_paranamer_paranamer_2_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_schlichtherle_truezip_6_8_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_8_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__net_md_5_bungeecord_chat_1_16_R0_3.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_projectlombok_lombok_1_18_12.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_yaml_snakeyaml_1_26.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__rhino_js_1_7R2.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/MyntoraCore.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/NPC_API.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/spigot.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/worldedit_bukkit_6_1_9.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/worldguard_6_2_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/MyntoraPrison.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/PrisonCoreTwo.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/Manager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/Prison.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/PrisonPlayer.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/AuctionCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/CellCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/CheckBlocksBrokenCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/CratesCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/GangCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/GivePickaxeCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/GiveSetCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/GoalsCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/GuiTestCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/RankupCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/TeleportToMineCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/ZoneCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/admin/GenerateMinesCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/admin/PlayerInfoCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/commands/admin/SetPlayerRankCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/events/BlockGoalEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/events/CellEvents.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/events/FirstJoinEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/events/FriendlyFireEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/events/GangChatEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/events/PlayerBlockBreakEvent.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/guis/FormattedGUIs.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/guis/GoalsGUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/guis/InputRewardsGUI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/Auctions.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/Cells.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/Crates.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/Gangs.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/Goals.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/Mines.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/NPCS.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/Sets.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/StarterPickaxe.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/WorldGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/managers/Zones.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/scoreboard/PrisonScoreboardLine.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/scoreboard/ScoreboardManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/sets/ZeusSet.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/utils/Gui.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/utils/PlayerDataConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/utils/Util.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/me/christo/prisoncore/utils/XMaterial.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cells.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/crates.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/economy.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/gangs.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/goals.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mines.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sets.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/zones.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/crates.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/economy.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/gangs.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/goals.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/christo/prisoncore/PrisonPlayer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/christo/prisoncore/Utils/Gui$clickEvent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/christo/prisoncore/Utils/Gui$closeEvent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/christo/prisoncore/Utils/Gui$dragEvent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/christo/prisoncore/Utils/Gui$openEvent.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/christo/prisoncore/Utils/Gui.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/christo/prisoncore/Utils/Util.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/me/christo/prisoncore/Utils/XMaterial.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mines.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/sets.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/zones.yml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/BlackMarketCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/FarmCellCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/ResetMineCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/StartEventCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/admin/ChristoClearStuff.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/events/FarmCellEvents.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/events/FarmMineSelectorEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/events/FishCatchEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/events/MineSelectorEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/managers/BlackMarket.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/managers/FarmCells.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/pMines/PMine.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/pMines/commands/PrivateMineCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/pMines/guis/MainGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/pMines/guis/MineInvitesGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/pMines/guis/MyMineGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/resources/farmcells.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/resources/market.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/resources/pmine.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/PrisonCoreTwo.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/Prison.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/Prison.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/PrisonPlayer.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/GangCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/GangCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/RankupCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/RankupCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/TeleportToMineCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/TeleportToMineCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/ZoneCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/ZoneCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/admin/GenerateMinesCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/commands/admin/GenerateMinesCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/events/BlockGoalEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/events/FriendlyFireEvent.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/events/GangChatEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/events/GangChatEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/events/PlayerBlockBreakEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/events/PlayerBlockBreakEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/managers/Cells.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/managers/Cells.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/managers/Gangs.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/managers/Gangs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/managers/Mines.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/managers/Mines.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/utils/Util.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/java/me/christo/prisoncore/utils/Util.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/Prison.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/Prison.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/PrisonPlayer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/commands/GangCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/commands/GangCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/commands/RankupCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/commands/RankupCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/commands/TeleportToMineCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/commands/TeleportToMineCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/commands/ZoneCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/commands/ZoneCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/commands/admin/GenerateMinesCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/commands/admin/GenerateMinesCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/events/BlockGoalEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/events/FriendlyFireEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/events/GangChatEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/events/GangChatEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/events/PlayerBlockBreakEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/events/PlayerBlockBreakEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/managers/Cells.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/managers/Cells.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/managers/Gangs.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/managers/Gangs.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/managers/Mines$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/managers/Mines$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/managers/Mines$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/managers/Mines$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/managers/Mines.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/managers/Mines.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/utils/Util.class" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/me/christo/prisoncore/utils/Util.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Myntora Prison/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../Myntora Prison/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +113,7 @@
     </option>
   </component>
   <component name="ProjectId" id="1oAIAl6tXmk1Bx4AH8v6bK9u1BO" />
-  <component name="ProjectLevelVcsManager">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">

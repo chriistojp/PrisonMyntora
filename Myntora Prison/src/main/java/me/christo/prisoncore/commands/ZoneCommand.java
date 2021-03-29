@@ -5,6 +5,7 @@ import me.christo.prisoncore.utils.Util;
 import me.christo.prisoncore.managers.Zones;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.data.Profile;
+import net.myntora.core.core.util.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -27,14 +28,22 @@ public class ZoneCommand implements CommandExecutor {
 
         if (args.length == 2) {
             if (args[0].equalsIgnoreCase("create")) {
-                p.sendMessage(Zones.msg("createdZone").replaceAll("%zone%", args[1]));
-                Zones.getFile().createSection("zones." + args[1]);
-                Zones.save();
+                if(Zones.getFile().isSet("zones." + args[1])) {
+                    p.sendMessage(Color.prison("Zones", "A zone with that name already exists!"));
+                } else {
+                    p.sendMessage(Zones.msg("createdZone").replaceAll("%zone%", args[1]));
+                    Zones.getFile().createSection("zones." + args[1]);
+                    Zones.save();
+                }
             }
             if (args[0].equalsIgnoreCase("delete")) {
-                p.sendMessage(Zones.msg("deletedZone"));
-                Zones.getFile().set("zones." + args[1], null);
-                Zones.save();
+                if(Zones.getFile().isSet("zones." + args[1])) {
+                    p.sendMessage(Zones.msg("deletedZone"));
+                    Zones.getFile().set("zones." + args[1], null);
+                    Zones.save();
+                } else {
+                    p.sendMessage(Color.prison("Zones", "A zone with that name couldn't be found!"));
+                }
             }
             if (args[0].equalsIgnoreCase("addchest")) {
                 if (p.getTargetBlock((HashSet<Byte>) null, 200).getType().equals(Material.CHEST)) {
@@ -45,13 +54,13 @@ public class ZoneCommand implements CommandExecutor {
                     } else {
                         size = Zones.getFile().getConfigurationSection("zones." + args[1] + ".chests").getKeys(false).size();
                     }
-
-
                     Zones.getFile().set("zones." + args[1] + ".chests." + size, p.getTargetBlock((HashSet<Byte>) null, 200).getLocation());
                     Zones.save();
 
                     p.sendMessage(Zones.msg("addedChest").replaceAll("%zone%", args[1]));
                     // Chest chest = (Chest) p.getTargetBlock(null, 200).getState();
+                } else {
+                    p.sendMessage(Color.prison("Zones", "You weren't looking at a chest!"));
                 }
             }
             if (args[0].equalsIgnoreCase("fill")) {

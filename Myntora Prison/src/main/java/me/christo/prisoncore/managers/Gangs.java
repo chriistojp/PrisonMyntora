@@ -2,8 +2,10 @@ package me.christo.prisoncore.managers;
 
 
 import me.christo.prisoncore.Prison;
-import me.christo.prisoncore.PrisonPlayer;
 import me.christo.prisoncore.utils.Util;
+import net.myntora.core.core.Core;
+import net.myntora.core.core.data.Profile;
+import net.myntora.core.core.util.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -11,6 +13,7 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +22,8 @@ public class Gangs {
 
     private static File gangsFile;
     private static FileConfiguration gangs;
+
+    public static List<Player> gangChat = new ArrayList<>();
 
     public static List<String> getConfig(List<String> path) {
 
@@ -83,96 +88,110 @@ public class Gangs {
 
     public static void kickFromGang(Player sender, Player target, String gang) {
 
-        PrisonPlayer player = new PrisonPlayer(sender.getUniqueId());
-        PrisonPlayer kicked = new PrisonPlayer(target.getUniqueId());
+        Profile player = Core.getInstance().getProfileManager().getProfile(sender);
+        Profile kicked = Core.getInstance().getProfileManager().getProfile(target);
 
-        if(player.isGangMember()) {
-            player.sendMessage("you dont have perms to do that");
+
+        if(player.getData().getIsGangMember().getStatus()) {
+            sender.sendMessage(Color.prison("Gangs", "You don't have permission to do that!"));
             return;
         }
 
-        if(player.getGang().equals(kicked.getGang())) {
-            if (kicked.isGangMember()) {
+        if(player.getData().getPrisonGangName().getCell().equals(kicked.getData().getPrisonGangName().getCell())) {
+            if (kicked.getData().getIsGangMember().getStatus()) {
                 List<String> members = gangs.getStringList("Gangs." + gang + ".members");
                 members.remove(target.getName());
                 gangs.set("Gangs." + gang + ".members", members);
 
-                kicked.sendMessage(Util.color(gangs.getString("Messages.kicked")));
+                target.sendMessage(Color.main("Gangs", "You have been kicked from your gang!"));
             }
-            if (kicked.isGangAdmin()) {
-                if(player.isGangLeader()) {
-                    List<String> members = gangs.getStringList("Gangs." + gang + ".admins");
+            if (kicked.getData().getIsGangAdmin().getStatus()) {
+                if(player.getData().getIsGangOwner().getStatus()) {
+                    List<String> members = gangs.getStringList("Gangs." + gang + ".members");
                     members.remove(target.getName());
-                    gangs.set("Gangs." + gang + ".admins", members);
-                    kicked.sendMessage(Util.color(gangs.getString("Messages.kicked")));
+                    gangs.set("Gangs." + gang + ".members", members);
+                    target.sendMessage(Color.main("Gangs", "You have been kicked from your gang!"));
                 } else {
-                    player.sendMessage("you must be the owner to kick admins");
+                    sender.sendMessage(Color.prison("Gangs", "You must be the gang owner to kick admins!"));
                     return;
                 }
             }
             save();
 
-            kicked.setGang(false);
-            kicked.setGangName("");
+            kicked.getData().getPrisonGangName().setCell("none");
+            kicked.getData().getIsGangAdmin().setStatus(false);
+            kicked.getData().getIsGangMember().setStatus(false);
 
-            Gangs.messageAllPlayers(player.getGang(), getFile().getString("Messages.kickedPlayer").replaceAll("%player%", kicked.getName()));
+            kicked.getData().save();
+
+
+
+            Gangs.messageAllPlayers(gang, Util.color("&d" + target.getName() + "&7 has been kicked from the gang!"));
         } else {
-            sender.sendMessage("you guys arent in the same gang");
+            sender.sendMessage(Color.prison("Gangs", "That player is not in your gang!"));
         }
     }
 
     public static void messageAllPlayers(String gang, String message) {
-
-
         for(String s : gangs.getStringList("Gangs." + gang + ".members")) {
-
             Player p = Bukkit.getPlayer(s);
             assert p != null;
-            p.sendMessage(Util.color(message));
+            p.sendMessage(Util.color("&d[Gang Chat] " + message));
 
         }
-        for(String s : gangs.getStringList("Gangs." + gang + ".admins")) {
-
+//        Player p = Bukkit.getPlayer(Objects.requireNonNull(gangs.getString("Gangs." + gang + ".leader")));
+//        assert p != null;
+//        p.sendMessage(Util.color(message));
+    }
+    public static void gangChatMessage(Player originalPlayer, String gang, String message) {
+        for(String s : gangs.getStringList("Gangs." + gang + ".members")) {
             Player p = Bukkit.getPlayer(s);
             assert p != null;
-            p.sendMessage(Util.color(message));
+            p.sendMessage(Util.color("&d[Gang Chat] " + originalPlayer.getName() + ": &7" + message));
 
         }
-
-        Player p = Bukkit.getPlayer(Objects.requireNonNull(gangs.getString("Gangs." + gang + ".leader")));
-        assert p != null;
-        p.sendMessage(Util.color(message));
-
-
-
-
+//        Player p = Bukkit.getPlayer(Objects.requireNonNull(gangs.getString("Gangs." + gang + ".leader")));
+//        assert p != null;
+//        p.sendMessage(Util.color(message));
     }
 
     public static void makeLeader(Player sender, Player target) {
 
 
+        Profile oldLeader = Core.getInstance().getProfileManager().getProfile(sender);
+        Profile newLeader = Core.getInstance().getProfileManager().getProfile(target);
 
-        PrisonPlayer oldLeader = new PrisonPlayer(sender.getUniqueId());
-        PrisonPlayer newLeader = new PrisonPlayer(target.getUniqueId());
 
-        gangs.set("Gangs." + oldLeader.getGang() + ".leader", newLeader.getName());
 
-        List<String> admins = gangs.getStringList("Gangs." + oldLeader.getGang() + ".admins");
-        admins.add(oldLeader.getName());
-        gangs.set("Gangs." + oldLeader.getGang() + ".admins", admins);
+        oldLeader.getData().getIsGangOwner().setStatus(false);
+        oldLeader.getData().getIsGangAdmin().setStatus(true);
 
-        //removing old leader
-        List<String> members = gangs.getStringList("Gangs." + oldLeader.getGang() + ".members");
-        if(members.contains(newLeader.getName())) {
-            members.remove(newLeader.getName());
-            gangs.set("Gangs." + oldLeader.getGang() + ".members", members);
-        }
-        List<String> oldAdmin = gangs.getStringList("Gangs." + oldLeader.getGang() + ".admins");
-        if(oldAdmin.contains(newLeader.getName())) {
-            oldAdmin.remove(newLeader.getName());
-            gangs.set("Gangs." + oldLeader.getGang() + ".admins", oldAdmin);
-        }
-        
+        newLeader.getData().getIsGangAdmin().setStatus(false);
+        newLeader.getData().getIsGangOwner().setStatus(true);
+
+        sender.sendMessage(Color.prison("Gangs", "You have given ownership to &d" + target.getName() + "!"));
+        target.sendMessage(Color.prison("Gangs", "You are now the leader of your gang!"));
+
+//        gangs.set("Gangs." + oldLeader.getGang() + ".leader", newLeader.getName());
+
+
+
+//        List<String> admins = gangs.getStringList("Gangs." + oldLeader.getGang() + ".admins");
+//        admins.add(oldLeader.getName());
+//        gangs.set("Gangs." + oldLeader.getGang() + ".admins", admins);
+//
+//        //removing old leader
+//        List<String> members = gangs.getStringList("Gangs." + oldLeader.getGang() + ".members");
+//        if(members.contains(newLeader.getName())) {
+//            members.remove(newLeader.getName());
+//            gangs.set("Gangs." + oldLeader.getGang() + ".members", members);
+//        }
+//        List<String> oldAdmin = gangs.getStringList("Gangs." + oldLeader.getGang() + ".admins");
+//        if(oldAdmin.contains(newLeader.getName())) {
+//            oldAdmin.remove(newLeader.getName());
+//            gangs.set("Gangs." + oldLeader.getGang() + ".admins", oldAdmin);
+//        }
+
         save();
     }
 

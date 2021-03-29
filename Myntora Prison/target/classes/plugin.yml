@@ -6,8 +6,6 @@ authors: [ Christo ]
 description: Prison Core
 website: http://www.devchristo.com/
 commands:
-  gang:
-    description: /gang help
   economy:
     description: Main economy command
     aliases: [eco]

@@ -31,14 +31,21 @@ public class GenerateMinesCommand extends Command {
     @Override
     public void execute(CommandSender sender, String... args) {
 
-        int toGenerate = Prison.getInstance().getConfig().getInt("generate");
-        for(int i = 0; i < toGenerate; i++) {
+        if (args.length == 1) {
 
-            pasteSchematic((Player) sender);
+            Player p = (Player) sender;
+            pasteSchematic(p.getLocation());
+        } else {
+            int toGenerate = Prison.getInstance().getConfig().getInt("generate");
+            for (int i = 0; i < toGenerate; i++) {
 
+                pasteSchematic((Player) sender);
+
+            }
         }
 
-    }
+
+}
 
     @SneakyThrows
     public void pasteSchematic(Player p) {
@@ -66,6 +73,24 @@ public class GenerateMinesCommand extends Command {
             Prison.getInstance().saveConfig();
 
         }
+
+    }
+
+    @SneakyThrows
+    public void pasteSchematic(Location loc) {
+
+
+
+        File file = new File(Prison.getInstance().getDataFolder() + File.separator + "clipboard.schematic");
+        if (!file.exists()) {
+            Prison.getInstance().saveResource("clipboard.schematic", false);
+        }
+
+        Vector vec = new Vector(loc.getBlockX(), loc.getBlockY(), loc.getBlockZ());
+        World w = new BukkitWorld(Bukkit.getWorld("prison_world"));
+
+        FaweAPI.load(file).paste(w, vec);
+
 
     }
 }

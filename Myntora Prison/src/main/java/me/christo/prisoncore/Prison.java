@@ -3,26 +3,29 @@ package me.christo.prisoncore;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import lombok.Getter;
 import me.christo.prisoncore.commands.*;
+import me.christo.prisoncore.commands.admin.ChristoClearStuff;
 import me.christo.prisoncore.commands.admin.GenerateMinesCommand;
 import me.christo.prisoncore.commands.admin.PlayerInfoCommand;
 import me.christo.prisoncore.commands.admin.SetPlayerRankCommand;
 import me.christo.prisoncore.events.*;
 import me.christo.prisoncore.managers.*;
 import me.christo.prisoncore.guis.FormattedGUIs;
+import me.christo.prisoncore.pMines.PMine;
+import me.christo.prisoncore.pMines.commands.PrivateMineCommand;
+import me.christo.prisoncore.pickaxe.events.DropPickaxeEvent;
+import me.christo.prisoncore.pickaxe.events.PlayerBlockBreakEvent;
+import me.christo.prisoncore.pickaxe.events.SwitchToPickaxeEvent;
+import me.christo.prisoncore.pickaxe.events.ToolRightClickEvent;
 import me.christo.prisoncore.scoreboard.ScoreboardManager;
 import me.christo.prisoncore.sets.ZeusSet;
 import me.christo.prisoncore.shop.commands.ShopCommand;
-import me.christo.prisoncore.utils.PlayerDataConfig;
-import me.christo.prisoncore.utils.Util;
 import net.myntora.core.core.command.CommandLib;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.util.UUID;
 
 public final class Prison extends JavaPlugin {
 
@@ -33,6 +36,8 @@ public final class Prison extends JavaPlugin {
 
     @Getter
     public Manager manager;
+
+
 
     @Override
     public void onEnable() {
@@ -50,14 +55,19 @@ public final class Prison extends JavaPlugin {
         loadCommands();
 
         getServer().getPluginManager().registerEvents(new FirstJoinEvent(), this);
-        getServer().getPluginManager().registerEvents(new FriendlyFireEvent(), this);
-        getServer().getPluginManager().registerEvents(new GangChatEvent(), this);
-        getServer().getPluginManager().registerEvents(new PlayerBlockBreakEvent(), this);
         getServer().getPluginManager().registerEvents(new CratesCommand(), this);
         getServer().getPluginManager().registerEvents(new ZeusSet(), this);
         getServer().getPluginManager().registerEvents(new CellEvents(), this);
+        getServer().getPluginManager().registerEvents(new MineSelectorEvent(), this);
+        getServer().getPluginManager().registerEvents(new FishCatchEvent(), this);
+        getServer().getPluginManager().registerEvents(new FarmMineSelectorEvent(), this);
+        getServer().getPluginManager().registerEvents(new GangChatEvent(), this);
 
-        getCommand("gang").setExecutor(new GangCommand());
+        getServer().getPluginManager().registerEvents(new ToolRightClickEvent(), this);
+        getServer().getPluginManager().registerEvents(new DropPickaxeEvent(), this);
+        getServer().getPluginManager().registerEvents(new PlayerBlockBreakEvent(), this);
+        getServer().getPluginManager().registerEvents(new SwitchToPickaxeEvent(), this);
+
         getCommand("zone").setExecutor(new ZoneCommand());
         getCommand("crates").setExecutor(new CratesCommand());
         getCommand("pickaxe").setExecutor(new GivePickaxeCommand());
@@ -68,16 +78,15 @@ public final class Prison extends JavaPlugin {
         //getServer().getPluginManager().registerEvents(new BlockGoalEvent(), this);
 
         Sets.loadFile();
-        Gangs.loadFile();
         Mines.loadFile();
         Zones.loadFile();
         Goals.loadFile();
         Crates.loadFile();
         Cells.loadFile();
-        for (Player p : Bukkit.getOnlinePlayers()) {
-            Util.players.put(p.getUniqueId(), new PlayerDataConfig(this, p.getUniqueId()));
-        }
-        loadFiles();
+        PMine.loadFile();
+        FarmCells.loadFile();
+        Gangs.loadFile();
+        BlackMarket.loadFile();
     }
 
     @Override
@@ -100,12 +109,6 @@ public final class Prison extends JavaPlugin {
         return gen;
     }
 
-    public void loadFiles() {
-        for (File f : new File(getDataFolder() + File.separator + "players").listFiles()) {
-            PlayerDataConfig pdc = new PlayerDataConfig(this, UUID.fromString(f.getName().replaceFirst(".yml", "")));
-            Util.players.put(pdc.getId(), pdc);
-        }
-    }
     public static WorldGuardPlugin getWorldGuard() {
         Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("WorldGuard");
 
@@ -126,7 +129,14 @@ public final class Prison extends JavaPlugin {
                 .register(new GuiTestCommand())
                 .register(new AuctionCommand())
                 .register(new ShopCommand())
-                .register(new SellCommand());
+                .register(new SellCommand())
+                .register(new ResetMineCommand())
+                .register(new PrivateMineCommand())
+                .register(new StartEventCommand())
+                .register(new FarmCellCommand())
+                .register(new GangCommand())
+                .register(new ChristoClearStuff())
+                .register(new BlackMarketCommand());
     }
 
 }

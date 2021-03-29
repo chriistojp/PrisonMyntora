@@ -4,8 +4,11 @@ package me.christo.prisoncore.utils;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import java.io.File;
 import java.io.IOException;
@@ -23,8 +26,6 @@ public class Util {
     public static String color(String s) {
         return ChatColor.translateAlternateColorCodes('&', s);
     }
-
-    public static Map<UUID, PlayerDataConfig> players = new HashMap<>();
 
     public static String replaceNumbers(Double num) {
         df.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.getDefault()));
@@ -59,6 +60,16 @@ public class Util {
             return "WEST";
         }
         return "";
+    }
+
+    public static ItemStack addGlow(ItemStack i) {
+
+        i.addUnsafeEnchantment(Enchantment.OXYGEN, 1);
+
+        ItemMeta meta = i.getItemMeta();
+        meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        i.setItemMeta(meta);
+        return i;
     }
 
     public static String getOppositeCardinal(Player player) {

@@ -1,0 +1,73 @@
+Messages:
+  invitedMessage: "&3&lMine > &7You have invited &3[player] &7to your mine!"
+  inviteMessage: "&3&lMine > &7You have been invited to &3[player]'s &7mine.&3"
+  #this is automatically added at the end of the msg.
+  clickMessage: " \n&3[Click&3 &3Here]"
+  joinedMessage: "&3&lMine > &7You have successfully joined &3[player]'s &7mine"
+  alreadyMember: "&3&lMine > &3[player] &7is already a part of your mine!"
+  noInvites: "&3&lMine > &7You have no pending invites!"
+  leftMine: "&3&lMine > &7You have left &3[player]'s &7mine!"
+  leftMineOwner: "&3&lMine > &3[player] &7has left your mine!"
+  leaveFail: "&3&lMine > &7You are not a part of that players mine!"
+  removedPlayer: "&3&lMine > &7You have been removed from &3[player]'s &7mine!"
+  removedPlayerOwner: "&3&lMine > &7You removed &3[player] &7from your mine!"
+  removedFail: "&3&lMine > &7That player is not a part of your mine!"
+MainGui:
+  size: 27
+  name: "&3&lMine Settings"
+  fillItem: BLACK_STAINED_GLASS_PANE
+  Items:
+    12:
+      material: DIAMOND_PICKAXE
+      name: "&e&lYour Mine"
+      opensMyMineGui: true
+      glow: true
+      lore:
+        - ""
+        - "&7Manage and view your mine."
+    14:
+      material: FEATHER
+      name: "&a&lJoined Mines"
+      opensInviteGui: true
+      glow: true
+      lore:
+        - ""
+        - "&7View mines you have been added to."
+
+MyMineGui:
+  size: 27
+  name: "test"
+  fillItem: BLACK_STAINED_GLASS_PANE
+  startsAt: 10
+  displayName: "&b&l[player]"
+  displayLore:
+    - ""
+    - "&7This player is a part of your mine."
+
+  Items:
+    1:
+      material: DIAMOND_PICKAXE
+      name: "&e&lYour Mine"
+      lore:
+        -  "&7"
+        -  "&7This menu shows you all of the players that are added to your mine."
+        -  "&7You can do /pmine remove {player} to remove a player from your mine."
+      glow: true
+MineInvitesGui:
+  size: 27
+  name: "test"
+  fillItem: BLACK_STAINED_GLASS_PANE
+  startsAt: 10
+  displayName: "&b&l[player]"
+  displayLore:
+    - ""
+    - "&7Click to teleport to this players mine."
+  Items:
+    1:
+      material: FEATHER
+      name: "&a&lJoined Mines"
+      lore:
+        -  "&7"
+        -  "&7This menu shows you all of the mines you are added to"
+        -  "&7You can do /pmine leave {player} to leave a mine."
+      glow: true

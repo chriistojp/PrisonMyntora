@@ -41,12 +41,16 @@ public class StarterPickaxe {
         lore.add(Util.color("  &c&l&m»&r &7Speed &f") + profile.getPrisonSpeedLevel().getAmount());
         lore.add(Util.color("  &c&l&m»&r &7Haste &f") + profile.getPrisonHasteLevel().getAmount());
         lore.add(Util.color("  &c&l&m»&r &7Jump Boost &f") + profile.getPrisonJumpLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Shard Finder &f") + profile.getPrisonShardFinderLevel().getAmount());
-        meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
-        meta.addEnchant(Enchantment.DURABILITY, 1, true);
+        lore.add(Util.color("  &c&l&m»&r &7Jack Hammer &f") + profile.getPrisonJackHammerLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Laser &f") + profile.getPrisonLaserLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Explosive &f") + profile.getPrisonExplosiveLevel().getAmount());
+        meta.addEnchant(Enchantment.DIG_SPEED, profile.getPrisonEfficiencyLevel().getAmount(), true);
+        meta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, profile.getPrisonFortuneLevel().getAmount(), true);
+        meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         item.setItemMeta(meta);
+
     }
 
     public static void givePickaxe(Player p) {
@@ -67,9 +71,12 @@ public class StarterPickaxe {
         lore.add(Util.color("  &c&l&m»&r &7Speed &f") + profile.getPrisonSpeedLevel().getAmount());
         lore.add(Util.color("  &c&l&m»&r &7Haste &f") + profile.getPrisonHasteLevel().getAmount());
         lore.add(Util.color("  &c&l&m»&r &7Jump Boost &f") + profile.getPrisonJumpLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Shard Finder &f") + profile.getPrisonShardFinderLevel().getAmount());
-        meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
-        meta.addEnchant(Enchantment.DURABILITY, 1, true);
+        lore.add(Util.color("  &c&l&m»&r &7Jack Hammer &f") + profile.getPrisonJackHammerLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Laser &f") + profile.getPrisonLaserLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Explosive &f") + profile.getPrisonExplosiveLevel().getAmount());
+        meta.addEnchant(Enchantment.DIG_SPEED, profile.getPrisonEfficiencyLevel().getAmount(), true);
+        meta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, profile.getPrisonFortuneLevel().getAmount(), true);
+        meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         i.setItemMeta(meta);
@@ -102,9 +109,12 @@ public class StarterPickaxe {
         lore.add(Util.color("  &c&l&m»&r &7Speed &f") + profile.getPrisonSpeedLevel().getAmount());
         lore.add(Util.color("  &c&l&m»&r &7Haste &f") + profile.getPrisonHasteLevel().getAmount());
         lore.add(Util.color("  &c&l&m»&r &7Jump Boost &f") + profile.getPrisonJumpLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Shard Finder &f") + profile.getPrisonShardFinderLevel().getAmount());
-        meta.addEnchant(Enchantment.DIG_SPEED, 1, true);
-        meta.addEnchant(Enchantment.DURABILITY, 1, true);
+        lore.add(Util.color("  &c&l&m»&r &7Jack Hammer &f") + profile.getPrisonJackHammerLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Laser &f") + profile.getPrisonLaserLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Explosive &f") + profile.getPrisonExplosiveLevel().getAmount());
+        meta.addEnchant(Enchantment.DIG_SPEED, profile.getPrisonEfficiencyLevel().getAmount(), true);
+        meta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, profile.getPrisonFortuneLevel().getAmount(), true);
+        meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         i.setItemMeta(meta);
@@ -117,7 +127,7 @@ public class StarterPickaxe {
     public static boolean holdingPickaxe(Player p) {
 
         if(p.getItemInHand().getType() == null) {
-            return true;
+            return false;
         }
         if(p.getItemInHand().getType().equals(Material.DIAMOND_PICKAXE)) {
 
@@ -130,6 +140,19 @@ public class StarterPickaxe {
             }
         }
         return false;
+    }
+
+    public static ItemStack findTool(Player p) {
+        for (ItemStack item : p.getInventory().getContents()) {
+            if (item != null && item.hasItemMeta()) {
+                net.minecraft.server.v1_8_R3.ItemStack itemNMS = CraftItemStack.asNMSCopy(item);
+                if (itemNMS.hasTag() && itemNMS.getTag().hasKey("tool")) {
+                    return item;
+                }
+            }
+        }
+        return null;
+
     }
 
     public static int getBlocks(ItemStack i) {

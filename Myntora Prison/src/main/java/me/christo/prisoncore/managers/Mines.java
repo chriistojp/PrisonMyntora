@@ -22,6 +22,7 @@ public class Mines {
 
     private static File minesFile;
     private static FileConfiguration mines;
+    public static List<String> minesToReset;
 
     public static List<String> getConfig(List<String> path) {
 
@@ -101,12 +102,55 @@ public class Mines {
 
     }
 
-    public static void fill(String mine) {
+//    public static void fill(String mine) {
+//
+//        World w = Bukkit.getWorld(Objects.requireNonNull(Mines.getFile().getString("mines.world")));
+//
+//        ProtectedRegion r = Prison.getWorldGuard().getRegionManager(w)
+//                .getRegion(mine + "-mine");
+//
+//
+//        assert w != null;
+//        AsyncWorld world = AsyncWorld.create(new WorldCreator(w.getName()));
+//
+//        TaskManager.IMP.taskWhenFree(new Runnable() {
+//            @Override
+//            public void run() {
+//                for (int x = r.getMinimumPoint().getBlockX(); x < r.getMaximumPoint().getBlockX() + 1; x++) {
+//                    for (int y = r.getMinimumPoint().getBlockY(); y < r.getMaximumPoint().getBlockY()
+//                            + 1; y++) {
+//                        for (int z = r.getMinimumPoint().getBlockZ(); z < r.getMaximumPoint().getBlockZ()
+//                                + 1; z++) {
+//
+//                            for(String key : Mines.getFile().getConfigurationSection("mines." + mine + ".blocks").getKeys(false)) {
+//                                System.out.println(key);
+//                                System.out.println(Mines.getFile().getString("mines." + mine + ".blocks." + key + ".material"));
+//                                int chance = ThreadLocalRandom.current().nextInt(0, 100);
+//                                if(chance <= Mines.getFile().getInt("mines." + mine + ".blocks." + key + ".chance")) {
+//                                    world.getBlockAt(new Location(w, x, y, z)).setType(Material.matchMaterial(Mines.getFile().getString("mines." + mine + ".blocks." + key + ".material")));
+//                                }
+//
+//                            }
+//                        }
+//                    }
+//                }
+//                world.commit();
+//                world.clear();
+//
+//            }
+//        });
+//
+//    }
 
-        World w = Bukkit.getWorld(Objects.requireNonNull(Mines.getFile().getString("mines.world")));
+    //iron blocks
+    //coal blocks
+    // emerald blocks
+    public static void fillEventsMineOres() {
+
+        World w = Bukkit.getWorld("prison_world");
 
         ProtectedRegion r = Prison.getWorldGuard().getRegionManager(w)
-                .getRegion(mine + "-mine");
+                .getRegion("eventsmine");
 
 
         assert w != null;
@@ -121,15 +165,74 @@ public class Mines {
                         for (int z = r.getMinimumPoint().getBlockZ(); z < r.getMaximumPoint().getBlockZ()
                                 + 1; z++) {
 
-                            for(String key : Mines.getFile().getConfigurationSection("mines." + mine + ".blocks").getKeys(false)) {
-                                System.out.println(key);
-                                System.out.println(Mines.getFile().getString("mines." + mine + ".blocks." + key + ".material"));
-                                int chance = ThreadLocalRandom.current().nextInt(0, 100);
-                                if(chance <= Mines.getFile().getInt("mines." + mine + ".blocks." + key + ".chance")) {
-                                    world.getBlockAt(new Location(w, x, y, z)).setType(Material.matchMaterial(Mines.getFile().getString("mines." + mine + ".blocks." + key + ".material")));
-                                }
+                            int random = ThreadLocalRandom.current().nextInt(0, 11);
+
+                            if(random <= 6) {
+                                world.getBlockAt(new Location(w, x, y, z)).setType(Material.COAL_BLOCK);
+                            } else if (random == 7 || random == 8 || random == 9) {
+                                world.getBlockAt(new Location(w, x, y, z)).setType(Material.IRON_BLOCK);
+                            } else if (random == 10) {
+                                world.getBlockAt(new Location(w, x, y, z)).setType(Material.EMERALD_BLOCK);
+                            }
+
+                        }
+                    }
+                }
+                world.commit();
+                world.clear();
+
+            }
+        });
+        Bukkit.getScheduler().runTaskLater(Prison.getInstance(), () -> {
+
+            TaskManager.IMP.taskWhenFree(new Runnable() {
+                @Override
+                public void run() {
+                    for (int x = r.getMinimumPoint().getBlockX(); x < r.getMaximumPoint().getBlockX() + 1; x++) {
+                        for (int y = r.getMinimumPoint().getBlockY(); y < r.getMaximumPoint().getBlockY()
+                                + 1; y++) {
+                            for (int z = r.getMinimumPoint().getBlockZ(); z < r.getMaximumPoint().getBlockZ()
+                                    + 1; z++) {
+
+                                world.getBlockAt(new Location(w, x, y, z)).setType(Material.AIR);
 
                             }
+                        }
+                    }
+                    world.commit();
+                    world.clear();
+
+                }
+            });
+
+            Bukkit.broadcastMessage(Util.color("&d[Events] &7The Event has ended!"));
+        }, 20 * 30);
+
+    }
+
+
+    public static void fillEventsMine(Material m) {
+
+        World w = Bukkit.getWorld("prison_world");
+
+        ProtectedRegion r = Prison.getWorldGuard().getRegionManager(w)
+                .getRegion("eventsmine");
+
+
+        assert w != null;
+        AsyncWorld world = AsyncWorld.create(new WorldCreator(w.getName()));
+
+        TaskManager.IMP.taskWhenFree(new Runnable() {
+            @Override
+            public void run() {
+                for (int x = r.getMinimumPoint().getBlockX(); x < r.getMaximumPoint().getBlockX() + 1; x++) {
+                    for (int y = r.getMinimumPoint().getBlockY(); y < r.getMaximumPoint().getBlockY()
+                            + 1; y++) {
+                        for (int z = r.getMinimumPoint().getBlockZ(); z < r.getMaximumPoint().getBlockZ()
+                                + 1; z++) {
+
+                            world.getBlockAt(new Location(w, x, y, z)).setType(m);
+
                         }
                     }
                 }
@@ -139,13 +242,40 @@ public class Mines {
             }
         });
 
+        Bukkit.getScheduler().runTaskLater(Prison.getInstance(), () -> {
+
+            TaskManager.IMP.taskWhenFree(new Runnable() {
+                @Override
+                public void run() {
+                    for (int x = r.getMinimumPoint().getBlockX(); x < r.getMaximumPoint().getBlockX() + 1; x++) {
+                        for (int y = r.getMinimumPoint().getBlockY(); y < r.getMaximumPoint().getBlockY()
+                                + 1; y++) {
+                            for (int z = r.getMinimumPoint().getBlockZ(); z < r.getMaximumPoint().getBlockZ()
+                                    + 1; z++) {
+
+                                world.getBlockAt(new Location(w, x, y, z)).setType(Material.AIR);
+
+                            }
+                        }
+                    }
+                    world.commit();
+                    world.clear();
+
+                }
+            });
+
+            Bukkit.broadcastMessage(Util.color("&d[Events] &7The Event has ended!"));
+        }, 20 * 30);
+
+
     }
+
     public static void fill(Material m, String mine) {
 
-        World w = Bukkit.getWorld(Objects.requireNonNull(Mines.getFile().getString("mines.world")));
+        World w = Bukkit.getWorld("prison_world");
 
         ProtectedRegion r = Prison.getWorldGuard().getRegionManager(w)
-                .getRegion(mine + "-mine");
+                .getRegion(mine);
 
 
         assert w != null;
@@ -154,6 +284,7 @@ public class Mines {
         TaskManager.IMP.taskWhenFree(new Runnable() {
             @Override
             public void run() {
+                assert r != null;
                 for (int x = r.getMinimumPoint().getBlockX(); x < r.getMaximumPoint().getBlockX() + 1; x++) {
                     for (int y = r.getMinimumPoint().getBlockY(); y < r.getMaximumPoint().getBlockY()
                             + 1; y++) {
@@ -161,6 +292,7 @@ public class Mines {
                                 + 1; z++) {
 
                                     world.getBlockAt(new Location(w, x, y, z)).setType(m);
+                            System.out.println("set");
 
                         }
                     }

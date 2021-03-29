@@ -35,7 +35,6 @@ public class Cells {
     public static HashMap<Player, Player> inviteHashmap = new HashMap<>();
 
     //puts the auctioneer with the player who last bid so we can remove money
-    public static HashMap<Player, Player> currentBidder = new HashMap<>();
 
     public static void tryToDisband(Player p) {
 

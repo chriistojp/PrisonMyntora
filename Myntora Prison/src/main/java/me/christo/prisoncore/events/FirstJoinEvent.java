@@ -15,8 +15,9 @@ public class FirstJoinEvent implements Listener {
     public void onJoin(PlayerJoinEvent e) {
 
         Player p = e.getPlayer();
-
-        StarterPickaxe.givePickaxe(p);
+        if(!e.getPlayer().hasPlayedBefore()) {
+            StarterPickaxe.givePickaxe(p);
+        }
 
     }
 
