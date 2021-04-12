@@ -34,12 +34,15 @@ public class Cells {
     public static HashMap<Player, Boolean> disbandStatus = new HashMap<>();
     public static HashMap<Player, Player> inviteHashmap = new HashMap<>();
 
+
     //puts the auctioneer with the player who last bid so we can remove money
 
     public static void tryToDisband(Player p) {
 
         disbandStatus.put(p, true);
         p.sendMessage(Color.prison("Cell", "Are you sure you want to disband? Type 'yes' or 'cancel'!"));
+
+
 
     }
 

@@ -2,6 +2,7 @@ package me.christo.prisoncore.scoreboard;
 
 import me.christo.prisoncore.Manager;
 import me.christo.prisoncore.Prison;
+import me.christo.prisoncore.utils.Util;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.data.Profile;
 import net.myntora.core.core.data.mongo.player.Rank;
@@ -62,10 +63,14 @@ public class ScoreboardManager extends Manager implements Listener {
                 } else {
                     scoreboard.get(PrisonScoreboardLine.RANK).write(color("  &7Rank: &d") + Core.getInstance().getProfileManager().getProfile(scoreboard.getOwner()).getData().getRank().getName());
                 }
-                scoreboard.get(PrisonScoreboardLine.BALANCE).write(color("  &7Balance: &d") + Core.getInstance().getProfileManager().getProfile(scoreboard.getOwner()).getData().getPrisonMoney().getAmount());
-                scoreboard.get(PrisonScoreboardLine.SHARDS).write(color("  &7Shards: &d") + Core.getInstance().getProfileManager().getProfile(scoreboard.getOwner()).getData().getPrisonShards().getAmount());
+                scoreboard.get(PrisonScoreboardLine.BALANCE).write(color("  &7Balance: &d") + Util.formatNumber(Core.getInstance().getProfileManager().getProfile(scoreboard.getOwner()).getData().getPrisonMoney().getAmount()));
+                scoreboard.get(PrisonScoreboardLine.SHARDS).write(color("  &7Shards: &d") + Util.formatNumber(Core.getInstance().getProfileManager().getProfile(scoreboard.getOwner()).getData().getPrisonShards().getAmount()));
                 scoreboard.get(PrisonScoreboardLine.GANG).write(color("&d&lGang:"));
-                scoreboard.get(PrisonScoreboardLine.GANG_NAME).write(color("  &7Name: &dThisIsStatic"));
+                if(Core.getInstance().getProfileManager().getProfile(scoreboard.getOwner()).getData().getPrisonGangName().getCell() == null) {
+                    scoreboard.get(PrisonScoreboardLine.GANG_NAME).write(color("  &7Name: &dNone"));
+                } else {
+                    scoreboard.get(PrisonScoreboardLine.GANG_NAME).write(color("  &7Name: &d" + Core.getInstance().getProfileManager().getProfile(scoreboard.getOwner()).getData().getPrisonGangName().getCell()));
+                }
                 for (Rank rank : Rank.values()) {
                     if (!rank.getName().isEmpty()) {
                         scoreboard.getHandle().getTeam(rank.name()).setPrefix(rank.getPrefix());

@@ -91,6 +91,8 @@ public class Gangs {
         Profile player = Core.getInstance().getProfileManager().getProfile(sender);
         Profile kicked = Core.getInstance().getProfileManager().getProfile(target);
 
+        kicked.getData().getPrisonGangName().setCell(null);
+        kicked.getData().save();
 
         if(player.getData().getIsGangMember().getStatus()) {
             sender.sendMessage(Color.prison("Gangs", "You don't have permission to do that!"));

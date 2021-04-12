@@ -32,6 +32,7 @@ public class SetPlayerRankCommand extends Command {
                 Profile profile = Core.getInstance().getProfileManager().getProfile(Bukkit.getPlayer(args[0]));
                 try {
                     profile.getData().setPrisonRank(PrisonRanks.valueOf(args[1].toUpperCase()));
+                    profile.getData().save();
                 } catch (Exception e) {
                     p.sendMessage(Color.prison("Rank", "&7Invalid Rank: &d" + args[1].toUpperCase()));
                     return;

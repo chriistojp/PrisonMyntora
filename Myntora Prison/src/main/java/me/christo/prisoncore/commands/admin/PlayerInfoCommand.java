@@ -1,7 +1,7 @@
 package me.christo.prisoncore.commands.admin;
 
 
-import me.christo.prisoncore.managers.StarterPickaxe;
+import me.christo.prisoncore.pickaxe.StarterPickaxe;
 import me.christo.prisoncore.utils.Gui;
 import me.christo.prisoncore.utils.Util;
 import net.myntora.core.core.Core;
@@ -11,12 +11,12 @@ import net.myntora.core.core.data.Profile;
 import net.myntora.core.core.util.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,14 +32,21 @@ public class PlayerInfoCommand extends Command {
         if(args.length == 1) {
 
             Player p = (Player) sender;
+
+            if(Bukkit.getPlayer(args[0]) == null) {
+                p.sendMessage(Color.prison("Info", args[0] + " was not found online!"));
+                return;
+            }
+
+            OfflinePlayer player = Bukkit.getOfflinePlayer(args[0]);
             p.sendMessage(Color.prison("Info", "Opening..."));
-            infoGui(p, Bukkit.getPlayer(args[0]));
+            infoGui(p, player);
 
         }
 
     }
 
-    public Gui infoGui(Player sender, Player p) {
+    public Gui infoGui(Player sender, OfflinePlayer p) {
 
         Profile profile = Core.getInstance().getProfileManager().getProfile(p);
 

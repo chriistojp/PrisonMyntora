@@ -2,6 +2,7 @@ package me.christo.prisoncore.commands;
 
 
 import com.sk89q.worldguard.bukkit.RegionContainer;
+import me.christo.cooldown.api.API;
 import me.christo.prisoncore.Prison;
 import me.christo.prisoncore.managers.Cells;
 import me.christo.prisoncore.utils.Util;
@@ -17,6 +18,9 @@ import org.bukkit.block.Sign;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Set;
 
 @DynamicCommand(
@@ -31,7 +35,70 @@ public class CellCommand extends Command {
         Player p = (Player) sender;
         String[] blocks = {"A", "B", "C", "D"};
 
+        if(args.length == 0) {
+            API api = new API(p.getUniqueId());
+            if(api.hasCooldown("cell")) {
+
+                long seconds = api.getTimeLeft("cell");
+                long days = seconds / 86400;
+                long hours = (seconds / 3600) - (24 * days);
+                p.sendMessage(Color.prison("Cells", "Your cell has &d" + days + "d " + hours + "h &7before it expires."));
+            } else {
+                p.sendMessage(Color.prison("Cells", "You do not currently have a cell!"));
+            }
+        }
+
         if (args.length == 1) {
+
+            if(args[0].equalsIgnoreCase("resetcooldown")) {
+
+                API api = new API(p.getUniqueId());
+                api.clearCooldown("cell");
+                api.createCooldown("cell", 604800);
+
+            }
+
+
+
+            if(args[0].equalsIgnoreCase("renew")) {
+
+                Profile profile = Core.getInstance().getProfileManager().getProfile(p);
+                String[] block = profile.getData().getPrisonCellName().getCell().split("\\.");
+
+
+                API api = new API(p.getUniqueId());
+
+                if(block[0].equalsIgnoreCase("d")) {
+                    if(profile.getData().getPrisonMoney().getAmount() >= 5000) {
+                        api.clearCooldown("cell");
+                        api.createCooldown("cell", 604800);
+                        profile.getData().getPrisonMoney().decreaseAmount(5000);
+                    }
+                }
+                if(block[0].equalsIgnoreCase("c")) {
+                    if(profile.getData().getPrisonMoney().getAmount() >= 10000) {
+                        api.clearCooldown("cell");
+                        api.createCooldown("cell", 604800);
+                        profile.getData().getPrisonMoney().decreaseAmount(5000);
+                    }
+                }
+                if(block[0].equalsIgnoreCase("b")) {
+                    if(profile.getData().getPrisonMoney().getAmount() >= 25000) {
+                        api.clearCooldown("cell");
+                        api.createCooldown("cell", 604800);
+                        profile.getData().getPrisonMoney().decreaseAmount(5000);
+                    }
+                }
+                if(block[0].equalsIgnoreCase("a")) {
+                    if(profile.getData().getPrisonMoney().getAmount() >= 30000) {
+                        api.clearCooldown("cell");
+                        api.createCooldown("cell", 604800);
+                        profile.getData().getPrisonMoney().decreaseAmount(5000);
+                    }
+                }
+
+            }
+
             if (args[0].equalsIgnoreCase("help")) {
 
                 Profile prf = Core.getInstance().getProfileManager().getProfile(p);
@@ -62,9 +129,21 @@ public class CellCommand extends Command {
                 int z = p.getTargetBlock((Set<Material>) null, 5).getZ();
 
                 Sign sign = (Sign) p.getTargetBlock((Set<Material>) null, 5).getState();
-                sign.setLine(0, Util.color("&7Cell: " + Cells.getCellName.get(p)));
-                sign.setLine(1, Util.color("&cBlock: " + Cells.blockName.get(p)));
-                sign.setLine(2, Util.color("&7Rent: &a$100/wk"));
+                sign.setLine(0, Util.color("&dCell: &7" + (Cells.getCellName.get(p)).toUpperCase()));
+                sign.setLine(1, Util.color("&dBlock: &7" + Cells.blockName.get(p)));
+                String blockName = Cells.blockName.get(p);
+                if(blockName.equalsIgnoreCase("d")) {
+                    sign.setLine(2, Util.color("&dRent: &7$5k/wk"));
+                }
+                if(blockName.equalsIgnoreCase("c")) {
+                    sign.setLine(2, Util.color("&dRent: &7$10k/wk"));
+                }
+                if(blockName.equalsIgnoreCase("b")) {
+                    sign.setLine(2, Util.color("&dRent: &7$25k/wk"));
+                }
+                if(blockName.equalsIgnoreCase("a")) {
+                    sign.setLine(2, Util.color("&dRent: &7$30k/wk"));
+                }
                 sign.setLine(3, Util.color("&7Click to Claim!"));
                 sign.update();
 
@@ -118,6 +197,7 @@ public class CellCommand extends Command {
         }
 
         if(args.length == 2) {
+
             if (args[0].equalsIgnoreCase("invite")) {
                 Profile profile = Core.getInstance().getProfileManager().getProfile(p);
                 if (profile.getData().getPrisonCellStatus().getStatus()) {
@@ -140,9 +220,11 @@ public class CellCommand extends Command {
                     if (Bukkit.getPlayer(args[1]) != null) {
 
                         Player targetPlayer = Bukkit.getPlayer(args[1]);
-                        p.sendMessage(Color.prison("Cells", "You invited " + targetPlayer.getName() + " to your cell!"));
-                        targetPlayer.sendMessage(Color.prison("Cells", "You have been invited to " + p.getName() + "'s cell!"));
-                        Cells.inviteHashmap.put(targetPlayer, p);
+                        p.sendMessage(Color.prison("Cells", "You removed " + targetPlayer.getName() + " to your cell!"));
+                        targetPlayer.sendMessage(Color.prison("Cells", "You have been removed from " + p.getName() + "'s cell!"));
+
+                        Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "rg removemember " + p.getName() + "-cell " + targetPlayer.getName());
+
 
                     }
 
@@ -181,7 +263,7 @@ public class CellCommand extends Command {
                             System.out.println(Cells.getCellName(p));
 
 
-                            p.sendMessage(Util.color("&c&lCells > &7Please click the sign you'd like to assign to this cell!"));
+                            p.sendMessage(Util.color("&c&lCells > &7Please do /cell setsign while looking at a sign."));
 
 
                         } else {

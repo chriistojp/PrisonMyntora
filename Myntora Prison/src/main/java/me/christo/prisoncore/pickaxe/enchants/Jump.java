@@ -1,7 +1,7 @@
 package me.christo.prisoncore.pickaxe.enchants;
 
 
-import me.christo.prisoncore.managers.StarterPickaxe;
+import me.christo.prisoncore.pickaxe.StarterPickaxe;
 import me.christo.prisoncore.pickaxe.guis.EnchantsGUI;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.data.Profile;

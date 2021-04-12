@@ -6,6 +6,8 @@ import com.boydti.fawe.util.TaskManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.christo.prisoncore.Prison;
 import me.christo.prisoncore.utils.Util;
+import net.myntora.core.core.Core;
+import net.myntora.core.core.data.Profile;
 import org.bukkit.*;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -82,9 +84,9 @@ public class Mines {
 
     public static boolean isSelector(Player p) {
 
-        if(p.getItemInHand().hasItemMeta()) {
-            if(p.getItemInHand().getItemMeta().hasDisplayName()) {
-                if(p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Util.color("&a&lMINE SELECTOR TOOL"))) {
+        if (p.getItemInHand().hasItemMeta()) {
+            if (p.getItemInHand().getItemMeta().hasDisplayName()) {
+                if (p.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Util.color("&a&lMINE SELECTOR TOOL"))) {
                     return true;
                 }
             }
@@ -167,7 +169,7 @@ public class Mines {
 
                             int random = ThreadLocalRandom.current().nextInt(0, 11);
 
-                            if(random <= 6) {
+                            if (random <= 6) {
                                 world.getBlockAt(new Location(w, x, y, z)).setType(Material.COAL_BLOCK);
                             } else if (random == 7 || random == 8 || random == 9) {
                                 world.getBlockAt(new Location(w, x, y, z)).setType(Material.IRON_BLOCK);
@@ -270,38 +272,63 @@ public class Mines {
 
     }
 
-    public static void fill(Material m, String mine) {
 
-        World w = Bukkit.getWorld("prison_world");
+    public static void fill(Player p, String mine) {
 
-        ProtectedRegion r = Prison.getWorldGuard().getRegionManager(w)
-                .getRegion(mine);
+        Profile profile = Core.getInstance().getProfileManager().getProfile(p);
+        String rank = profile.getData().getPrisonRank().getName();
+        if (profile.getData().getPrisonMineNumber().getAmount() != 0) {
 
+            profile.getData().getPrisonCellName().getCell();
+            World w = Bukkit.getWorld("prison_world");
+            ProtectedRegion r = Prison.getWorldGuard().getRegionManager(w)
+                    .getRegion(mine);
+            assert w != null;
+            AsyncWorld world = AsyncWorld.create(new WorldCreator(w.getName()));
+            Material[] m = profile.getData().getPrisonRank().getMineBlock();
 
-        assert w != null;
-        AsyncWorld world = AsyncWorld.create(new WorldCreator(w.getName()));
+            TaskManager.IMP.taskWhenFree(new Runnable() {
+                @Override
+                public void run() {
+                    assert r != null;
+                    for (int x = r.getMinimumPoint().getBlockX(); x < r.getMaximumPoint().getBlockX() + 1; x++) {
+                        for (int y = r.getMinimumPoint().getBlockY(); y < r.getMaximumPoint().getBlockY()
+                                + 1; y++) {
+                            for (int z = r.getMinimumPoint().getBlockZ(); z < r.getMaximumPoint().getBlockZ()
+                                    + 1; z++) {
 
-        TaskManager.IMP.taskWhenFree(new Runnable() {
-            @Override
-            public void run() {
-                assert r != null;
-                for (int x = r.getMinimumPoint().getBlockX(); x < r.getMaximumPoint().getBlockX() + 1; x++) {
-                    for (int y = r.getMinimumPoint().getBlockY(); y < r.getMaximumPoint().getBlockY()
-                            + 1; y++) {
-                        for (int z = r.getMinimumPoint().getBlockZ(); z < r.getMaximumPoint().getBlockZ()
-                                + 1; z++) {
-
-                                    world.getBlockAt(new Location(w, x, y, z)).setType(m);
-                            System.out.println("set");
+                                if (m.length == 1) {
+                                    world.getBlockAt(new Location(w, x, y, z)).setType(m[0]);
+                                }
+                                if (m.length == 2) {
+                                    world.getBlockAt(new Location(w, x, y, z)).setType(m[ThreadLocalRandom.current().nextInt(2)]);
+                                }
+                            }
 
                         }
                     }
-                }
-                world.commit();
-                world.clear();
+                    world.commit();
+                    world.clear();
 
-            }
-        });
+                }
+            });
+
+
+        }
+    }
+
+    public static boolean checkChance(int chance) {
+
+        //60
+
+        //0 - 100
+
+        //
+        int random = ThreadLocalRandom.current().nextInt(0, 100);
+
+        // <= 30
+
+        return random <= chance;
 
     }
 

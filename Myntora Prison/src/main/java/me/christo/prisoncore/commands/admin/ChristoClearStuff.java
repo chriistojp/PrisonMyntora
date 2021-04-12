@@ -23,7 +23,7 @@ public class ChristoClearStuff extends Command {
         if(args.length == 1) {
             if(args[0].equalsIgnoreCase("gang")) {
 
-                profile.getData().getPrisonGangName().setCell("none");
+                profile.getData().getPrisonGangName().setCell(null);
                 profile.getData().getIsGangOwner().setStatus(false);
                 profile.getData().getIsGangAdmin().setStatus(false);
                 profile.getData().getIsGangMember().setStatus(false);

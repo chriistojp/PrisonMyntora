@@ -24,11 +24,8 @@
     <orderEntry type="library" name="FastAsyncWorldEdit-bukkit-19.11.13-5505943-1282-22.3.5" level="project" />
     <orderEntry type="library" name="worldguard-6.2.1" level="project" />
     <orderEntry type="library" name="spigot" level="project" />
-    <orderEntry type="library" name="MyntoraCore" level="project" />
     <orderEntry type="library" name="worldedit-bukkit-6.1.9" level="project" />
-    <orderEntry type="library" name="NPC-API" level="project" />
     <orderEntry type="library" name="ArmorEquipEvent-1.7.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.spigotmc:spigot-api:1.16.4-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.guava:guava:21.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.gson:gson:2.8.0" level="project" />
@@ -44,5 +41,8 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: junit:junit:4.8.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.12" level="project" />
     <orderEntry type="library" name="Maven: com.intellectualsites.fawe:FAWE-Bukkit:1.16-583" level="project" />
+    <orderEntry type="library" name="Citizens" level="project" />
+    <orderEntry type="library" name="MyntoraCore" level="project" />
+    <orderEntry type="library" name="CooldownsAPI" level="project" />
   </component>
 </module>

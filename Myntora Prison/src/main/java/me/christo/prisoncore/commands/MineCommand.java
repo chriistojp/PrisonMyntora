@@ -7,6 +7,8 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.christo.prisoncore.Prison;
+import me.christo.prisoncore.managers.NPCS;
+import me.christo.prisoncore.pMines.PMine;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.command.Command;
 import net.myntora.core.core.command.DynamicCommand;
@@ -14,12 +16,13 @@ import net.myntora.core.core.data.Profile;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.NPC;
 import org.bukkit.entity.Player;
 
 @DynamicCommand(
         name = "mine"
 )
-public class TeleportToMineCommand extends Command {
+public class MineCommand extends Command {
     @Override
     public void execute(CommandSender sender, String... args) {
 
@@ -38,12 +41,23 @@ public class TeleportToMineCommand extends Command {
             }
         }
 
+        //        int lastClaimed = Prison.getInstance().getConfig().getInt("lastMine");
+        //
+        //        for(int i = lastClaimed; i > 0; i--) {
+        //            NpcAPI.createNPC("&d&lMine Management", new Location(Bukkit.getWorld("prison_world"), (i * 100) + 5, 71, (i * 100)), true, p, "chriisto");
+
         if (lastMine == 0) {
             profile.getData().getPrisonMineNumber().setAmount(1);
             Prison.getInstance().getConfig().set("lastMine", 1);
             Prison.getInstance().saveConfig();
             teleport(p);
             assignRegions(p);
+            PMine.getFile().set("mines." + p.getUniqueId().toString(), "none");
+            PMine.save();
+
+            int lastClaimed = Prison.getInstance().getConfig().getInt("lastMine");
+            NPCS.spawnMinesNPC(new Location(Bukkit.getWorld("prison_world"), (lastClaimed * 100) + 5, 71, (lastClaimed * 100)));
+
             return;
         }
 
@@ -52,13 +66,23 @@ public class TeleportToMineCommand extends Command {
         System.out.println(profile.getData().getPrisonMineNumber().getAmount());
         if (profile.getData().getPrisonMineNumber().getAmount() == 0) {
             profile.getData().getPrisonMineNumber().setAmount(lastMine + 1);
+            profile.getData().save();
             Prison.getInstance().getConfig().set("lastMine", lastMine + 1);
             Prison.getInstance().saveConfig();
             assignRegions(p);
             teleport(p);
-            return;
+            PMine.getFile().set("mines." + p.getUniqueId().toString(), "none");
+            PMine.save();
+
+
+            int lastClaimed = Prison.getInstance().getConfig().getInt("lastMine");
+            Bukkit.broadcastMessage("test");
+            NPCS.spawnMinesNPC(new Location(Bukkit.getWorld("prison_world"), (lastClaimed * 100) + 5, 71, (lastClaimed * 100), -90, 0));
+
+        } else {
+            teleport(p);
         }
-        teleport(p);
+
 
 
     }

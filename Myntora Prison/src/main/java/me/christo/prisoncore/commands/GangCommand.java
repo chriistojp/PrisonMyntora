@@ -8,6 +8,7 @@ import net.myntora.core.core.command.DynamicCommand;
 import net.myntora.core.core.data.Profile;
 import net.myntora.core.core.util.Color;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -31,6 +32,23 @@ public class GangCommand extends net.myntora.core.core.command.Command {
         Player p = (Player) sender;
         Profile player = Core.getInstance().getProfileManager().getProfile(p);
         FileConfiguration config = Gangs.getFile();
+
+        if(args.length == 0) {
+
+            p.sendMessage(Color.prison("Gang", "Help Message for Gangs"));
+            sendGangMessage(p, "gang create (name) - Creates a gang.");
+            sendGangMessage(p, "gang info - Displays info of the gang you are currently in");
+            sendGangMessage(p, "gang leave - Leaves the current gang you are a port of.");
+            sendGangMessage(p, "gang disband - Can only be done by the Gang Leader. Removes the gang entirely.");
+            sendGangMessage(p, "gang chat [enable/disable] - Turns on Gang only chat mode. Enables players to talk only with their gang.");
+            sendGangMessage(p, "gang kick (player) - Can only be done by the Gang Leader. Removes a player from the gang.");
+            sendGangMessage(p, "gang makeleader (player) - Transfers the leadership of the gang from one player to another.");
+            sendGangMessage(p, "gang promote (player) - Can only be done by the Gang Leader. Promotes a player to Gang Admin.");
+            sendGangMessage(p, "gang demote (player) - Can only be done by the Gang Leader. Demotes a player to Member Status.");
+            sendGangMessage(p , "gang join (gang) - Has to have a current invite from a gang. Joins a gang.");
+            sendGangMessage(p , "gang invite (player) - nvites a player to a gang. The person who invited the player has to be either a Gang Leader or a Gang Admin.");
+
+        }
 
         if (args.length == 1) {
             if (args[0].equalsIgnoreCase("info")) {
@@ -199,7 +217,7 @@ public class GangCommand extends net.myntora.core.core.command.Command {
             if (args[0].equalsIgnoreCase("join")) {
                 if (Gangs.inviteHash.containsKey(p)) {
                     if (args[1].equalsIgnoreCase(Gangs.inviteHash.get(p))) {
-                        if (!player.getData().getPrisonGangName().getCell().equalsIgnoreCase("none")) {
+                        if (player.getData().getPrisonGangName().getCell() == null) {
                             Gangs.addMember(Gangs.inviteHash.get(p), p);
                             player.getData().getIsGangMember().setStatus(true);
                             player.getData().getPrisonGangName().setCell(Gangs.inviteHash.get(p));
@@ -222,9 +240,10 @@ public class GangCommand extends net.myntora.core.core.command.Command {
                         if (Bukkit.getPlayer(args[1]) != null) {
                             Player target = Bukkit.getPlayer(args[1]);
                             Profile toInvite = Core.getInstance().getProfileManager().getProfile(target);
-                            if (toInvite.getData().getPrisonGangName().getCell().equals("none")) {
+                            if (toInvite.getData().getPrisonGangName().getCell() == null) {
                                 p.sendMessage(Color.prison("Gangs", "You invited &d" + target.getName() + "&7 to join your gang!"));
                                 target.sendMessage(Color.prison("Gangs", "You have been invited to join &d" + player.getData().getPrisonGangName().getCell() + "&7 by &d" + p.getName() + "!"));
+                                target.sendMessage(Color.prison("Gangs", "&7/gang join " + player.getData().getPrisonGangName().getCell() + " &7to accept!"));
                                 Gangs.inviteHash.put(target, player.getData().getPrisonGangName().getCell());
                             } else {
                                 p.sendMessage(Color.prison("Gangs", "That player is already in a gang!"));
@@ -268,5 +287,14 @@ public class GangCommand extends net.myntora.core.core.command.Command {
 
     }
 
+    public static String color(String s) {
+        return ChatColor.translateAlternateColorCodes('&', s);
+    }
+
+    public static void sendGangMessage(Player p, String message) {
+
+        p.sendMessage(color(" &7- /" + message));
+
+    }
 
 }

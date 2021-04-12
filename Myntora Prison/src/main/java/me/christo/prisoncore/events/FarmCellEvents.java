@@ -79,7 +79,7 @@ public class FarmCellEvents implements Listener {
             if (e.getPlayer().getItemInHand().hasItemMeta()) {
                 if (e.getPlayer().getItemInHand().getItemMeta().hasDisplayName()) {
                     if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Util.color("&a&lCell Selector"))) {
-                        e.setCancelled(true);
+                        //e.setCancelled(true);
                     }
                 }
             }

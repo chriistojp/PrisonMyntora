@@ -1,9 +1,7 @@
 package me.christo.prisoncore.events;
 
 
-import me.christo.prisoncore.Prison;
-import me.christo.prisoncore.managers.StarterPickaxe;
-import me.christo.prisoncore.utils.Util;
+import me.christo.prisoncore.pickaxe.StarterPickaxe;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,7 +14,7 @@ public class FirstJoinEvent implements Listener {
 
         Player p = e.getPlayer();
         if(!e.getPlayer().hasPlayedBefore()) {
-            StarterPickaxe.givePickaxe(p);
+            StarterPickaxe.getPlayersPickaxe(p);
         }
 
     }

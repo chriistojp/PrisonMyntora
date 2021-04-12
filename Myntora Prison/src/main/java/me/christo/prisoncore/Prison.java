@@ -2,11 +2,9 @@ package me.christo.prisoncore;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import lombok.Getter;
+import lombok.SneakyThrows;
 import me.christo.prisoncore.commands.*;
-import me.christo.prisoncore.commands.admin.ChristoClearStuff;
-import me.christo.prisoncore.commands.admin.GenerateMinesCommand;
-import me.christo.prisoncore.commands.admin.PlayerInfoCommand;
-import me.christo.prisoncore.commands.admin.SetPlayerRankCommand;
+import me.christo.prisoncore.commands.admin.*;
 import me.christo.prisoncore.events.*;
 import me.christo.prisoncore.managers.*;
 import me.christo.prisoncore.guis.FormattedGUIs;
@@ -19,9 +17,13 @@ import me.christo.prisoncore.pickaxe.events.ToolRightClickEvent;
 import me.christo.prisoncore.scoreboard.ScoreboardManager;
 import me.christo.prisoncore.sets.ZeusSet;
 import me.christo.prisoncore.shop.commands.ShopCommand;
+import net.myntora.core.core.Core;
 import net.myntora.core.core.command.CommandLib;
+import net.myntora.core.core.data.Profile;
+import net.myntora.core.core.util.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -39,9 +41,12 @@ public final class Prison extends JavaPlugin {
 
 
 
+    @SneakyThrows
     @Override
     public void onEnable() {
 
+        // 1 shard digger = 25 shards/min
+        // 1 token fetcher = 2500 tokens/min //50
 
         File file = new File(getDataFolder(), "config.yml");
         if (!file.exists())
@@ -53,6 +58,26 @@ public final class Prison extends JavaPlugin {
 
         loadManagers();
         loadCommands();
+
+
+        Bukkit.getScheduler().runTaskTimer(this, () -> {
+            for(Player p : Bukkit.getOnlinePlayers()) {
+
+                Profile profile = Core.getInstance().getProfileManager().getProfile(p);
+                int tokensToAdd = profile.getData().getPrisonPetTokenFetcherLevel().getAmount() * 2500;
+                int shardsToAdd = profile.getData().getPrisonPetShardDiggerLevel().getAmount() * 25;
+
+
+                p.sendMessage(Color.prison("Pets", "Your pet has earned you &3" + shardsToAdd + " &7shards and &e" + tokensToAdd + "&7 tokens."));
+
+                profile.getData().getPrisonShards().increaseAmount(shardsToAdd);
+                profile.getData().getPrisonMoney().increaseAmount(tokensToAdd);
+
+                profile.getData().save();
+
+
+            }
+        }, 20 * 60, 20 * 60);
 
         getServer().getPluginManager().registerEvents(new FirstJoinEvent(), this);
         getServer().getPluginManager().registerEvents(new CratesCommand(), this);
@@ -67,12 +92,15 @@ public final class Prison extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DropPickaxeEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerBlockBreakEvent(), this);
         getServer().getPluginManager().registerEvents(new SwitchToPickaxeEvent(), this);
+        getServer().getPluginManager().registerEvents(new BoosterRightClickEvent(), this);
+
+        getServer().getPluginManager().registerEvents(new PetsClickEvent(), this);
 
         getCommand("zone").setExecutor(new ZoneCommand());
         getCommand("crates").setExecutor(new CratesCommand());
-        getCommand("pickaxe").setExecutor(new GivePickaxeCommand());
         getCommand("set").setExecutor(new GiveSetCommand());
         getCommand("format").setExecutor(new FormattedGUIs());
+
 
         getCommand("goals").setExecutor(new GoalsCommand());
         //getServer().getPluginManager().registerEvents(new BlockGoalEvent(), this);
@@ -121,7 +149,7 @@ public final class Prison extends JavaPlugin {
         new CommandLib().setupBukkit(this)
                 .register(new CheckBlocksBrokenCommand())
                 .register(new GenerateMinesCommand())
-                .register(new TeleportToMineCommand())
+                .register(new MineCommand())
                 .register(new RankupCommand())
                 .register(new PlayerInfoCommand())
                 .register(new SetPlayerRankCommand())
@@ -136,7 +164,16 @@ public final class Prison extends JavaPlugin {
                 .register(new FarmCellCommand())
                 .register(new GangCommand())
                 .register(new ChristoClearStuff())
-                .register(new BlackMarketCommand());
+                .register(new BlackMarketCommand())
+                .register(new BoosterCommand())
+                .register(new GivePickaxeCommand())
+                .register(new TagSetCommand())
+                .register(new GivePetCommand())
+                .register(new ShardsBalanceCommand())
+                .register(new OpenCasinoCommand())
+                .register(new ArmorStandTest())
+                .register(new PayCommand())
+                .register(new ShardsCommand());
     }
 
 }

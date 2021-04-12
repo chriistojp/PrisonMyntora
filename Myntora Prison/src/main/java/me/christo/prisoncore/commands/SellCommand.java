@@ -28,7 +28,7 @@ public class SellCommand extends Command {
             if (Items.isSellableItem(i)) {
                 Items item = Items.translateFromMaterial(i.getType());
                 assert item != null;
-                double cost = Items.getSellPrice(item);
+                double cost = Items.getSellPrice(item) * i.getAmount();
                 profile.getData().getPrisonMoney().increaseAmount((int) cost);
 
                 p.sendMessage(Color.main("Sale", "Your sale earned you &d$" + cost + "!"));

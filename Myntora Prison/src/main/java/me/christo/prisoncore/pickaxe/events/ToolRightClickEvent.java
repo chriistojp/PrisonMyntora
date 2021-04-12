@@ -1,9 +1,8 @@
 package me.christo.prisoncore.pickaxe.events;
 
 
-import me.christo.prisoncore.managers.StarterPickaxe;
+import me.christo.prisoncore.pickaxe.StarterPickaxe;
 import me.christo.prisoncore.pickaxe.guis.EnchantsGUI;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;

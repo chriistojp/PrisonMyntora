@@ -1,21 +1,30 @@
 package me.christo.prisoncore.pickaxe.events;
 
 
-import me.christo.prisoncore.managers.StarterPickaxe;
+import me.christo.prisoncore.pickaxe.StarterPickaxe;
+import me.christo.prisoncore.utils.Util;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.data.Profile;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.WitherSkull;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 public class SwitchToPickaxeEvent implements Listener {
 
     @EventHandler
     public void onHold(PlayerItemHeldEvent e) {
-        if (e.getPlayer().getInventory().getItem(e.getNewSlot()) != null && e.getPlayer().getInventory().getItem(e.getNewSlot()).equals(StarterPickaxe.findTool(e.getPlayer()))) {
+
+
+
+
+        if (e.getPlayer().getInventory().getItem(e.getNewSlot()) != null && e.getPlayer().getInventory().getItem(e.getNewSlot()).hasItemMeta()
+    && e.getPlayer().getInventory().getItem(e.getNewSlot()).getItemMeta().getDisplayName().contains(Util.color("&b"))) {
 
             Player p = e.getPlayer();
             Profile profile = Core.getInstance().getProfileManager().getProfile(p);

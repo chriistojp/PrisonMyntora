@@ -40,6 +40,7 @@ public class GenerateMinesCommand extends Command {
             for (int i = 0; i < toGenerate; i++) {
 
                 pasteSchematic((Player) sender);
+                sender.sendMessage("generate");
 
             }
         }

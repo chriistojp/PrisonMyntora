@@ -45,6 +45,10 @@ public class AuctionCommand extends Command {
                         p.sendMessage(Color.prison("Auctions", "There is no current auction!"));
                         return;
                     }
+                    if(p == currentAuctioneer) {
+                        p.sendMessage(Color.prison("Auctions", "You cannot bid on your own auction!"));
+                        return;
+                    }
 
                     //if a bid has not been made
                     if (Auctions.auctionFirstBidStatus.get(currentAuctioneer)) {
@@ -84,7 +88,7 @@ public class AuctionCommand extends Command {
                     }
 
                 } else {
-                    p.sendMessage(Color.prison("Auctions", "There is no ongoing auctions!"));
+                    p.sendMessage(Color.prison("Auctions", "There are no ongoing auctions!"));
                 }
             }
             if (args[0].equalsIgnoreCase("clear")) {

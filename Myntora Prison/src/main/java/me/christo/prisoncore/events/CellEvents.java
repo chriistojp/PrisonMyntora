@@ -4,8 +4,11 @@ package me.christo.prisoncore.events;
 import com.sk89q.worldedit.BlockVector;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
+import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import me.christo.cooldown.Cooldowns;
+import me.christo.cooldown.api.API;
 import me.christo.prisoncore.Prison;
 import me.christo.prisoncore.managers.Cells;
 import me.christo.prisoncore.utils.Util;
@@ -28,7 +31,11 @@ import org.bukkit.event.inventory.InventoryCreativeEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 public class CellEvents implements Listener {
 
@@ -95,9 +102,11 @@ public class CellEvents implements Listener {
     }
 
 
+
+
     //obvious, trying to claim
     @EventHandler
-    public void onTryToClaimEvent(PlayerInteractEvent e) {
+    public void onTryToClaimEvent(PlayerInteractEvent e) throws StorageException {
 
         Player p = e.getPlayer();
         Profile profile = Core.getInstance().getProfileManager().getProfile(p);
@@ -113,39 +122,23 @@ public class CellEvents implements Listener {
                         String cellName = ChatColor.stripColor(sign.getLine(0)).replaceAll("Cell:", "").replace(" ", "");
                         String blockName = ChatColor.stripColor(sign.getLine(1)).replaceAll("Block:", "").replace(" ", "");
 
-                        System.out.println("cells." + blockName + "." + cellName + ".locationOne.x");
-                        int x = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationOne.x");
-                        System.out.println(x);
-                        int y = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationOne.y");
-                        int z = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationOne.z");
-
-                        int x2 = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationTwo.x");
-                        int y2 = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationTwo.y");
-                        int z2 = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationTwo.z");
-
-                        BlockVector pos1 = new BlockVector(x, y, z);
-                        BlockVector pos2 = new BlockVector(x2, y2, z2);
-                        ProtectedRegion region = new ProtectedCuboidRegion(e.getPlayer().getName() + "-cell", pos1, pos2);
-                        region.setFlag(DefaultFlag.BLOCK_BREAK, StateFlag.State.DENY);
-                        region.setFlag(DefaultFlag.BLOCK_PLACE, StateFlag.State.DENY);
-                        region.setFlag(DefaultFlag.MOB_SPAWNING, StateFlag.State.DENY);
-                        region.setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.DENY);
-                        region.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
-                        region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
-                        Prison.getWorldGuard().getRegionManager(Bukkit.getWorld("prison_world")).addRegion(region);
-           //             Prison.getWorldGuard().getRegionManager(Bukkit.getWorld("prison_world")).getRegion(e.getPlayer().getName() + "-cell").getMembers().addPlayer(p.getName());
-
-                        sign.setLine(1, Util.color("&aClaimed!"));
-                        sign.setLine(3, Util.color("Owner: &5" + e.getPlayer().getName()));
-                        sign.update();
-
-                        p.sendMessage(Color.prison("Cells", "You have claimed " + cellName + "!"));
-
-                        profile.getData().getPrisonCellName().setCell(blockName + "." + cellName);
-
-                        profile.getData().getPrisonCellStatus().setStatus(true);
-                        profile.getData().save();
-
+                        if (blockName.equalsIgnoreCase("d")) {
+                            if (profile.getData().getPrisonMoney().getAmount() >= 5000) {
+                                createCell(p, sign, "5k");
+                            }
+                        } else if (blockName.equalsIgnoreCase("c")) {
+                            if (profile.getData().getPrisonMoney().getAmount() >= 10000) {
+                                createCell(p, sign, "10k");
+                            }
+                        } else if (blockName.equalsIgnoreCase("b")) {
+                            if (profile.getData().getPrisonMoney().getAmount() >= 25000) {
+                                createCell(p, sign, "25k");
+                            }
+                        } else if (blockName.equalsIgnoreCase("a")) {
+                            if (profile.getData().getPrisonMoney().getAmount() >= 30000) {
+                                createCell(p, sign, "30k");
+                            }
+                        }
                     }
                 }
             }
@@ -154,9 +147,101 @@ public class CellEvents implements Listener {
 
     }
 
+    public void createCell(Player p, Sign sign, String rent) throws StorageException {
+
+        Profile profile = Core.getInstance().getProfileManager().getProfile(p);
+
+        if (sign.getLine(3).equals(Util.color("&7Click to Claim!"))) {
+            if (profile.getData().getPrisonCellStatus().getStatus()) {
+                p.sendMessage(Color.prison("Cells", "You already have a cell"));
+            } else {
+
+                String cellName = ChatColor.stripColor(sign.getLine(0)).replaceAll("Cell:", "").replace(" ", "").toLowerCase();
+                String blockName = ChatColor.stripColor(sign.getLine(1)).replaceAll("Block:", "").replace(" ", "");
+
+                int x = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationOne.x");
+                int y = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationOne.y");
+                int z = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationOne.z");
+
+                int x2 = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationTwo.x");
+                int y2 = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationTwo.y");
+                int z2 = Cells.getFile().getInt("cells." + blockName + "." + cellName + ".locationTwo.z");
+
+                BlockVector pos1 = new BlockVector(x, y, z);
+                BlockVector pos2 = new BlockVector(x2, y2, z2);
+                ProtectedRegion region = new ProtectedCuboidRegion(p.getName() + "-cell", pos1, pos2);
+                region.setFlag(DefaultFlag.BLOCK_BREAK, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.BLOCK_PLACE, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.MOB_SPAWNING, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.MOB_DAMAGE, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
+                region.setFlag(DefaultFlag.ENTRY, StateFlag.State.DENY);
+                Prison.getWorldGuard().getRegionManager(Bukkit.getWorld("prison_world")).addRegion(region);
+                Prison.getWorldGuard().getRegionManager(Bukkit.getWorld("prison_world")).saveChanges();
+
+                Bukkit.broadcastMessage(cellName + " " + blockName);
+                Bukkit.broadcastMessage(x + " " + y + " " + z);
+                Prison.getWorldGuard().getRegionManager(Bukkit.getWorld("prison_world")).getRegion(p.getName() + "-cell").getMembers().addPlayer(p.getName());
+
+                sign.setLine(1, Util.color("&d&lClaimed!"));
+          //      sign.setLine();
+                sign.setLine(3, Util.color("&dOwner: &7" + p.getName()));
+                sign.update();
+
+                p.sendMessage(Color.prison("Cells", "You have claimed " + cellName + "!"));
+
+                profile.getData().getPrisonCellName().setCell(blockName + "." + cellName);
+
+                profile.getData().getPrisonCellStatus().setStatus(true);
+                profile.getData().save();
+
+                API api = new API(p.getUniqueId());
+                api.createCooldown("cell", 604800);
+            }
+        }
+    }
+
 
 
     //selector stuff
+
+    @EventHandler
+    public void onSignClick(PlayerInteractEvent e) {
+
+
+        if(e.getClickedBlock() == null) {
+            return;
+        }
+
+        if(e.getClickedBlock().getType() == Material.WALL_SIGN) {
+
+            Sign sign = (Sign) e.getClickedBlock().getState();
+            if(ChatColor.stripColor(sign.getLine(3)).contains(e.getPlayer().getName())) {
+
+                API api = new API(e.getPlayer().getUniqueId());
+
+                long seconds = api.getTimeLeft("cell");
+                SimpleDateFormat formatter = new SimpleDateFormat("dd:HH:mm:ss", Locale.US);
+
+                Date date = new Date(seconds);
+                long days = seconds / 86400;
+                long hours = (seconds / 3600) - (24 * days);
+
+
+
+                String result = formatter.format(date);
+
+
+
+                e.getPlayer().sendMessage(Color.prison("Cells", "Your cell has &d" + days + "d " + hours + "h &7before it expires."));
+
+
+            }
+
+        }
+
+    }
+
     @EventHandler
     public void onClick(PlayerInteractEvent e) {
 

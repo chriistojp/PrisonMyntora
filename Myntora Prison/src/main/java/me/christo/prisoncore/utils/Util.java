@@ -62,6 +62,15 @@ public class Util {
         return "";
     }
 
+    public static String formatNumber(long count) {
+        if (count < 1000)
+            return "" + count;
+        int exp = (int) (Math.log(count) / Math.log(1000));
+        DecimalFormat format = new DecimalFormat("0.#");
+        String value = format.format(count / Math.pow(1000, exp));
+        return String.format("%s%c", value, "kMBTQ".charAt(exp - 1));
+    }
+
     public static ItemStack addGlow(ItemStack i) {
 
         i.addUnsafeEnchantment(Enchantment.OXYGEN, 1);

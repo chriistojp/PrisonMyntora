@@ -1,11 +1,13 @@
-package me.christo.prisoncore.managers;
+package me.christo.prisoncore.pickaxe;
 
 import me.christo.prisoncore.Prison;
 import me.christo.prisoncore.utils.Util;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.data.Profile;
 import net.myntora.core.core.data.mongo.player.ProfileData;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.craftbukkit.v1_8_R3.inventory.CraftItemStack;
@@ -53,7 +55,8 @@ public class StarterPickaxe {
 
     }
 
-    public static void givePickaxe(Player p) {
+
+    public static ItemStack getPlayersPickaxe(Player p) {
 
         ProfileData profile = Core.getInstance().getProfileManager().getProfile(p).getData();
 
@@ -85,13 +88,13 @@ public class StarterPickaxe {
         net.minecraft.server.v1_8_R3.NBTTagCompound itemC = (itemNMS.hasTag()) ? itemNMS.getTag()
                 : new net.minecraft.server.v1_8_R3.NBTTagCompound();
 
-        itemC.setInt("blocks", 0);
-        ItemStack newItem = CraftItemStack.asBukkitCopy(itemNMS);
-        p.getInventory().addItem(newItem);
+        itemC.setInt("blocks", profile.getPrisonBlocksMined().getAmount());
+
+        return CraftItemStack.asBukkitCopy(itemNMS);
 
     }
 
-    public static ItemStack getPlayersPickaxe(Player p) {
+    public static ItemStack getPlayersPickaxe(OfflinePlayer p) {
 
         ProfileData profile = Core.getInstance().getProfileManager().getProfile(p).getData();
 
@@ -119,8 +122,13 @@ public class StarterPickaxe {
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
         i.setItemMeta(meta);
 
+        net.minecraft.server.v1_8_R3.ItemStack itemNMS = CraftItemStack.asNMSCopy(i);
+        net.minecraft.server.v1_8_R3.NBTTagCompound itemC = (itemNMS.hasTag()) ? itemNMS.getTag()
+                : new net.minecraft.server.v1_8_R3.NBTTagCompound();
 
-        return i;
+        itemC.setInt("blocks", profile.getPrisonBlocksMined().getAmount());
+
+        return CraftItemStack.asBukkitCopy(itemNMS);
 
     }
 
@@ -130,15 +138,31 @@ public class StarterPickaxe {
             return false;
         }
         if(p.getItemInHand().getType().equals(Material.DIAMOND_PICKAXE)) {
-
-            net.minecraft.server.v1_8_R3.ItemStack itemNMS = CraftItemStack.asNMSCopy(p.getItemInHand());
-            net.minecraft.server.v1_8_R3.NBTTagCompound itemC = (itemNMS.hasTag()) ? itemNMS.getTag()
-                    : new net.minecraft.server.v1_8_R3.NBTTagCompound();
-
-            if (itemC.get("blocks") != null) {
-                return true;
+            if (p.getItemInHand().hasItemMeta()) {
+                Bukkit.broadcastMessage("1");
+                if (p.getItemInHand().getItemMeta().hasDisplayName()) {
+                    Bukkit.broadcastMessage("2");
+                    if (p.getItemInHand().getItemMeta().getDisplayName().contains(Util.color("&7Right"))) {
+                        Bukkit.broadcastMessage("3");
+                        return true;
+                    }
+                }
             }
         }
+
+//            net.minecraft.server.v1_8_R3.ItemStack itemNMS = CraftItemStack.asNMSCopy(p.getItemInHand());
+//            net.minecraft.server.v1_8_R3.NBTTagCompound itemC = (itemNMS.hasTag()) ? itemNMS.getTag()
+//                    : new net.minecraft.server.v1_8_R3.NBTTagCompound();
+//
+//            Bukkit.broadcastMessage("yay");
+//            Bukkit.broadcastMessage(itemC.getInt("blocks") + "");
+//
+//            if (itemC.getInt("blocks") > -1) {
+//                Bukkit.broadcastMessage("yay1");
+//                return true;
+//            }
+//        }
+//        Bukkit.broadcastMessage("yay2");
         return false;
     }
 
