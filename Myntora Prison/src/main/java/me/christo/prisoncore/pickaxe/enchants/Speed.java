@@ -25,7 +25,7 @@ public class Speed {
         }
         if(profile.getData().getPrisonMoney().getAmount() >= cost) {
             profile.getData().getPrisonSpeedLevel().setAmount(profile.getData().getPrisonSpeedLevel().getAmount() + 1);
-            profile.getData().save();
+
 
             p.setItemInHand(StarterPickaxe.getPlayersPickaxe(p));
             p.getOpenInventory().close();

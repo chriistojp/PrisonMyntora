@@ -25,7 +25,7 @@ public class Efficiency {
         }
         if(profile.getData().getPrisonMoney().getAmount() >= cost) {
             profile.getData().getPrisonEfficiencyLevel().setAmount(profile.getData().getPrisonEfficiencyLevel().getAmount() + 1);
-            profile.getData().save();
+
 
             p.setItemInHand(StarterPickaxe.getPlayersPickaxe(p));
             p.getOpenInventory().close();

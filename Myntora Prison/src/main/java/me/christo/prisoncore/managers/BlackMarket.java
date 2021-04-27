@@ -155,8 +155,7 @@ public class BlackMarket {
                 seller.getData().getPrisonMoney().increaseAmount(getFile().getInt("items." + slot + ".price"));
                 profile.getData().getPrisonMoney().decreaseAmount(getFile().getInt("items." + slot + ".price"));
 
-                seller.getData().save();
-                profile.getData().save();
+
 
                 if (Bukkit.getPlayer(getFile().getString("items." + slot + ".seller")) != null) {
 

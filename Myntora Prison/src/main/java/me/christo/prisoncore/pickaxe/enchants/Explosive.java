@@ -41,7 +41,7 @@ public class Explosive {
         }
         if (profile.getData().getPrisonMoney().getAmount() >= cost) {
             profile.getData().getPrisonExplosiveLevel().setAmount(profile.getData().getPrisonExplosiveLevel().getAmount() + 1);
-            profile.getData().save();
+
 
             p.setItemInHand(StarterPickaxe.getPlayersPickaxe(p));
             p.getOpenInventory().close();

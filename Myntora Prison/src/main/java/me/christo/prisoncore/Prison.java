@@ -17,6 +17,7 @@ import me.christo.prisoncore.pickaxe.events.ToolRightClickEvent;
 import me.christo.prisoncore.scoreboard.ScoreboardManager;
 import me.christo.prisoncore.sets.ZeusSet;
 import me.christo.prisoncore.shop.commands.ShopCommand;
+import me.christo.prisoncore.zones.commands.ZonesCommand;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.command.CommandLib;
 import net.myntora.core.core.data.Profile;
@@ -64,8 +65,8 @@ public final class Prison extends JavaPlugin {
             for(Player p : Bukkit.getOnlinePlayers()) {
 
                 Profile profile = Core.getInstance().getProfileManager().getProfile(p);
-                int tokensToAdd = profile.getData().getPrisonPetTokenFetcherLevel().getAmount() * 2500;
-                int shardsToAdd = profile.getData().getPrisonPetShardDiggerLevel().getAmount() * 25;
+                int tokensToAdd = profile.getData().getPrisonPetTokenFinderLevel().getAmount() * 2500;
+                int shardsToAdd = profile.getData().getPrisonPetShardFinderLevel().getAmount() * 25;
 
 
                 p.sendMessage(Color.prison("Pets", "Your pet has earned you &3" + shardsToAdd + " &7shards and &e" + tokensToAdd + "&7 tokens."));
@@ -73,13 +74,13 @@ public final class Prison extends JavaPlugin {
                 profile.getData().getPrisonShards().increaseAmount(shardsToAdd);
                 profile.getData().getPrisonMoney().increaseAmount(tokensToAdd);
 
-                profile.getData().save();
+
 
 
             }
         }, 20 * 60, 20 * 60);
 
-        getServer().getPluginManager().registerEvents(new FirstJoinEvent(), this);
+        getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new CratesCommand(), this);
         getServer().getPluginManager().registerEvents(new ZeusSet(), this);
         getServer().getPluginManager().registerEvents(new CellEvents(), this);
@@ -95,6 +96,7 @@ public final class Prison extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new BoosterRightClickEvent(), this);
 
         getServer().getPluginManager().registerEvents(new PetsClickEvent(), this);
+        getServer().getPluginManager().registerEvents(new DeathEvent(), this);
 
         getCommand("zone").setExecutor(new ZoneCommand());
         getCommand("crates").setExecutor(new CratesCommand());
@@ -102,7 +104,6 @@ public final class Prison extends JavaPlugin {
         getCommand("format").setExecutor(new FormattedGUIs());
 
 
-        getCommand("goals").setExecutor(new GoalsCommand());
         //getServer().getPluginManager().registerEvents(new BlockGoalEvent(), this);
 
         Sets.loadFile();
@@ -173,7 +174,8 @@ public final class Prison extends JavaPlugin {
                 .register(new OpenCasinoCommand())
                 .register(new ArmorStandTest())
                 .register(new PayCommand())
-                .register(new ShardsCommand());
+                .register(new ShardsCommand())
+                .register(new ZonesCommand());
     }
 
 }

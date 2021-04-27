@@ -22,7 +22,7 @@ import java.util.Objects;
 
 @DynamicCommand(
         name = "gang",
-        aliases = {"gangs"}
+        aliases = {"gangs", "g"}
 )
 public class GangCommand extends net.myntora.core.core.command.Command {
     @Override
@@ -50,7 +50,22 @@ public class GangCommand extends net.myntora.core.core.command.Command {
 
         }
 
+
         if (args.length == 1) {
+            if(args[0].equalsIgnoreCase("help")) {
+                p.sendMessage(Color.prison("Gang", "Help Message for Gangs"));
+                sendGangMessage(p, "gang create (name) - Creates a gang.");
+                sendGangMessage(p, "gang info - Displays info of the gang you are currently in");
+                sendGangMessage(p, "gang leave - Leaves the current gang you are a port of.");
+                sendGangMessage(p, "gang disband - Can only be done by the Gang Leader. Removes the gang entirely.");
+                sendGangMessage(p, "gang chat [enable/disable] - Turns on Gang only chat mode. Enables players to talk only with their gang.");
+                sendGangMessage(p, "gang kick (player) - Can only be done by the Gang Leader. Removes a player from the gang.");
+                sendGangMessage(p, "gang makeleader (player) - Transfers the leadership of the gang from one player to another.");
+                sendGangMessage(p, "gang promote (player) - Can only be done by the Gang Leader. Promotes a player to Gang Admin.");
+                sendGangMessage(p, "gang demote (player) - Can only be done by the Gang Leader. Demotes a player to Member Status.");
+                sendGangMessage(p , "gang join (gang) - Has to have a current invite from a gang. Joins a gang.");
+                sendGangMessage(p , "gang invite (player) - nvites a player to a gang. The person who invited the player has to be either a Gang Leader or a Gang Admin.");
+            }
             if (args[0].equalsIgnoreCase("info")) {
 
                 String gangName = player.getData().getPrisonGangName().getCell();
@@ -78,18 +93,18 @@ public class GangCommand extends net.myntora.core.core.command.Command {
 
             }
             if (args[0].equalsIgnoreCase("leave")) {
-                if (!player.getData().getPrisonGangName().getCell().equals("none")) {
+                if (player.getData().getPrisonGangName().getCell() != null) {
 
                     List<String> members = Gangs.getFile().getStringList("Gangs." + player.getData().getPrisonGangName().getCell() + ".members");
+                    Gangs.messageAllPlayers(player.getData().getPrisonGangName().getCell(), p.getName() + " has left the gang.");
                     members.remove(p.getName());
                     Gangs.getFile().set("Gangs." + player.getData().getPrisonGangName().getCell() + ".members", members);
                     Gangs.save();
 
                     player.getData().getPrisonGangName().setCell("none");
-                    player.getData().getIsGangMember().setStatus(false);
-                    player.getData().getIsGangAdmin().setStatus(false);
+                    player.getData().getPrisonGangMember().setStatus(false);
+                    player.getData().getPrisonGangAdmin().setStatus(false);
 
-                    player.getData().save();
 
 
                     p.sendMessage(Color.prison("Gangs", "You have left your gang!"));
@@ -99,13 +114,13 @@ public class GangCommand extends net.myntora.core.core.command.Command {
             }
             if (args[0].equalsIgnoreCase("disband")) {
 
-                if (player.getData().getIsGangOwner().getStatus()) {
+                if (player.getData().getPrisonGangOwner().getStatus()) {
 
                     Bukkit.broadcastMessage(Color.prison("Gangs", "The gang &d" + player.getData().getPrisonGangName().getCell() + "&7 has been disbanded!"));
                     Gangs.getFile().set("Gangs." + player.getData().getPrisonGangName().getCell(), null);
 
                     player.getData().getPrisonGangName().setCell("none");
-                    player.getData().getIsGangOwner().setStatus(false);
+                    player.getData().getPrisonGangOwner().setStatus(false);
 
 
                     //loop through members, make profile, set gangs.
@@ -128,11 +143,11 @@ public class GangCommand extends net.myntora.core.core.command.Command {
             if (args[0].equalsIgnoreCase("chat")) {
 
 
-                if (args[1].equalsIgnoreCase("enable")) {
+                if (args[1].equalsIgnoreCase("on")) {
                     p.sendMessage(Color.prison("Gangs", "Gang chat enabled!"));
                     Gangs.gangChat.add(p);
                     //     player.setGangChat(true);
-                } else if (args[1].equalsIgnoreCase("disable")) {
+                } else if (args[1].equalsIgnoreCase("off")) {
                     if (Gangs.gangChat.contains(p)) {
                         p.sendMessage(Color.prison("Gangs", "Gang chat disabled!"));
                         //    player.setGangChat(false);
@@ -143,7 +158,7 @@ public class GangCommand extends net.myntora.core.core.command.Command {
             }
 
             if (args[0].equalsIgnoreCase("friendlyfire")) {
-                if (player.getData().getIsGangOwner().getStatus()) {
+                if (player.getData().getPrisonGangOwner().getStatus()) {
                     //   player.enableFriendlyFire(Boolean.parseBoolean(args[1]));
                     Gangs.messageAllPlayers(player.getData().getPrisonGangName().getCell(), config.getString("Messages.friendlyFireUpdate").replaceAll("%option%", args[1]));
                 }
@@ -154,7 +169,7 @@ public class GangCommand extends net.myntora.core.core.command.Command {
             }
 
             if (args[0].equalsIgnoreCase("makeleader")) {
-                if (player.getData().getIsGangOwner().getStatus()) {
+                if (player.getData().getPrisonGangOwner().getStatus()) {
                     if (Bukkit.getPlayer(args[1]) != null) {
                         Player target = Bukkit.getPlayer(args[1]);
 
@@ -173,16 +188,16 @@ public class GangCommand extends net.myntora.core.core.command.Command {
 
 
             if (args[0].equalsIgnoreCase("promote")) {
-                if (player.getData().getIsGangOwner().getStatus()) {
+                if (player.getData().getPrisonGangOwner().getStatus()) {
                     if (Bukkit.getPlayer(args[1]) != null) {
                         Player target = Bukkit.getPlayer(args[1]);
                         Profile toPromote = Core.getInstance().getProfileManager().getProfile(target);
-                        if (toPromote.getData().getIsGangMember().getStatus()) {
-                            toPromote.getData().getIsGangMember().setStatus(false);
-                            toPromote.getData().getIsGangAdmin().setStatus(true);
+                        if (toPromote.getData().getPrisonGangMember().getStatus()) {
+                            toPromote.getData().getPrisonGangMember().setStatus(false);
+                            toPromote.getData().getPrisonGangAdmin().setStatus(true);
 
                             Gangs.messageAllPlayers(player.getData().getPrisonGangName().getCell(), Util.color("&d" + target.getName() + " &7has been promoted to &dGang Mentor!"));
-                        } else if (toPromote.getData().getIsGangAdmin().getStatus()) {
+                        } else if (toPromote.getData().getPrisonGangAdmin().getStatus()) {
                             p.sendMessage(Color.prison("Gangs", "&d" + target.getName() + " &&is already a gang admin. Run /gang makeleader " + target.getName() + " to make them the leader."));
                             p.sendMessage(Util.color(config.getString("Messages.mustMakeLeaderToPromote")).replaceAll("%player%", target.getName()));
                         }
@@ -193,18 +208,18 @@ public class GangCommand extends net.myntora.core.core.command.Command {
             }
 
             if (args[0].equalsIgnoreCase("demote")) {
-                if (player.getData().getIsGangOwner().getStatus()) {
+                if (player.getData().getPrisonGangOwner().getStatus()) {
                     if (Bukkit.getPlayer(args[1]) != null) {
                         Player target = Bukkit.getPlayer(args[1]);
                         Profile toDemote = Core.getInstance().getProfileManager().getProfile(target);
-                        if (toDemote.getData().getIsGangMember().getStatus()) {
+                        if (toDemote.getData().getPrisonGangMember().getStatus()) {
                             p.sendMessage(Color.prison("Gangs", "That player is already the lowest rank!"));
                             return;
                         }
-                        if (toDemote.getData().getIsGangAdmin().getStatus() && !toDemote.getData().getIsGangOwner().getStatus()) {
+                        if (toDemote.getData().getPrisonGangAdmin().getStatus() && !toDemote.getData().getPrisonGangOwner().getStatus()) {
 
-                            toDemote.getData().getIsGangAdmin().setStatus(false);
-                            toDemote.getData().getIsGangMember().setStatus(true);
+                            toDemote.getData().getPrisonGangAdmin().setStatus(false);
+                            toDemote.getData().getPrisonGangMember().setStatus(true);
 
                             Gangs.messageAllPlayers(player.getData().getPrisonGangName().getCell(), Util.color("&d" + target.getName() + " &7has been demoted to &dGang Member!"));
                         }
@@ -219,9 +234,8 @@ public class GangCommand extends net.myntora.core.core.command.Command {
                     if (args[1].equalsIgnoreCase(Gangs.inviteHash.get(p))) {
                         if (player.getData().getPrisonGangName().getCell() == null) {
                             Gangs.addMember(Gangs.inviteHash.get(p), p);
-                            player.getData().getIsGangMember().setStatus(true);
+                            player.getData().getPrisonGangMember().setStatus(true);
                             player.getData().getPrisonGangName().setCell(Gangs.inviteHash.get(p));
-                            player.getData().save();
 
                             p.sendMessage(Color.prison("Gangs", "&7You joined the gang!"));
                             Gangs.inviteHash.remove(p);
@@ -235,11 +249,12 @@ public class GangCommand extends net.myntora.core.core.command.Command {
 
             if (args[0].equalsIgnoreCase("invite")) {
                 if (!player.getData().getPrisonGangName().getCell().equals("none")) {
-                    if (player.getData().getIsGangAdmin().getStatus() || player.getData().getIsGangOwner().getStatus()) {
+                    if (player.getData().getPrisonGangAdmin().getStatus() || player.getData().getPrisonGangOwner().getStatus()) {
 
                         if (Bukkit.getPlayer(args[1]) != null) {
                             Player target = Bukkit.getPlayer(args[1]);
                             Profile toInvite = Core.getInstance().getProfileManager().getProfile(target);
+                            Gangs.messageAllPlayers(player.getData().getPrisonGangName().getCell(), target.getName() + " has been invited to the gang.");
                             if (toInvite.getData().getPrisonGangName().getCell() == null) {
                                 p.sendMessage(Color.prison("Gangs", "You invited &d" + target.getName() + "&7 to join your gang!"));
                                 target.sendMessage(Color.prison("Gangs", "You have been invited to join &d" + player.getData().getPrisonGangName().getCell() + "&7 by &d" + p.getName() + "!"));
@@ -274,9 +289,8 @@ public class GangCommand extends net.myntora.core.core.command.Command {
                     List<String> members = new ArrayList<>();
                     members.add(p.getName());
                     config.set("Gangs." + args[1] + ".members", members);
-                    player.getData().getIsGangOwner().setStatus(true);
+                    player.getData().getPrisonGangOwner().setStatus(true);
                     player.getData().getPrisonGangName().setCell(args[1]);
-                    player.getData().save();
                     Gangs.save();
 
 

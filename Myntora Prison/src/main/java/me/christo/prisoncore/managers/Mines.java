@@ -149,7 +149,7 @@ public class Mines {
     // emerald blocks
     public static void fillEventsMineOres() {
 
-        World w = Bukkit.getWorld("prison_world");
+        World w = Bukkit.getWorld("prison_spawn");
 
         ProtectedRegion r = Prison.getWorldGuard().getRegionManager(w)
                 .getRegion("eventsmine");
@@ -215,7 +215,7 @@ public class Mines {
 
     public static void fillEventsMine(Material m) {
 
-        World w = Bukkit.getWorld("prison_world");
+        World w = Bukkit.getWorld("prison_spawn");
 
         ProtectedRegion r = Prison.getWorldGuard().getRegionManager(w)
                 .getRegion("eventsmine");
@@ -285,7 +285,7 @@ public class Mines {
                     .getRegion(mine);
             assert w != null;
             AsyncWorld world = AsyncWorld.create(new WorldCreator(w.getName()));
-            Material[] m = profile.getData().getPrisonRank().getMineBlock();
+         //   Material[] m = profile.getData().getPrisonRank().getMineBlock();
 
             TaskManager.IMP.taskWhenFree(new Runnable() {
                 @Override
@@ -297,12 +297,12 @@ public class Mines {
                             for (int z = r.getMinimumPoint().getBlockZ(); z < r.getMaximumPoint().getBlockZ()
                                     + 1; z++) {
 
-                                if (m.length == 1) {
-                                    world.getBlockAt(new Location(w, x, y, z)).setType(m[0]);
-                                }
-                                if (m.length == 2) {
-                                    world.getBlockAt(new Location(w, x, y, z)).setType(m[ThreadLocalRandom.current().nextInt(2)]);
-                                }
+//                                if (m.length == 1) {
+//                                    world.getBlockAt(new Location(w, x, y, z)).setType(m[0]);
+//                                }
+//                                if (m.length == 2) {
+//                                    world.getBlockAt(new Location(w, x, y, z)).setType(m[ThreadLocalRandom.current().nextInt(2)]);
+//                                }
                             }
 
                         }

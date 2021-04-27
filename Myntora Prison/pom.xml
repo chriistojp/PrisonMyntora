@@ -77,28 +77,66 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.16.4-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sk89q.worldedit</groupId>
-            <artifactId>worldedit-core</artifactId>
-            <version>6.1.4-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.12</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.intellectualsites.fawe</groupId>
-            <artifactId>FAWE-Bukkit</artifactId>
-            <version>1.16-583</version>
+            <groupId>armor.equip</groupId>
+            <artifactId>ArmorEquipEvent</artifactId>
+            <version>1.7.2</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/ArmorEquipEvent-1.7.2.jar</systemPath>
         </dependency>
-
+        <dependency>
+            <groupId>cooldowns</groupId>
+            <artifactId>Cooldowns</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/CooldownsAPI.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>fawe</groupId>
+            <artifactId>fawe</artifactId>
+            <version>22.3.5</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/FastAsyncWorldEdit-bukkit-19.11.13-5505943-1282-22.3.5.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>core</groupId>
+            <artifactId>core</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/MyntoraCore.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>spigot</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.8.9</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/spigot.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>worldedit</groupId>
+            <artifactId>worldedit</artifactId>
+            <version>6.1.9</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/worldedit-bukkit-6.1.9.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>worldguard</groupId>
+            <artifactId>worldguard</artifactId>
+            <version>6.1</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/worldguard-6.1.jar</systemPath>
+        </dependency>
+        <dependency>
+            <groupId>citizens</groupId>
+            <artifactId>citizens</artifactId>
+            <version>?</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/Citizens.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>

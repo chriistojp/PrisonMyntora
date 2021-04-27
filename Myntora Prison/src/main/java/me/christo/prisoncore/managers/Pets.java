@@ -6,7 +6,7 @@ import me.christo.prisoncore.utils.Gui;
 import me.christo.prisoncore.utils.Util;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.data.Profile;
-import net.myntora.core.core.data.mongo.player.Rank;
+import net.myntora.core.core.data.mysql.player.types.Rank;
 import net.myntora.core.core.util.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -55,18 +55,18 @@ public class Pets {
 
         Profile profile = Core.getInstance().getProfileManager().getProfile(p);
         gui.i(11, Material.DIAMOND_SPADE, "&3&lShard Digger", "", "&7This enchant will passively earn you shards every minute. Shards", "&7can be spent to upgrade your pet. Shards can also",
-        "&7be obtained by the &3\"compressor\" &7enchant", "&7on your pickaxe.", "", "&3⭐ &7Current Information:", "", "&3⭐ &7Current Level: &3" + profile.getData().getPrisonPetShardDiggerLevel().getAmount(),
-        "&3⭐ &7Cost to Upgrade: &3" + (profile.getData().getPrisonPetShardDiggerLevel().getAmount() + 1) * 1000);
-        gui.i(13, Material.DRAGON_EGG, "&d&lPET INFO", "", "&d⭐ &7Pet Information", "", "&d⭐ &7Shard Digger: &d" + profile.getData().getPrisonPetShardDiggerLevel().getAmount() + "&7/min", "&d⭐ &7Token Fetcher: &d" + profile.getData().getPrisonPetTokenFetcherLevel().getAmount() + "&7/min");
+        "&7be obtained by the &3\"compressor\" &7enchant", "&7on your pickaxe.", "", "&3⭐ &7Current Information:", "", "&3⭐ &7Current Level: &3" + profile.getData().getPrisonPetShardFinderLevel().getAmount(),
+        "&3⭐ &7Cost to Upgrade: &3" + (profile.getData().getPrisonPetShardFinderLevel().getAmount() + 1) * 1000);
+        gui.i(13, Material.DRAGON_EGG, "&d&lPET INFO", "", "&d⭐ &7Pet Information", "", "&d⭐ &7Shard Digger: &d" + profile.getData().getPrisonPetShardFinderLevel().getAmount() + "&7/min", "&d⭐ &7Token Fetcher: &d" + profile.getData().getPrisonPetTokenFinderLevel().getAmount() + "&7/min");
         gui.i(15, Material.MAGMA_CREAM, "&e&lToken Fetcher", "", "&7This enchant will passively earn you tokens every minute. Tokens", "&7can be spent to upgrade your pickaxe. Tokens can",
-                "&7be obtained by selling items in the &eshop.", "", "&e⭐ &7Current Information:", "", "&e⭐ &7Current Level: &e" + profile.getData().getPrisonPetTokenFetcherLevel().getAmount(),
-                "&e⭐ &7Cost to Upgrade: &e" + (profile.getData().getPrisonPetTokenFetcherLevel().getAmount() + 1) * 1000);
+                "&7be obtained by selling items in the &eshop.", "", "&e⭐ &7Current Information:", "", "&e⭐ &7Current Level: &e" + profile.getData().getPrisonPetTokenFinderLevel().getAmount(),
+                "&e⭐ &7Cost to Upgrade: &e" + (profile.getData().getPrisonPetTokenFinderLevel().getAmount() + 1) * 1000);
 
         gui.onClick(e -> {
 
             if(e.getSlot() == 11) {
 
-                int level = profile.getData().getPrisonPetShardDiggerLevel().getAmount();
+                int level = profile.getData().getPrisonPetShardFinderLevel().getAmount();
                 double price = ((level + 1) * 1000) * 1.5;
 
                 if(level == 10) {
@@ -78,7 +78,7 @@ public class Pets {
                 if(profile.getData().getPrisonShards().getAmount() >= price) {
 
                     profile.getData().getPrisonShards().decreaseAmount((int) price);
-                    profile.getData().getPrisonPetShardDiggerLevel().increaseAmount(1);
+                    profile.getData().getPrisonPetShardFinderLevel().increaseAmount(1);
                     p.getOpenInventory().close();
                     openGui(p);
                     p.sendMessage(Color.prison("Pets", "You successfully upgraded your &dshard digger &7level to &d" + (level + 1)));
@@ -87,12 +87,12 @@ public class Pets {
                     p.getOpenInventory().close();
                     p.sendMessage(Color.prison("Pets", "You cannot afford that enchant."));
                 }
-                profile.getData().save();
+
 
             }
             if(e.getSlot() == 15) {
 
-                int level = profile.getData().getPrisonPetTokenFetcherLevel().getAmount();
+                int level = profile.getData().getPrisonPetTokenFinderLevel().getAmount();
                 double price = ((level + 1) * 1000) * 1.5;
 
                 if(level == 50) {
@@ -103,7 +103,7 @@ public class Pets {
                 if(profile.getData().getPrisonShards().getAmount() >= price) {
 
                     profile.getData().getPrisonShards().decreaseAmount((int) price);
-                    profile.getData().getPrisonPetTokenFetcherLevel().increaseAmount(1);
+                    profile.getData().getPrisonPetTokenFinderLevel().increaseAmount(1);
                     p.getOpenInventory().close();
                     openGui(p);
                     p.sendMessage(Color.prison("Pets", "You successfully upgraded your &dtoken fetcher &7level to &d" + (level + 1)));
@@ -113,7 +113,7 @@ public class Pets {
                     p.sendMessage(Color.prison("Pets", "You cannot afford that enchant."));
                 }
 
-                profile.getData().save();
+
 
             }
 

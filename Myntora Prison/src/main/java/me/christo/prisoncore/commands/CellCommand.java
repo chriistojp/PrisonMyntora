@@ -172,7 +172,7 @@ public class CellCommand extends Command {
                 profile.getData().getPrisonCellName().setCell("");
                 profile.getData().getPrisonCellStatus().setStatus(false);
 
-                profile.getData().save();
+
 
                 p.sendMessage(Color.prison("Cells", "Reset it!"));
             }

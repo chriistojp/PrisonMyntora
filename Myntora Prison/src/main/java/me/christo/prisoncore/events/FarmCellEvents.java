@@ -7,7 +7,7 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import me.christo.prisoncore.Prison;
-import me.christo.prisoncore.managers.Cells;
+import me.christo.prisoncore.managers.FarmCells;
 import me.christo.prisoncore.utils.Util;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.data.Profile;
@@ -32,7 +32,7 @@ public class FarmCellEvents implements Listener {
     @EventHandler
     public void onChat(AsyncPlayerChatEvent e) {
 
-        if(Cells.disbandStatus.containsKey(e.getPlayer())) {
+        if(FarmCells.disbandStatus.containsKey(e.getPlayer())) {
             if (e.getMessage().equals("yes")) {
                 e.setCancelled(true);
 
@@ -40,21 +40,21 @@ public class FarmCellEvents implements Listener {
                 Bukkit.broadcastMessage(profile.getData().getPrisonFarmName().getCell());
                 String cellName = profile.getData().getPrisonFarmName().getCell();
                 
-                profile.getData().getPrisonFarmStatus().setStatus(false);
+                profile.getData().getPrisonFarmCellStatus().setStatus(false);
                 profile.getData().getPrisonFarmName().setCell("");
-                e.getPlayer().sendMessage(Color.prison("Cells", "You have disbanded your cell!"));
-                Cells.disbandStatus.remove(e.getPlayer());
+                e.getPlayer().sendMessage(Color.prison("FarmCells", "You have disbanded your cell!"));
+                FarmCells.disbandStatus.remove(e.getPlayer());
 
-                profile.getData().save();
 
-                int signX = Cells.getFile().getInt("cells." + cellName + ".signLocation.x");
-                int signY = Cells.getFile().getInt("cells." + cellName + ".signLocation.y");
-                int signZ = Cells.getFile().getInt("cells." + cellName + ".signLocation.z");
+
+                int signX = FarmCells.getFile().getInt("cells." + cellName + ".signLocation.x");
+                int signY = FarmCells.getFile().getInt("cells." + cellName + ".signLocation.y");
+                int signZ = FarmCells.getFile().getInt("cells." + cellName + ".signLocation.z");
                 System.out.println("SIGN X " + signX);
                 Sign sign = (Sign) Bukkit.getWorld("prison_world").getBlockAt(signX, signY, signZ).getState();
 
-                sign.setLine(0, Util.color("&7Cell: " + Cells.getFile().getString("cells." + cellName + ".name")));
-                sign.setLine(1, Util.color("&cBlock: " + Cells.getFile().getString("cells." + cellName + ".block")));
+                sign.setLine(0, Util.color("&7Cell: " + FarmCells.getFile().getString("cells." + cellName + ".name")));
+                sign.setLine(1, Util.color("&cBlock: " + FarmCells.getFile().getString("cells." + cellName + ".block")));
                 sign.setLine(2, Util.color("&7Rent: &a$100/wk"));
                 sign.setLine(3, Util.color("&7Click to Claim!"));
                 sign.update();
@@ -64,8 +64,8 @@ public class FarmCellEvents implements Listener {
 
 
             } else if(e.getMessage().equals("cancel")) {
-                Cells.disbandStatus.remove(e.getPlayer());
-                e.getPlayer().sendMessage(Color.prison("Cells", "Disbanding cell cancelled!"));
+                FarmCells.disbandStatus.remove(e.getPlayer());
+                e.getPlayer().sendMessage(Color.prison("FarmCells", "Disbanding cell cancelled!"));
             }
         }
 
@@ -100,8 +100,8 @@ public class FarmCellEvents implements Listener {
             if (e.getClickedBlock().getType() == Material.WALL_SIGN) {
                 Sign sign = (Sign) e.getClickedBlock().getState();
                 if (sign.getLine(3).equals(Util.color("&7Click to Claim!"))) {
-                    if (profile.getData().getPrisonFarmStatus().getStatus()) {
-                        p.sendMessage(Color.prison("Cells", "You already have a cell"));
+                    if (profile.getData().getPrisonFarmCellStatus().getStatus()) {
+                        p.sendMessage(Color.prison("FarmCells", "You already have a cell"));
                     } else {
 
                         String cellName = ChatColor.stripColor(sign.getLine(0)).replaceAll("Cell:", "").replace(" ", "");
@@ -111,14 +111,14 @@ public class FarmCellEvents implements Listener {
                         
 
                         System.out.println("cells." + "farms" + "." + cellName + ".locationOne.x");
-                        int x = Cells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationOne.x");
+                        int x = FarmCells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationOne.x");
                         System.out.println(x);
-                        int y = Cells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationOne.y");
-                        int z = Cells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationOne.z");
+                        int y = FarmCells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationOne.y");
+                        int z = FarmCells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationOne.z");
 
-                        int x2 = Cells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationTwo.x");
-                        int y2 = Cells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationTwo.y");
-                        int z2 = Cells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationTwo.z");
+                        int x2 = FarmCells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationTwo.x");
+                        int y2 = FarmCells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationTwo.y");
+                        int z2 = FarmCells.getFile().getInt("cells." + "farms" + "." + cellName + ".locationTwo.z");
 
                         BlockVector pos1 = new BlockVector(x, y, z);
                         BlockVector pos2 = new BlockVector(x2, y2, z2);
@@ -136,12 +136,12 @@ public class FarmCellEvents implements Listener {
                         sign.setLine(3, Util.color("Owner: &5" + e.getPlayer().getName()));
                         sign.update();
 
-                        p.sendMessage(Color.prison("Cells", "You have claimed " + cellName + "!"));
+                        p.sendMessage(Color.prison("FarmCells", "You have claimed " + cellName + "!"));
 
                         profile.getData().getPrisonFarmName().setCell("farms" + "." + cellName);
 
-                        profile.getData().getPrisonFarmStatus().setStatus(true);
-                        profile.getData().save();
+                        profile.getData().getPrisonFarmCellStatus().setStatus(true);
+
 
                     }
                 }

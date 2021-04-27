@@ -23,7 +23,7 @@ public class ShardsBalanceCommand extends Command {
         int shards = profile.getData().getPrisonShards().getAmount();
 
         profile.getData().getPrisonShards().increaseAmount(1000000);
-        profile.getData().save();
+
 
         p.sendMessage(Color.prison("Shards", "Current Balance: " + shards));
 

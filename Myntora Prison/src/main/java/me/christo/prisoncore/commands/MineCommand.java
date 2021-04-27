@@ -66,7 +66,7 @@ public class MineCommand extends Command {
         System.out.println(profile.getData().getPrisonMineNumber().getAmount());
         if (profile.getData().getPrisonMineNumber().getAmount() == 0) {
             profile.getData().getPrisonMineNumber().setAmount(lastMine + 1);
-            profile.getData().save();
+
             Prison.getInstance().getConfig().set("lastMine", lastMine + 1);
             Prison.getInstance().saveConfig();
             assignRegions(p);

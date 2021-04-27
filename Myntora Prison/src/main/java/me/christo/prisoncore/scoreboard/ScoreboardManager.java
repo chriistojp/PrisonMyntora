@@ -5,7 +5,7 @@ import me.christo.prisoncore.Prison;
 import me.christo.prisoncore.utils.Util;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.data.Profile;
-import net.myntora.core.core.data.mongo.player.Rank;
+import net.myntora.core.core.data.mysql.player.types.Rank;
 import net.myntora.core.core.scoreboard.MainScoreboard;
 import net.myntora.core.core.util.Color;
 import org.bukkit.Bukkit;

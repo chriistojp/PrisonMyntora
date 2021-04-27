@@ -8,7 +8,7 @@ import net.myntora.core.core.Core;
 import net.myntora.core.core.command.Command;
 import net.myntora.core.core.command.DynamicCommand;
 import net.myntora.core.core.data.Profile;
-import net.myntora.core.core.data.mongo.player.Rank;
+import net.myntora.core.core.data.mysql.player.types.Rank;
 import net.myntora.core.core.util.Color;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;

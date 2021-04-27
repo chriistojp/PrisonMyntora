@@ -24,18 +24,18 @@ public class ChristoClearStuff extends Command {
             if(args[0].equalsIgnoreCase("gang")) {
 
                 profile.getData().getPrisonGangName().setCell(null);
-                profile.getData().getIsGangOwner().setStatus(false);
-                profile.getData().getIsGangAdmin().setStatus(false);
-                profile.getData().getIsGangMember().setStatus(false);
+                profile.getData().getPrisonGangOwner().setStatus(false);
+                profile.getData().getPrisonGangAdmin().setStatus(false);
+                profile.getData().getPrisonGangMember().setStatus(false);
 
-                profile.getData().save();
+
                 p.sendMessage(Color.main("Gangs", "Cleared!"));
 
             }
         }
         if(args[0].equalsIgnoreCase("mine")) {
             profile.getData().getPrisonMineNumber().setAmount(0);
-            profile.getData().save();
+
         }
 
     }

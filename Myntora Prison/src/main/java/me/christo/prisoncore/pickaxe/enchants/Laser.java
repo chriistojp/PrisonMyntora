@@ -25,7 +25,7 @@ public class Laser {
         }
         if(profile.getData().getPrisonMoney().getAmount() >= cost) {
             profile.getData().getPrisonLaserLevel().setAmount(profile.getData().getPrisonLaserLevel().getAmount() + 1);
-            profile.getData().save();
+
 
             p.setItemInHand(StarterPickaxe.getPlayersPickaxe(p));
             p.getOpenInventory().close();

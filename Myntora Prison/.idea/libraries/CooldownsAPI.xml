@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="CooldownsAPI">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../.Servers/PrisonCore2 Test/plugins/CooldownsAPI.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

@@ -43,7 +43,7 @@ public class PlayerBlockBreakEvent implements Listener {
                             JackHammer.executeJackHammer(p, e.getBlock());
                             e.setCancelled(true);
                             profile.getData().getPrisonBlocksMined().increaseAmount(1);
-                            profile.getData().save();
+
                             StarterPickaxe.update(p);
                             System.out.println(profile.getData().getPrisonBlocksMined().getAmount());
 

@@ -60,9 +60,9 @@ public class FarmCellCommand extends Command {
                 int z = p.getTargetBlock((Set<Material>) null, 5).getZ();
 
                 Sign sign = (Sign) p.getTargetBlock((Set<Material>) null, 5).getState();
-                sign.setLine(0, Util.color("&7Cell: " + FarmCells.getCellName.get(p)));
-                sign.setLine(1, Util.color("&cBlock: " + "Farming"));
-                sign.setLine(2, Util.color("&7Rent: &a$100/wk"));
+                sign.setLine(0, Util.color("&8Cell: " + FarmCells.getCellName.get(p)));
+                sign.setLine(1, Util.color("&8Block: " + "&cFarming"));
+                sign.setLine(2, Util.color("&8Rent: &a$100/wk"));
                 sign.setLine(3, Util.color("&7Click to Claim!"));
                 sign.update();
 
@@ -91,7 +91,7 @@ public class FarmCellCommand extends Command {
                 profile.getData().getPrisonCellName().setCell("");
                 profile.getData().getPrisonCellStatus().setStatus(false);
 
-                profile.getData().save();
+
 
                 p.sendMessage(Color.prison("FarmCells", "Reset it!"));
             }

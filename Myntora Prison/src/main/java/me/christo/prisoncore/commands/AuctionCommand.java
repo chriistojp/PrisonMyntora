@@ -2,6 +2,7 @@ package me.christo.prisoncore.commands;
 
 
 import me.christo.prisoncore.managers.Auctions;
+import me.christo.prisoncore.pickaxe.StarterPickaxe;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.command.Command;
 import net.myntora.core.core.command.DynamicCommand;
@@ -24,6 +25,14 @@ public class AuctionCommand extends Command {
 
         Player p = (Player) sender;
 
+        if(StarterPickaxe.holdingPickaxe(p)) {
+            p.sendMessage(Color.prison("Auctions", "You cannot auction your pickaxe."));
+            return;
+        }
+        if(p.getItemInHand().getType() == Material.DRAGON_EGG) {
+            p.sendMessage(Color.prison("Auctions", "You cannot auction a pet."));
+        }
+
         if (args.length == 0) {
 
             p.sendMessage(Color.prison("Auctions", "Help menu for auctions:"));
@@ -34,6 +43,20 @@ public class AuctionCommand extends Command {
         }
 
         if (args.length == 1) {
+
+            if(args[0].equalsIgnoreCase("info")) {
+
+                if(Auctions.hasOngoingAuction()) {
+
+                    Player currentAuctioneer = Auctions.getCurrentAuction();
+
+                    Auctions.sendItemTooltipMessage(p, Color.prison("Auctions", "An Auction has started for &d(Hover Here)!"), Auctions.auctionPlayerItem.get(p));
+                    p.sendMessage(Color.prison("Auctions", "Starting Price: &d$" + Auctions.startingAmountHash.get(currentAuctioneer)));
+                    p.sendMessage(Color.prison("Auctions", "Bid Increment: &d$" + Auctions.incrementHashmap.get(currentAuctioneer)));
+
+
+                }
+            }
 
             if (args[0].equalsIgnoreCase("bid")) {
 

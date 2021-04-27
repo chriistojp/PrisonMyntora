@@ -58,7 +58,7 @@ public class CellEvents implements Listener {
                 e.getPlayer().sendMessage(Color.prison("Cells", "You have disbanded your cell!"));
                 Cells.disbandStatus.remove(e.getPlayer());
 
-                profile.getData().save();
+
 
                 int signX = Cells.getFile().getInt("cells." + cellName + ".signLocation.x");
                 int signY = Cells.getFile().getInt("cells." + cellName + ".signLocation.y");
@@ -193,7 +193,7 @@ public class CellEvents implements Listener {
                 profile.getData().getPrisonCellName().setCell(blockName + "." + cellName);
 
                 profile.getData().getPrisonCellStatus().setStatus(true);
-                profile.getData().save();
+
 
                 API api = new API(p.getUniqueId());
                 api.createCooldown("cell", 604800);

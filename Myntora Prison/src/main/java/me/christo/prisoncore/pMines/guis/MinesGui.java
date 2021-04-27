@@ -60,28 +60,28 @@ public class MinesGui {
         gui.onClick(e -> {
             e.setCancelled(true);
             if(e.getSlot() == 53) {
-//                if(e.getClick() == ClickType.MIDDLE) {
-//
-//                    List<String> members = PMine.getFile().getStringList("mines." + p.getUniqueId() + ".members");
-//                    members.remove(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()));
-//
-//                    PMine.getFile().set("mines." + p.getUniqueId() + ".members", members);
-//
-//                    p.getOpenInventory().close();
-//                    showMembers(p);
-//
-//                    List<String> addedTo = PMine.getFile().getStringList("mines." + Bukkit.getOfflinePlayer(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())).getUniqueId() + ".memberOf");
-//                    addedTo.remove(p.getName());
-//
-//                    if(Bukkit.getPlayer(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())) != null) {
-//
-//                        Bukkit.getPlayer(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())).sendMessage(Color.prison("Mines", "You have been removed from &d" + p.getName() + "'s &7mine!"));
-//
-//                    }
-//
-//                    PMine.save();
-//
-//                }
+                if(e.getClick() == ClickType.MIDDLE) {
+
+                    List<String> members = PMine.getFile().getStringList("mines." + p.getUniqueId() + ".members");
+                    members.remove(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName()));
+
+                    PMine.getFile().set("mines." + p.getUniqueId() + ".members", members);
+
+                    p.getOpenInventory().close();
+                    showMembers(p);
+
+                    List<String> addedTo = PMine.getFile().getStringList("mines." + Bukkit.getOfflinePlayer(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())).getUniqueId() + ".memberOf");
+                    addedTo.remove(p.getName());
+
+                    if(Bukkit.getPlayer(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())) != null) {
+
+                        Bukkit.getPlayer(ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName())).sendMessage(Color.prison("Mines", "You have been removed from &d" + p.getName() + "'s &7mine!"));
+
+                    }
+
+                    PMine.save();
+
+                }
                 p.getOpenInventory().close();
                 showAddedTo(p);
             }

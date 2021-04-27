@@ -35,7 +35,7 @@ public class EnchantsGUI implements Listener {
 
         int efficiencyCurrent = profile.getData().getPrisonEfficiencyLevel().getAmount();
         int fortuneCurrent = profile.getData().getPrisonFortuneLevel().getAmount();
-        int crateFinderCurrent = profile.getData().getPrisonCrateFinder().getAmount();
+//        int crateFinderCurrent = profile.getData().getPrisonCr().getAmount();
         int currentSpeed = profile.getData().getPrisonSpeedLevel().getAmount();
         int currentJump = profile.getData().getPrisonSpeedLevel().getAmount();
         int currentHaste = profile.getData().getPrisonHasteLevel().getAmount();
@@ -45,7 +45,7 @@ public class EnchantsGUI implements Listener {
 
         int efficiencyLevel = Efficiency.getUpgradeCost(profile.getData().getPrisonEfficiencyLevel().getAmount());
         int fortuneLevel = Fortune.getUpgradeCost(profile.getData().getPrisonFortuneLevel().getAmount());
-        int crateFinderLevel = CrateFinder.getUpgradeCost(profile.getData().getPrisonCrateFinder().getAmount());
+//        int crateFinderLevel = CrateFinder.getUpgradeCost(profile.getData().getPrisonCrateFinder().getAmount());
         int speedLevel = Speed.getUpgradeCost(profile.getData().getPrisonSpeedLevel().getAmount());
         int jumpLevel = Jump.getUpgradeCost(profile.getData().getPrisonJumpLevel().getAmount());
         int hasteLevel = Haste.getUpgradeCost(profile.getData().getPrisonHasteLevel().getAmount());
@@ -55,7 +55,7 @@ public class EnchantsGUI implements Listener {
 
         gui.i(12, Material.FEATHER, "&f&lEfficiency",  "", "&f&l&m»&r &7Info", "", "&7 ⭐ Cost: &f" + efficiencyLevel, "&7 ⭐ Current Level: &f" + efficiencyCurrent, "", " &7&oClick to upgrade your &f&oefficiency &7&olevel!");
         gui.i(13, Material.EXP_BOTTLE, "&e&lFortune",  "", "&e&l&m»&r &7Info", "","&7 ⭐ Cost: &e" + fortuneLevel, "&7 ⭐ Current Level: &e" + fortuneCurrent, "", " &7&oClick to upgrade your &e&ofortune &7&olevel!");
-        gui.i(14, Material.CHEST, "&6&lCrate Finder",  "", "&6&l&m»&r &7Info", "","&7 ⭐ Cost: &6" + crateFinderLevel, "&7 ⭐ Current Level: &6" + crateFinderCurrent, "", " &7&oClick to upgrade your &6&ocrate finder &7&olevel!");
+//        gui.i(14, Material.CHEST, "&6&lCrate Finder",  "", "&6&l&m»&r &7Info", "","&7 ⭐ Cost: &6" + crateFinderLevel, "&7 ⭐ Current Level: &6" + crateFinderCurrent, "", " &7&oClick to upgrade your &6&ocrate finder &7&olevel!");
         gui.i(21, Material.SUGAR, "&f&lSpeed",  "", "&f&l&m»&r &7Info", "","&7 ⭐ Cost: &f" + speedLevel, "&7 ⭐ Current Level: &f" + currentSpeed, "", " &7&oClick to upgrade your &f&ospeed &7&olevel!");
         gui.i(22, Material.PISTON_BASE, "&2&lJump",  "", "&2&l&m»&r &7Info", "","&7 ⭐ Cost: &2" + jumpLevel, "&7 ⭐ Current Level: &2" + currentJump, "", " &7&oClick to upgrade your &2&ojump &7&olevel!");
         gui.i(23, Material.GOLD_PICKAXE, "&e&lHaste",  "", "&e&l&m»&r &7Info", "","&7 ⭐ Cost: &e" + hasteLevel, "&7 ⭐ Current Level: &e" + currentHaste, "", " &7&oClick to upgrade your &ehaste &7&olevel!");
@@ -76,7 +76,7 @@ public class EnchantsGUI implements Listener {
                 Fortune.addFortune(p);
             }
             if(e.getSlot() == 14) {
-                CrateFinder.addCrateFinder(p);
+//                CrateFinder.addCrateFinder(p);
             }
             if(e.getSlot() == 21) {
                 Speed.addSpeed(p);

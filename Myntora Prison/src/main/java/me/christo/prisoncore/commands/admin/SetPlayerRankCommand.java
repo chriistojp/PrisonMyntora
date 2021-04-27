@@ -5,8 +5,8 @@ import net.myntora.core.core.Core;
 import net.myntora.core.core.command.Command;
 import net.myntora.core.core.command.DynamicCommand;
 import net.myntora.core.core.data.Profile;
-import net.myntora.core.core.data.mongo.player.Rank;
-import net.myntora.core.core.data.mongo.prison.PrisonRanks;
+import net.myntora.core.core.data.mysql.player.types.Rank;
+import net.myntora.core.core.data.mysql.player.types.PrisonRanks;
 import net.myntora.core.core.util.Color;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
@@ -32,7 +32,7 @@ public class SetPlayerRankCommand extends Command {
                 Profile profile = Core.getInstance().getProfileManager().getProfile(Bukkit.getPlayer(args[0]));
                 try {
                     profile.getData().setPrisonRank(PrisonRanks.valueOf(args[1].toUpperCase()));
-                    profile.getData().save();
+
                 } catch (Exception e) {
                     p.sendMessage(Color.prison("Rank", "&7Invalid Rank: &d" + args[1].toUpperCase()));
                     return;

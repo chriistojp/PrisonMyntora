@@ -4,7 +4,6 @@ import me.christo.prisoncore.Prison;
 import me.christo.prisoncore.utils.Util;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.data.Profile;
-import net.myntora.core.core.data.mongo.player.ProfileData;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
@@ -27,7 +26,7 @@ public class StarterPickaxe {
 
     public static void update(Player p) {
 
-        ProfileData profile = Core.getInstance().getProfileManager().getProfile(p).getData();
+        Profile profile = Core.getInstance().getProfileManager().getProfile(p);
 
         ItemStack item = p.getItemInHand();
         ItemMeta meta = item.getItemMeta();
@@ -35,19 +34,19 @@ public class StarterPickaxe {
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(Util.color(" &6&lStatistics:"));
-        lore.add(Util.color("  &6&l&m»&r &fBlocks Broken: &7" + profile.getPrisonBlocksMined().getAmount()));
+        lore.add(Util.color("  &6&l&m»&r &fBlocks Broken: &7" + profile.getData().getPrisonBlocksMined().getAmount()));
         lore.add("");
         lore.add(Util.color(" &c&lEnchantments:"));
-        lore.add(Util.color("  &c&l&m»&r &7Efficiency &f") + profile.getPrisonEfficiencyLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Fortune &f") + profile.getPrisonFortuneLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Speed &f") + profile.getPrisonSpeedLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Haste &f") + profile.getPrisonHasteLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Jump Boost &f") + profile.getPrisonJumpLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Jack Hammer &f") + profile.getPrisonJackHammerLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Laser &f") + profile.getPrisonLaserLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Explosive &f") + profile.getPrisonExplosiveLevel().getAmount());
-        meta.addEnchant(Enchantment.DIG_SPEED, profile.getPrisonEfficiencyLevel().getAmount(), true);
-        meta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, profile.getPrisonFortuneLevel().getAmount(), true);
+        lore.add(Util.color("  &c&l&m»&r &7Efficiency &f") + profile.getData().getPrisonEfficiencyLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Fortune &f") + profile.getData().getPrisonFortuneLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Speed &f") + profile.getData().getPrisonSpeedLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Haste &f") + profile.getData().getPrisonHasteLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Jump Boost &f") + profile.getData().getPrisonJumpLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Jack Hammer &f") + profile.getData().getPrisonJackHammerLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Laser &f") + profile.getData().getPrisonLaserLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Explosive &f") + profile.getData().getPrisonExplosiveLevel().getAmount());
+        meta.addEnchant(Enchantment.DIG_SPEED, profile.getData().getPrisonEfficiencyLevel().getAmount(), true);
+        meta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, profile.getData().getPrisonFortuneLevel().getAmount(), true);
         meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -58,7 +57,7 @@ public class StarterPickaxe {
 
     public static ItemStack getPlayersPickaxe(Player p) {
 
-        ProfileData profile = Core.getInstance().getProfileManager().getProfile(p).getData();
+        Profile profile = Core.getInstance().getProfileManager().getProfile(p);
 
         ItemStack i = new ItemStack(Material.DIAMOND_PICKAXE);
         ItemMeta meta = i.getItemMeta();
@@ -66,19 +65,19 @@ public class StarterPickaxe {
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(Util.color(" &6&lStatistics:"));
-        lore.add(Util.color("  &6&l&m»&r &fBlocks Broken: &7" + profile.getPrisonBlocksMined().getAmount()));
+        lore.add(Util.color("  &6&l&m»&r &fBlocks Broken: &7" + profile.getData().getPrisonBlocksMined().getAmount()));
         lore.add("");
         lore.add(Util.color(" &c&lEnchantments:"));
-        lore.add(Util.color("  &c&l&m»&r &7Efficiency &f") + profile.getPrisonEfficiencyLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Fortune &f") + profile.getPrisonFortuneLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Speed &f") + profile.getPrisonSpeedLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Haste &f") + profile.getPrisonHasteLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Jump Boost &f") + profile.getPrisonJumpLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Jack Hammer &f") + profile.getPrisonJackHammerLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Laser &f") + profile.getPrisonLaserLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Explosive &f") + profile.getPrisonExplosiveLevel().getAmount());
-        meta.addEnchant(Enchantment.DIG_SPEED, profile.getPrisonEfficiencyLevel().getAmount(), true);
-        meta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, profile.getPrisonFortuneLevel().getAmount(), true);
+        lore.add(Util.color("  &c&l&m»&r &7Efficiency &f") + profile.getData().getPrisonEfficiencyLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Fortune &f") + profile.getData().getPrisonFortuneLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Speed &f") + profile.getData().getPrisonSpeedLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Haste &f") + profile.getData().getPrisonHasteLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Jump Boost &f") + profile.getData().getPrisonJumpLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Jack Hammer &f") + profile.getData().getPrisonJackHammerLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Laser &f") + profile.getData().getPrisonLaserLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Explosive &f") + profile.getData().getPrisonExplosiveLevel().getAmount());
+        meta.addEnchant(Enchantment.DIG_SPEED, profile.getData().getPrisonEfficiencyLevel().getAmount(), true);
+        meta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, profile.getData().getPrisonFortuneLevel().getAmount(), true);
         meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -88,7 +87,7 @@ public class StarterPickaxe {
         net.minecraft.server.v1_8_R3.NBTTagCompound itemC = (itemNMS.hasTag()) ? itemNMS.getTag()
                 : new net.minecraft.server.v1_8_R3.NBTTagCompound();
 
-        itemC.setInt("blocks", profile.getPrisonBlocksMined().getAmount());
+        itemC.setInt("blocks", profile.getData().getPrisonBlocksMined().getAmount());
 
         return CraftItemStack.asBukkitCopy(itemNMS);
 
@@ -96,7 +95,7 @@ public class StarterPickaxe {
 
     public static ItemStack getPlayersPickaxe(OfflinePlayer p) {
 
-        ProfileData profile = Core.getInstance().getProfileManager().getProfile(p).getData();
+        Profile profile = Core.getInstance().getProfileManager().getProfile(p);
 
         ItemStack i = new ItemStack(Material.DIAMOND_PICKAXE);
         ItemMeta meta = i.getItemMeta();
@@ -104,19 +103,19 @@ public class StarterPickaxe {
         List<String> lore = new ArrayList<>();
         lore.add("");
         lore.add(Util.color(" &6&lStatistics:"));
-        lore.add(Util.color("  &6&l&m»&r &fBlocks Broken: &7" + profile.getPrisonBlocksMined().getAmount()));
+        lore.add(Util.color("  &6&l&m»&r &fBlocks Broken: &7" + profile.getData().getPrisonBlocksMined().getAmount()));
         lore.add("");
         lore.add(Util.color(" &c&lEnchantments:"));
-        lore.add(Util.color("  &c&l&m»&r &7Efficiency &f") + profile.getPrisonEfficiencyLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Fortune &f") + profile.getPrisonFortuneLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Speed &f") + profile.getPrisonSpeedLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Haste &f") + profile.getPrisonHasteLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Jump Boost &f") + profile.getPrisonJumpLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Jack Hammer &f") + profile.getPrisonJackHammerLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Laser &f") + profile.getPrisonLaserLevel().getAmount());
-        lore.add(Util.color("  &c&l&m»&r &7Explosive &f") + profile.getPrisonExplosiveLevel().getAmount());
-        meta.addEnchant(Enchantment.DIG_SPEED, profile.getPrisonEfficiencyLevel().getAmount(), true);
-        meta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, profile.getPrisonFortuneLevel().getAmount(), true);
+        lore.add(Util.color("  &c&l&m»&r &7Efficiency &f") + profile.getData().getPrisonEfficiencyLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Fortune &f") + profile.getData().getPrisonFortuneLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Speed &f") + profile.getData().getPrisonSpeedLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Haste &f") + profile.getData().getPrisonHasteLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Jump Boost &f") + profile.getData().getPrisonJumpLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Jack Hammer &f") + profile.getData().getPrisonJackHammerLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Laser &f") + profile.getData().getPrisonLaserLevel().getAmount());
+        lore.add(Util.color("  &c&l&m»&r &7Explosive &f") + profile.getData().getPrisonExplosiveLevel().getAmount());
+        meta.addEnchant(Enchantment.DIG_SPEED, profile.getData().getPrisonEfficiencyLevel().getAmount(), true);
+        meta.addEnchant(Enchantment.LOOT_BONUS_BLOCKS, profile.getData().getPrisonFortuneLevel().getAmount(), true);
         meta.spigot().setUnbreakable(true);
         meta.setLore(lore);
         meta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
@@ -126,7 +125,7 @@ public class StarterPickaxe {
         net.minecraft.server.v1_8_R3.NBTTagCompound itemC = (itemNMS.hasTag()) ? itemNMS.getTag()
                 : new net.minecraft.server.v1_8_R3.NBTTagCompound();
 
-        itemC.setInt("blocks", profile.getPrisonBlocksMined().getAmount());
+        itemC.setInt("blocks", profile.getData().getPrisonBlocksMined().getAmount());
 
         return CraftItemStack.asBukkitCopy(itemNMS);
 

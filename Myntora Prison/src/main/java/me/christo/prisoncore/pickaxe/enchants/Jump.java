@@ -25,7 +25,7 @@ public class Jump {
         }
         if(profile.getData().getPrisonMoney().getAmount() >= cost) {
             profile.getData().getPrisonJumpLevel().setAmount(profile.getData().getPrisonJumpLevel().getAmount() + 1);
-            profile.getData().save();
+
 
             p.setItemInHand(StarterPickaxe.getPlayersPickaxe(p));
             p.getOpenInventory().close();

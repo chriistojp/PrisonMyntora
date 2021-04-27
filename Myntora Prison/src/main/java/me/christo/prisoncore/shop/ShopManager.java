@@ -29,7 +29,7 @@ public class ShopManager extends Manager {
         Profile profile = Core.getInstance().getProfileManager().getProfile(player);
         Gui gui = new Gui(Color.translate("&5&l" + pageName), 54);
 
-        gui.i(53, Material.DOUBLE_PLANT, Color.translate("&7Balance: &6$" + profile.getData().getSurvivalBalance().getAmount()));
+        gui.i(53, Material.DOUBLE_PLANT, Color.translate("&7Balance: &6$" + profile.getData().getPrisonMoney().getAmount()));
         gui.i(52, new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 4), Color.translate("&6&lBACK"), "", Color.translate("&7Click to go back to the &6&nMain&r &7page."));
 
         gui.onOpen(e -> {
@@ -89,7 +89,7 @@ public class ShopManager extends Manager {
                             double sellPrice = Items.getSellPrice(i);
                             player.sendMessage(Color.main("Shop", "+ &a$" + sellPrice));
                             item.setAmount(item.getAmount() - 1);
-                            profile.getData().getSurvivalBalance().increaseAmount((int) sellPrice);
+                            profile.getData().getPrisonMoney().increaseAmount((int) sellPrice);
                             b = true;
                         }
                     }
@@ -119,7 +119,7 @@ public class ShopManager extends Manager {
                     return;
                 }
                 player.sendMessage(Color.main("Shop", "+ &a$" + sellPrice * total));
-                profile.getData().getSurvivalBalance().increaseAmount((int) sellPrice * total);
+                profile.getData().getPrisonMoney().increaseAmount((int) sellPrice * total);
             }
         });
         gui.show(player);

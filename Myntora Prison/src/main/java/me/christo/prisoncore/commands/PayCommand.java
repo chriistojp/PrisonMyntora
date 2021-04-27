@@ -39,8 +39,7 @@ public class PayCommand extends Command {
                             profile.getData().getPrisonMoney().decreaseAmount(amount);
                             toPay.getData().getPrisonMoney().increaseAmount(amount);
 
-                            profile.getData().save();
-                            toPay.getData().save();
+
 
                             sender.sendMessage(Color.prison("Money", "You paid &d" + amount + "&7 to " + Bukkit.getPlayer(args[1]).getName()));
                             Bukkit.getPlayer(args[1]).sendMessage(Color.prison("Money", "You recieved &d" + amount + "&7 from " + sender.getName()));

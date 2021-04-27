@@ -91,24 +91,22 @@ public class Gangs {
         Profile player = Core.getInstance().getProfileManager().getProfile(sender);
         Profile kicked = Core.getInstance().getProfileManager().getProfile(target);
 
-        kicked.getData().getPrisonGangName().setCell(null);
-        kicked.getData().save();
 
-        if(player.getData().getIsGangMember().getStatus()) {
+        if(player.getData().getPrisonGangMember().getStatus()) {
             sender.sendMessage(Color.prison("Gangs", "You don't have permission to do that!"));
             return;
         }
 
         if(player.getData().getPrisonGangName().getCell().equals(kicked.getData().getPrisonGangName().getCell())) {
-            if (kicked.getData().getIsGangMember().getStatus()) {
+            if (kicked.getData().getPrisonGangMember().getStatus()) {
                 List<String> members = gangs.getStringList("Gangs." + gang + ".members");
                 members.remove(target.getName());
                 gangs.set("Gangs." + gang + ".members", members);
 
                 target.sendMessage(Color.main("Gangs", "You have been kicked from your gang!"));
             }
-            if (kicked.getData().getIsGangAdmin().getStatus()) {
-                if(player.getData().getIsGangOwner().getStatus()) {
+            if (kicked.getData().getPrisonGangAdmin().getStatus()) {
+                if(player.getData().getPrisonGangOwner().getStatus()) {
                     List<String> members = gangs.getStringList("Gangs." + gang + ".members");
                     members.remove(target.getName());
                     gangs.set("Gangs." + gang + ".members", members);
@@ -119,12 +117,9 @@ public class Gangs {
                 }
             }
             save();
+            kicked.getData().getPrisonGangName().setCell(null);
+            kicked.getData().getPrisonGangMember().setStatus(false);
 
-            kicked.getData().getPrisonGangName().setCell("none");
-            kicked.getData().getIsGangAdmin().setStatus(false);
-            kicked.getData().getIsGangMember().setStatus(false);
-
-            kicked.getData().save();
 
 
 
@@ -165,11 +160,11 @@ public class Gangs {
 
 
 
-        oldLeader.getData().getIsGangOwner().setStatus(false);
-        oldLeader.getData().getIsGangAdmin().setStatus(true);
+        oldLeader.getData().getPrisonGangOwner().setStatus(false);
+        oldLeader.getData().getPrisonGangAdmin().setStatus(true);
 
-        newLeader.getData().getIsGangAdmin().setStatus(false);
-        newLeader.getData().getIsGangOwner().setStatus(true);
+        newLeader.getData().getPrisonGangAdmin().setStatus(false);
+        newLeader.getData().getPrisonGangOwner().setStatus(true);
 
         sender.sendMessage(Color.prison("Gangs", "You have given ownership to &d" + target.getName() + "!"));
         target.sendMessage(Color.prison("Gangs", "You are now the leader of your gang!"));

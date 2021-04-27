@@ -26,22 +26,9 @@ public class PetsClickEvent implements Listener {
                     if(p.getInventory().getItemInHand().hasItemMeta()) {
                         if(p.getInventory().getItemInHand().getItemMeta().hasDisplayName()) {
                             if(p.getInventory().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(Util.color("&d&lINVENTORY PET"))) {
-
                                 e.setCancelled(true);
-
-                                API api = new API(p.getUniqueId());
-                                if(api.hasCooldown("petClick")) {
-                                    if(api.getTimeLeft("petClick") <= 0) {
-                                        api.clearCooldown("petClick");
-                                    } else {
-                                        p.sendMessage(Color.prison("Pets", "Your still on cooldown for " + api.getTimeLeft("petClick")));
-                                    }
-                                } else {
                                     Pets.openGui(p);
-                                    api.createCooldown("petClick", 120);
-                                }
 
-                                e.setCancelled(true);
 
                             }
                         }

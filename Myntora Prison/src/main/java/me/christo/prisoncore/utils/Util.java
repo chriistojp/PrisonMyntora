@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Util {
 
@@ -37,6 +38,17 @@ public class Util {
     public static String replaceNumbers(long num) {
         df2.setDecimalFormatSymbols(new DecimalFormatSymbols(Locale.getDefault()));
         return df2.format(num);
+    }
+
+    public static boolean checkChance(int chance) {
+
+
+        int random = ThreadLocalRandom.current().nextInt(0, 100);
+        if(random <= chance) {
+            return true;
+        }
+        return false;
+
     }
 
     public static String getCardinalDirection(Player player) {

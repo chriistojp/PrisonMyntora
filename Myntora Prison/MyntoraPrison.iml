@@ -21,28 +21,78 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="FastAsyncWorldEdit-bukkit-19.11.13-5505943-1282-22.3.5" level="project" />
-    <orderEntry type="library" name="worldguard-6.2.1" level="project" />
-    <orderEntry type="library" name="spigot" level="project" />
-    <orderEntry type="library" name="worldedit-bukkit-6.1.9" level="project" />
-    <orderEntry type="library" name="ArmorEquipEvent-1.7.2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.guava:guava:21.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.gson:gson:2.8.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: net.md-5:bungeecord-chat:1.16-R0.3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: org.yaml:snakeyaml:1.26" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.sk89q.worldedit:worldedit-core:6.1.4-SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: de.schlichtherle:truezip:6.8.3" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: rhino:js:1.7R2" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.google.code.findbugs:jsr305:1.3.9" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.thoughtworks.paranamer:paranamer:2.6" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.sk89q.lib:jlibnoise:1.0.0" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.sk89q:jchronic:0.2.4a" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: junit:junit:4.8.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.18.12" level="project" />
-    <orderEntry type="library" name="Maven: com.intellectualsites.fawe:FAWE-Bukkit:1.16-583" level="project" />
-    <orderEntry type="library" name="Citizens" level="project" />
-    <orderEntry type="library" name="MyntoraCore" level="project" />
-    <orderEntry type="library" name="CooldownsAPI" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: armor.equip:ArmorEquipEvent:1.7.2">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/ArmorEquipEvent-1.7.2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: cooldowns:Cooldowns:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/CooldownsAPI.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: fawe:fawe:22.3.5">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/FastAsyncWorldEdit-bukkit-19.11.13-5505943-1282-22.3.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: core:core:1.0">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/MyntoraCore.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: spigot:spigot:1.8.9">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/spigot.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: worldedit:worldedit:6.1.9">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/worldedit-bukkit-6.1.9.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: worldguard:worldguard:6.1">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/worldguard-6.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Maven: citizens:citizens:?">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/libs/Citizens.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

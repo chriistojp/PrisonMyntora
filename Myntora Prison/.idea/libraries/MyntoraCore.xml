@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="MyntoraCore">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../../../.Servers/PrisonCore2 Test/plugins/MyntoraCore.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

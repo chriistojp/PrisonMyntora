@@ -25,7 +25,7 @@ public class Fortune {
         }
         if(profile.getData().getPrisonMoney().getAmount() >= cost) {
             profile.getData().getPrisonFortuneLevel().setAmount(profile.getData().getPrisonFortuneLevel().getAmount() + 1);
-            profile.getData().save();
+
 
             p.setItemInHand(StarterPickaxe.getPlayersPickaxe(p));
             p.getOpenInventory().close();
