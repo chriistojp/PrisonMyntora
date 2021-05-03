@@ -43,15 +43,15 @@ public class EnchantsGUI implements Listener {
         int currentExplosive = profile.getData().getPrisonExplosiveLevel().getAmount();
         int currentJackHammer = profile.getData().getPrisonJackHammerLevel().getAmount();
 
-        int efficiencyLevel = Efficiency.getUpgradeCost(profile.getData().getPrisonEfficiencyLevel().getAmount());
-        int fortuneLevel = Fortune.getUpgradeCost(profile.getData().getPrisonFortuneLevel().getAmount());
+        int efficiencyLevel = Efficiency.getUpgradeCost(profile.getData().getPrisonEfficiencyLevel().getAmount() + 1);
+        int fortuneLevel = Fortune.getUpgradeCost(profile.getData().getPrisonFortuneLevel().getAmount() + 1);
 //        int crateFinderLevel = CrateFinder.getUpgradeCost(profile.getData().getPrisonCrateFinder().getAmount());
-        int speedLevel = Speed.getUpgradeCost(profile.getData().getPrisonSpeedLevel().getAmount());
-        int jumpLevel = Jump.getUpgradeCost(profile.getData().getPrisonJumpLevel().getAmount());
-        int hasteLevel = Haste.getUpgradeCost(profile.getData().getPrisonHasteLevel().getAmount());
-        int laserLevel = Laser.getUpgradeCost(profile.getData().getPrisonLaserLevel().getAmount());
-        int explosiveLevel = Explosive.getUpgradeCost(profile.getData().getPrisonExplosiveLevel().getAmount());
-        int jackHammerLevel = JackHammer.getUpgradeCost(profile.getData().getPrisonJackHammerLevel().getAmount());
+        int speedLevel = Speed.getUpgradeCost(profile.getData().getPrisonSpeedLevel().getAmount() + 1);
+        int jumpLevel = Jump.getUpgradeCost(profile.getData().getPrisonJumpLevel().getAmount() + 1);
+        int hasteLevel = Haste.getUpgradeCost(profile.getData().getPrisonHasteLevel().getAmount() + 1);
+        int laserLevel = Laser.getUpgradeCost(profile.getData().getPrisonLaserLevel().getAmount() + 1);
+        int explosiveLevel = Explosive.getUpgradeCost(profile.getData().getPrisonExplosiveLevel().getAmount() + 1);
+        int jackHammerLevel = JackHammer.getUpgradeCost(profile.getData().getPrisonJackHammerLevel().getAmount() + 1);
 
         gui.i(12, Material.FEATHER, "&f&lEfficiency",  "", "&f&l&m»&r &7Info", "", "&7 ⭐ Cost: &f" + efficiencyLevel, "&7 ⭐ Current Level: &f" + efficiencyCurrent, "", " &7&oClick to upgrade your &f&oefficiency &7&olevel!");
         gui.i(13, Material.EXP_BOTTLE, "&e&lFortune",  "", "&e&l&m»&r &7Info", "","&7 ⭐ Cost: &e" + fortuneLevel, "&7 ⭐ Current Level: &e" + fortuneCurrent, "", " &7&oClick to upgrade your &e&ofortune &7&olevel!");

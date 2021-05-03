@@ -1,9 +1,17 @@
 package me.christo.prisoncore.pickaxe.events;
 
+import com.boydti.fawe.bukkit.regions.Worldguard;
+import com.sk89q.worldguard.bukkit.RegionContainer;
+import com.sk89q.worldguard.protection.managers.RegionManager;
+import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+import me.christo.prisoncore.Prison;
 import me.christo.prisoncore.pMines.PMine;
 import me.christo.prisoncore.pickaxe.StarterPickaxe;
 import me.christo.prisoncore.pickaxe.enchants.Explosive;
 import me.christo.prisoncore.pickaxe.enchants.JackHammer;
+import me.christo.prisoncore.shop.ShopManager;
+import me.christo.prisoncore.shop.commands.ShopCommand;
+import me.christo.prisoncore.shop.util.Items;
 import me.christo.prisoncore.utils.Util;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.data.Profile;
@@ -29,6 +37,15 @@ public class PlayerBlockBreakEvent implements Listener {
             return;
         }
 
+        RegionManager manager = Prison.getWorldGuard().getRegionManager(p.getWorld());
+        for (ProtectedRegion rg : manager.getApplicableRegions(p.getLocation()).getRegions()) {
+
+            if(!rg.getId().contains("mine")) {
+                return;
+            }
+
+        }
+
         e.getBlock().getDrops().clear();
 
       //  Collection<ItemStack> drops = e.getBlock().getDrops();
@@ -45,27 +62,17 @@ public class PlayerBlockBreakEvent implements Listener {
                             profile.getData().getPrisonBlocksMined().increaseAmount(1);
 
                             StarterPickaxe.update(p);
-                            System.out.println(profile.getData().getPrisonBlocksMined().getAmount());
-
 
                             for(ItemStack i : e.getBlock().getDrops()) {
-                                p.getInventory().addItem(i);
-                                if(PMine.getFile().getConfigurationSection("mines." + p.getUniqueId() + ".drops") == null) {
-                                    PMine.getFile().createSection("mines." + p.getUniqueId() + ".drops");
-                                    PMine.save();
+                                if(Items.isSellableItem(i)) {
+                                    Items item = Items.translateFromMaterial(i.getType());
+                                    assert item != null;
+                                    double price = Items.getSellPrice(item);
+                                    profile.getData().getPrisonMoney().increaseAmount((int) price);
                                 }
-                                for(String key :  PMine.getFile().getConfigurationSection("mines." + p.getUniqueId() + ".drops").getKeys(false)) {
-                                    ItemStack item = PMine.getFile().getItemStack("mines." + p.getUniqueId() + ".drops." + key);
-                                    if(item == i) {
-                                        Bukkit.broadcastMessage("t");
-                                        item.setAmount(i.getAmount() + item.getAmount());
-                                        PMine.getFile().set("mines." + p.getUniqueId() + ".drops." + key, item);
-                                        PMine.save();
-                                    }
-                                }
-                                //PMine.getFile().set("mines." + p.getUniqueId() + ".drops." + PMine.getFile().getConfigurationSection("mines." + p.getUniqueId() + ".drops").getKeys(false).size(), i);
-                                PMine.save();
                             }
+
+
 
                             e.getBlock().setType(Material.AIR);
 

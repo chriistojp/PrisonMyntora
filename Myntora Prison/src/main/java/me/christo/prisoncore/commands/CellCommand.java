@@ -13,6 +13,7 @@ import net.myntora.core.core.data.Profile;
 import net.myntora.core.core.util.Color;
 import net.myntora.core.core.util.ItemBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Sign;
 import org.bukkit.command.CommandSender;
@@ -34,6 +35,7 @@ public class CellCommand extends Command {
 
         Player p = (Player) sender;
         String[] blocks = {"A", "B", "C", "D"};
+        Profile pf = Core.getInstance().getProfileManager().getProfile(p);
 
         if(args.length == 0) {
             API api = new API(p.getUniqueId());
@@ -42,6 +44,16 @@ public class CellCommand extends Command {
                 long seconds = api.getTimeLeft("cell");
                 long days = seconds / 86400;
                 long hours = (seconds / 3600) - (24 * days);
+
+                String[] block = pf.getData().getPrisonCellName().getCell().split("\\.");
+                int x = Cells.getFile().getInt("cells." + block[0] + "." + block[1] + ".teleportLocation.x");
+                int y = Cells.getFile().getInt("cells." + block[0] + "." + block[1] + ".teleportLocation.y");
+                int z = Cells.getFile().getInt("cells." + block[0] + "." + block[1] + ".teleportLocation.z");
+
+                Location loc = new Location(Bukkit.getWorld("prison_spawn"), x, y, z);
+                p.teleport(loc);
+
+
                 p.sendMessage(Color.prison("Cells", "Your cell has &d" + days + "d " + hours + "h &7before it expires."));
             } else {
                 p.sendMessage(Color.prison("Cells", "You do not currently have a cell!"));
@@ -152,6 +164,10 @@ public class CellCommand extends Command {
                 Cells.getFile().set("cells." + Cells.blockName.get(p) + "." + Cells.getCellName.get(p) + ".signLocation.x", x);
                 Cells.getFile().set("cells." + Cells.blockName.get(p) + "." + Cells.getCellName.get(p) + ".signLocation.y", y);
                 Cells.getFile().set("cells." + Cells.blockName.get(p) + "." + Cells.getCellName.get(p) + ".signLocation.z", z);
+
+                Cells.getFile().set("cells." + Cells.blockName.get(p) + "." + Cells.getCellName.get(p) + ".teleportLocation.x", p.getLocation().getX());
+                Cells.getFile().set("cells." + Cells.blockName.get(p) + "." + Cells.getCellName.get(p) + ".teleportLocation.y", p.getLocation().getY());
+                Cells.getFile().set("cells." + Cells.blockName.get(p) + "." + Cells.getCellName.get(p) + ".teleportLocation.z", p.getLocation().getZ());
 
                 Cells.save();
 

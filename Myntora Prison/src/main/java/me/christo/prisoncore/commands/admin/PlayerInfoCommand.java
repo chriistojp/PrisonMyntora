@@ -46,7 +46,7 @@ public class PlayerInfoCommand extends Command {
 
     }
 
-    public Gui infoGui(Player sender, OfflinePlayer p) {
+    public static Gui infoGui(Player sender, OfflinePlayer p) {
 
         Profile profile = Core.getInstance().getProfileManager().getProfile(p);
 

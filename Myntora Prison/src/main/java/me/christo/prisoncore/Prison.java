@@ -1,6 +1,7 @@
 package me.christo.prisoncore;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
+import com.sun.xml.internal.bind.v2.model.annotation.Quick;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import me.christo.prisoncore.commands.*;
@@ -94,6 +95,7 @@ public final class Prison extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerBlockBreakEvent(), this);
         getServer().getPluginManager().registerEvents(new SwitchToPickaxeEvent(), this);
         getServer().getPluginManager().registerEvents(new BoosterRightClickEvent(), this);
+        getServer().getPluginManager().registerEvents(new QuickToolEvent(), this);
 
         getServer().getPluginManager().registerEvents(new PetsClickEvent(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);
@@ -175,7 +177,8 @@ public final class Prison extends JavaPlugin {
                 .register(new ArmorStandTest())
                 .register(new PayCommand())
                 .register(new ShardsCommand())
-                .register(new ZonesCommand());
+                .register(new ZonesCommand())
+                .register(new QuickToolCommand());
     }
 
 }
