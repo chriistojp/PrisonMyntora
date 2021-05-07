@@ -321,6 +321,14 @@ public class Gui implements Listener {
         return this;
     }
 
+    public Gui i(int[] position, ItemStack item, String name, String... lore) {
+        for(int i : position) {
+            getInventory().setItem((i), getItem(item, color(name)[0], color(lore)));
+        }
+        return this;
+    }
+
+
     public Gui i(int position, Material item, String name, String... lore) {
         getInventory().setItem((position), getItem(new ItemStack(item), color(name)[0], color(lore)));
         return this;

@@ -178,7 +178,9 @@ public final class Prison extends JavaPlugin {
                 .register(new PayCommand())
                 .register(new ShardsCommand())
                 .register(new ZonesCommand())
-                .register(new QuickToolCommand());
+                .register(new QuickToolCommand())
+                .register(new GambleCommand())
+                .register(new InfirmaryCommand());
     }
 
 }

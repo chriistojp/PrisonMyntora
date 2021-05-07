@@ -138,5 +138,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/Citizens.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>head-database</groupId>
+            <artifactId>head</artifactId>
+            <version>?</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/HeadDatabase-4.13.5.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
