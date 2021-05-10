@@ -40,7 +40,7 @@ public class RankupCommand extends Command {
             }
 
 
-            NPCS.spawnGoalsNPC(p, p.getLocation());
+      //      NPCS.spawnGoalsNPC(p, p.getLocation());
 
         }
 

@@ -40,7 +40,7 @@ public class GivePetCommand extends Command {
                     Pets.giveItemStack(Bukkit.getPlayer(args[0]));
                     p.sendMessage(Color.prison("Pets", "You gave a pet to &d" + Bukkit.getPlayer(args[0]).getName()));
 
-                    NPCS.spawnMinesNPC(p);
+               //     NPCS.spawnMinesNPC(p);
 
                 }
             }

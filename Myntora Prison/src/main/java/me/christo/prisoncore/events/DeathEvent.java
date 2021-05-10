@@ -18,14 +18,14 @@ public class DeathEvent implements Listener {
 
 
         List<ItemStack> drops = e.getDrops();
-        e.getDrops().clear();
+        //e.getDrops().clear();
 
         drops.removeIf(i -> i.getType() == Material.DIAMOND_PICKAXE);
         drops.removeIf(i -> i.getType() == Material.DRAGON_EGG);
 
-        for(ItemStack i : drops) {
-            e.getEntity().getLocation().getWorld().dropItem(e.getEntity().getLocation(), i);
-        }
+//        for(ItemStack i : drops) {
+//            e.getEntity().getLocation().getWorld().dropItem(e.getEntity().getLocation(), i);
+//        }
 
 
     }

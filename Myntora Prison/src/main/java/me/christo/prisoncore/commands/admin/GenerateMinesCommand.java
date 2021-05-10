@@ -59,6 +59,8 @@ public class GenerateMinesCommand extends Command {
             int lastGenerated = Prison.getInstance().getConfig().getInt("lastGenerated");
             Location loc = new Location(Bukkit.getWorld("prison_world"), lastGenerated * 100, 70, lastGenerated * 100);
 
+            p.sendMessage("schematic pasted at " + loc);
+
 
             File file = new File(Prison.getInstance().getDataFolder() + File.separator + "clipboard.schematic");
             if (!file.exists()) {

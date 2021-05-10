@@ -1,6 +1,7 @@
 package me.christo.prisoncore.commands.admin;
 
 
+import me.christo.prisoncore.Prison;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.command.Command;
 import net.myntora.core.core.command.DynamicCommand;
@@ -35,6 +36,12 @@ public class ChristoClearStuff extends Command {
         }
         if(args[0].equalsIgnoreCase("mine")) {
             profile.getData().getPrisonMineNumber().setAmount(0);
+
+            Prison.getInstance().getConfig().set("lastMine", 1);
+            Prison.getInstance().getConfig().set("lastGenerated", 0);
+            Prison.getInstance().saveConfig();
+
+
 
         }
 

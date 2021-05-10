@@ -58,6 +58,7 @@ public final class Prison extends JavaPlugin {
 
         instance = this;
 
+        NPCS.spawnNPCS();
         loadManagers();
         loadCommands();
 
@@ -99,6 +100,7 @@ public final class Prison extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new PetsClickEvent(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);
+        getServer().getPluginManager().registerEvents(new RespawnEvent(), this);
 
         getCommand("zone").setExecutor(new ZoneCommand());
         getCommand("crates").setExecutor(new CratesCommand());
@@ -180,7 +182,8 @@ public final class Prison extends JavaPlugin {
                 .register(new ZonesCommand())
                 .register(new QuickToolCommand())
                 .register(new GambleCommand())
-                .register(new InfirmaryCommand());
+                .register(new InfirmaryCommand())
+                .register(new SuicideCommand());
     }
 
 }

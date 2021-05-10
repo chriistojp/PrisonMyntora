@@ -145,5 +145,12 @@
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/HeadDatabase-4.13.5.jar</systemPath>
         </dependency>
+        <dependency>
+            <groupId>npcs</groupId>
+            <artifactId>npcss</artifactId>
+            <version>?</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/ServersNPC.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>

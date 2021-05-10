@@ -56,7 +56,7 @@ public class MineCommand extends Command {
             PMine.save();
 
             int lastClaimed = Prison.getInstance().getConfig().getInt("lastMine");
-            NPCS.spawnMinesNPC(new Location(Bukkit.getWorld("prison_world"), (lastClaimed * 100) + 5, 71, (lastClaimed * 100)));
+  //          NPCS.spawnMinesNPC(new Location(Bukkit.getWorld("prison_world"), (lastClaimed * 100) + 5, 71, (lastClaimed * 100)));
 
             return;
         }
@@ -77,7 +77,7 @@ public class MineCommand extends Command {
 
             int lastClaimed = Prison.getInstance().getConfig().getInt("lastMine");
             Bukkit.broadcastMessage("test");
-            NPCS.spawnMinesNPC(new Location(Bukkit.getWorld("prison_world"), (lastClaimed * 100) + 5, 71, (lastClaimed * 100), -90, 0));
+         //   NPCS.spawnMinesNPC(new Location(Bukkit.getWorld("prison_world"), (lastClaimed * 100) + 5, 71, (lastClaimed * 100), -90, 0));
 
         } else {
             teleport(p);
