@@ -1,6 +1,6 @@
 package me.christo.prisoncore.zones;
 
-import javafx.util.Pair;
+//import javafx.util.Pair;
 import me.christo.prisoncore.Prison;
 import me.christo.prisoncore.utils.Util;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Zones {
 
-    HashMap<Integer, Pair<ItemStack, Integer>> zonesHash = new HashMap<>();
+//    HashMap<Integer, Pair<ItemStack, Integer>> zonesHash = new HashMap<>();
 
 
     private static File zonesFile;

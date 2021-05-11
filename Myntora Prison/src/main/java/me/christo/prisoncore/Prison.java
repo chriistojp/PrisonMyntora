@@ -1,7 +1,6 @@
 package me.christo.prisoncore;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import com.sun.xml.internal.bind.v2.model.annotation.Quick;
 import lombok.Getter;
 import lombok.SneakyThrows;
 import me.christo.prisoncore.commands.*;
@@ -62,6 +61,7 @@ public final class Prison extends JavaPlugin {
         NPCS.spawnNPCS();
         loadManagers();
         loadCommands();
+        EasterEggNPCs.spawnEasterEggNPCs();
 
 
 //        Bukkit.getScheduler().runTaskTimer(this, () -> {
