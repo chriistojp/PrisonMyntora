@@ -101,6 +101,8 @@ public final class Prison extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);
         getServer().getPluginManager().registerEvents(new RespawnEvent(), this);
 
+        getServer().getPluginManager().registerEvents(new EasterEggNPCs(), this);
+
         getCommand("zone").setExecutor(new ZoneCommand());
         getCommand("crates").setExecutor(new CratesCommand());
         getCommand("set").setExecutor(new GiveSetCommand());
