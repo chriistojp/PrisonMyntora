@@ -40,9 +40,10 @@ public class ChristoClearStuff extends Command {
             Prison.getInstance().getConfig().set("lastMine", 1);
             Prison.getInstance().getConfig().set("lastGenerated", 0);
             Prison.getInstance().saveConfig();
-
-
-
+        }
+        if(args[0].equalsIgnoreCase("cell")) {
+            profile.getData().getPrisonCellStatus().setStatus(false);
+            profile.getData().getPrisonCellName().setCell("");
         }
 
     }

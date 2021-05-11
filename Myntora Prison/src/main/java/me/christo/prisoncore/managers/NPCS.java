@@ -35,9 +35,13 @@ public class NPCS {
         int lastGenerated = Prison.getInstance().getConfig().getInt("lastGenerated");
 
         for(int i = lastGenerated; lastGenerated >= 0; lastGenerated--) {
+
+            System.out.println("current number " + lastGenerated);
+
             Location loc = new Location(Bukkit.getWorld("prison_world"), (lastGenerated * 100) + 5, 71, (lastGenerated) * 100, 90, 0);
             ServersNPC.createNPC(i, NPCType.PLAYER, loc, "Bob");
 
+            System.out.println(i + " ");
             System.out.println(loc + " ");
 
         }

@@ -58,29 +58,28 @@ public final class Prison extends JavaPlugin {
 
         instance = this;
 
+        System.out.println("STARTING NPC GENERATION");
         NPCS.spawnNPCS();
         loadManagers();
         loadCommands();
 
 
-        Bukkit.getScheduler().runTaskTimer(this, () -> {
-            for(Player p : Bukkit.getOnlinePlayers()) {
-
-                Profile profile = Core.getInstance().getProfileManager().getProfile(p);
-                int tokensToAdd = profile.getData().getPrisonPetTokenFinderLevel().getAmount() * 2500;
-                int shardsToAdd = profile.getData().getPrisonPetShardFinderLevel().getAmount() * 25;
-
-
-                p.sendMessage(Color.prison("Pets", "Your pet has earned you &3" + shardsToAdd + " &7shards and &e" + tokensToAdd + "&7 tokens."));
-
-                profile.getData().getPrisonShards().increaseAmount(shardsToAdd);
-                profile.getData().getPrisonMoney().increaseAmount(tokensToAdd);
-
-
-
-
-            }
-        }, 20 * 60, 20 * 60);
+//        Bukkit.getScheduler().runTaskTimer(this, () -> {
+//            for(Player p : Bukkit.getOnlinePlayers()) {
+//
+//                Profile profile = Core.getInstance().getProfileManager().getProfile(p);
+//                int tokensToAdd = profile.getData().getPrisonPetTokenFinderLevel().getAmount() * 2500;
+//                int shardsToAdd = profile.getData().getPrisonPetShardFinderLevel().getAmount() * 25;
+//
+//
+//                profile.getData().getPrisonShards().increaseAmount(shardsToAdd);
+//                profile.getData().getPrisonMoney().increaseAmount(tokensToAdd);
+//
+//
+//
+//
+//            }
+//        }, 20 * 60, 20 * 60);
 
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new CratesCommand(), this);

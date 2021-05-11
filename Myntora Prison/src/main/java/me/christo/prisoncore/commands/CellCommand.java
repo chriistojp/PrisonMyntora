@@ -45,10 +45,15 @@ public class CellCommand extends Command {
                 long days = seconds / 86400;
                 long hours = (seconds / 3600) - (24 * days);
 
+                ;
                 String[] block = pf.getData().getPrisonCellName().getCell().split("\\.");
                 int x = Cells.getFile().getInt("cells." + block[0] + "." + block[1] + ".teleportLocation.x");
                 int y = Cells.getFile().getInt("cells." + block[0] + "." + block[1] + ".teleportLocation.y");
                 int z = Cells.getFile().getInt("cells." + block[0] + "." + block[1] + ".teleportLocation.z");
+
+                Bukkit.broadcastMessage(block[0]);
+                Bukkit.broadcastMessage(block[1]);
+                Bukkit.broadcastMessage("location: " + x + " " + y + " " + z + " ");
 
                 Location loc = new Location(Bukkit.getWorld("prison_spawn"), x, y, z);
                 p.teleport(loc);
