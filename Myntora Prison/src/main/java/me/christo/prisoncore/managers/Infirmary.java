@@ -28,9 +28,9 @@ public class Infirmary {
         }
 
         gui.i(20, new ItemStack(Material.POTION, 1, (byte) 16421), "&d&lSplash Potion of Healing II",
-                "", "&7For some fast health. Let's try not", "&7to die again.", "", "&a&lPrice: &7$(price)");
+                "", "&7For some fast health. Let's try not", "&7to die again.", "", "&a&lPrice: &7$10");
 
-        gui.i(24, Material.GOLDEN_APPLE, "&e&lGolden Apple", "&7Nom nom, we love health.", "", "&a&lPrice: &7$(price)");
+        gui.i(24, Material.GOLDEN_APPLE, "&e&lGolden Apple","", "&7Nom nom, we love health.", "", "&a&lPrice: &7$20");
 
 
         gui.onClick(e -> {

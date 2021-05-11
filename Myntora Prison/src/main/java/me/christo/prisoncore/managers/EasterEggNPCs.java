@@ -17,7 +17,8 @@ public class EasterEggNPCs implements Listener {
     public static void spawnEasterEggNPCs() {
 
         ServersNPC.createNPC(1001, NPCType.PLAYER, new Location(Bukkit.getWorld("prison_spawn"), -7, 100, 5, -130, 0), "Bob");
-
+        ServersNPC.createNPC(1002, NPCType.PLAYER, new Location(Bukkit.getWorld("prison_spawn"), 6, 98, -90, 115, 0), "Christo");
+        ServersNPC.createNPC(1003, NPCType.PLAYER, new Location(Bukkit.getWorld("prison_spawn"), 33, 98, -49.5, 89, 0), "Nurse");
     }
 
     @EventHandler
@@ -36,8 +37,16 @@ public class EasterEggNPCs implements Listener {
             //the module is the thing in [] and the body is the rest of the message
             player.sendMessage(Color.prison("Crates", "You found bob!"));
         }
+        ZNPC christo = ZNPC.find(1002);
 
+        if(event.getNpc().equals(christo)) {
+            player.sendMessage(Color.prison("NPC", "Casino up ahead!"));
+        }
+        ZNPC nurse = ZNPC.find(1003);
 
+        if(event.getNpc().equals(nurse)) {
+            Infirmary.openGui(player);
+        }
     }
 
 
