@@ -49,7 +49,8 @@ public enum Items {
     //FARMING
 
     KUSH(50, "farming", new ItemStack(Material.INK_SACK, 1, (byte) 2)),
-    SPEED(150, "farming", Material.SUGAR);
+    SPEED(150, "farming", Material.SUGAR),
+    NYQUIL(100, "farming", Material.MELON);
 
 
 

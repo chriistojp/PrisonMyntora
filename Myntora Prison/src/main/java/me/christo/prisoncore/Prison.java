@@ -3,6 +3,8 @@ package me.christo.prisoncore;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import lombok.Getter;
 import lombok.SneakyThrows;
+import me.christo.prisoncore.boosts.events.CropGrowEvent;
+import me.christo.prisoncore.boosts.events.KillEvent;
 import me.christo.prisoncore.commands.*;
 import me.christo.prisoncore.commands.admin.*;
 import me.christo.prisoncore.events.*;
@@ -15,7 +17,6 @@ import me.christo.prisoncore.pickaxe.events.PlayerBlockBreakEvent;
 import me.christo.prisoncore.pickaxe.events.SwitchToPickaxeEvent;
 import me.christo.prisoncore.pickaxe.events.ToolRightClickEvent;
 import me.christo.prisoncore.scoreboard.ScoreboardManager;
-import me.christo.prisoncore.sets.ZeusSet;
 import me.christo.prisoncore.shop.commands.ShopCommand;
 import me.christo.prisoncore.zones.commands.ZonesCommand;
 import net.myntora.core.core.Core;
@@ -83,7 +84,6 @@ public final class Prison extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new CratesCommand(), this);
-        getServer().getPluginManager().registerEvents(new ZeusSet(), this);
         getServer().getPluginManager().registerEvents(new CellEvents(), this);
         getServer().getPluginManager().registerEvents(new MineSelectorEvent(), this);
         getServer().getPluginManager().registerEvents(new FishCatchEvent(), this);
@@ -105,15 +105,18 @@ public final class Prison extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new NPCS(), this);
 
 
+        //boosters
+        getServer().getPluginManager().registerEvents(new CropGrowEvent(), this);
+        getServer().getPluginManager().registerEvents(new KillEvent(), this);
+
         getCommand("zone").setExecutor(new ZoneCommand());
         getCommand("crates").setExecutor(new CratesCommand());
-        getCommand("set").setExecutor(new GiveSetCommand());
         getCommand("format").setExecutor(new FormattedGUIs());
 
 
         //getServer().getPluginManager().registerEvents(new BlockGoalEvent(), this);
 
-        Sets.loadFile();
+
         Mines.loadFile();
         Zones.loadFile();
         Goals.loadFile();
@@ -187,7 +190,7 @@ public final class Prison extends JavaPlugin {
                 .register(new GambleCommand())
                 .register(new InfirmaryCommand())
                 .register(new SuicideCommand())
-                .register(new FillCommand());
+                .register(new SpawnCommand());
     }
 
 }

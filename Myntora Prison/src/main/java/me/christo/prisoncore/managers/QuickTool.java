@@ -34,10 +34,10 @@ public class QuickTool {
         Gui gui = new Gui("Quick Tool", 54);
         gui.fill(new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 15));
         gui.i(19, StarterPickaxe.getPlayersPickaxe(p));
-        gui.i(20, Material.DRAGON_EGG, "&d&lPet Menu", "", "&7Click to open the pet menu");
+        gui.i(20, Material.DRAGON_EGG, "&d&lPet Menu", "", "&7Click to open the pet menu.");
         gui.i(24, Material.MAP, "&e&lGang Info", "", "&7Click to display your gang info.");
         gui.i(25, Material.BOOK_AND_QUILL, "&f&lStats", "", "&7Click to display your stats.");
-        gui.i(39, Material.DIAMOND_PICKAXE, "&6&lTelepot to Mine", "", "&7Click to teleport to your mine.");
+        gui.i(39, Material.DIAMOND_PICKAXE, "&6&lTeleport to Mine", "", "&7Click to teleport to your mine.");
         gui.i(40, Material.NETHER_STAR, "&5&lSpawn Warp", "", "&7Click to teleport to spawn.");
         gui.i(41, Material.IRON_FENCE, "&a&lCell Warp", "", "&7Click to teleport to your cell.");
 

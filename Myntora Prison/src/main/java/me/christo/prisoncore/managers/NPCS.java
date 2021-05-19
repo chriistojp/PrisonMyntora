@@ -44,9 +44,9 @@ public class NPCS implements Listener {
             System.out.println("current number " + lastGenerated);
 
             Location loc = new Location(Bukkit.getWorld("prison_world"), (lastGenerated * 100) + 5, 71, (lastGenerated) * 100, 90, 0);
-            ServersNPC.createNPC(lastGenerated, NPCType.PLAYER, loc, "Bob");
+            ServersNPC.createNPC(100, NPCType.PLAYER, loc, "Bob");
 
-            System.out.println(i + " ");
+            ZNPC npc = ZNPC.find(1000);
             System.out.println(loc + " ");
 
         }
@@ -54,6 +54,9 @@ public class NPCS implements Listener {
     @EventHandler
     public void onNpcInteract(NPCInteractEvent event) {
         Player p = (Player) event.getPlayer();
+
+
+        Bukkit.broadcastMessage(event.getNpc().getEntityID() + "");
 
 
         if(event.getNpc().getEntityID() <= 1000) {
