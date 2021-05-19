@@ -35,7 +35,7 @@ public class EnchantsGUI implements Listener {
 
         int efficiencyCurrent = profile.getData().getPrisonEfficiencyLevel().getAmount();
         int fortuneCurrent = profile.getData().getPrisonFortuneLevel().getAmount();
-//        int crateFinderCurrent = profile.getData().getPrisonCr().getAmount();
+  //      int crateFinderCurrent = profile.getData().getPrisonC().getAmount();
         int currentSpeed = profile.getData().getPrisonSpeedLevel().getAmount();
         int currentJump = profile.getData().getPrisonSpeedLevel().getAmount();
         int currentHaste = profile.getData().getPrisonHasteLevel().getAmount();
