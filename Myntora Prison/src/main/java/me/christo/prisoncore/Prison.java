@@ -104,6 +104,7 @@ public final class Prison extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new EasterEggNPCs(), this);
         getServer().getPluginManager().registerEvents(new NPCS(), this);
 
+
         getCommand("zone").setExecutor(new ZoneCommand());
         getCommand("crates").setExecutor(new CratesCommand());
         getCommand("set").setExecutor(new GiveSetCommand());
@@ -185,7 +186,8 @@ public final class Prison extends JavaPlugin {
                 .register(new QuickToolCommand())
                 .register(new GambleCommand())
                 .register(new InfirmaryCommand())
-                .register(new SuicideCommand());
+                .register(new SuicideCommand())
+                .register(new FillCommand());
     }
 
 }

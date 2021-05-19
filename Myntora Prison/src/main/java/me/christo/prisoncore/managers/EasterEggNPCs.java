@@ -21,10 +21,6 @@ public class EasterEggNPCs implements Listener {
         ServersNPC.createNPC(1003, NPCType.PLAYER, new Location(Bukkit.getWorld("prison_spawn"), 33, 98, -49.5, 89, 0), "Nurse");
         ServersNPC.createNPC(1004, NPCType.PLAYER, new Location(Bukkit.getWorld("prison_spawn"), 129, 92, 29, 145, 0), "Farmer");
         ServersNPC.createNPC(1005, NPCType.PLAYER, new Location(Bukkit.getWorld("prison_spawn"), -20, 98, -78, -32, 0), "Cactus");
-        ServersNPC.createNPC(1006, NPCType.PLAYER, new Location(Bukkit.getWorld("prison_spawn"), -30, 98, -38, -178, 0), "Lunch Lady");
-        ServersNPC.createNPC(1007, NPCType.PLAYER, new Location(Bukkit.getWorld("prison_spawn"), 7, 98, 141, 157, 0), "Charlie");
-        ServersNPC.createNPC(1008, NPCType.PLAYER, new Location(Bukkit.getWorld("prison_spawn"), -12, 99, -136, -57, 0), "Noodles");
-        ServersNPC.createNPC(1009, NPCType.PLAYER, new Location(Bukkit.getWorld("prison_spawn"), -18, 98, 27, -133, 0), "Zay");
     }
 
     @EventHandler
@@ -41,12 +37,12 @@ public class EasterEggNPCs implements Listener {
         if(event.getNpc().equals(bob)) {
             //Color.prison is how we format everything.
             //the module is the thing in [] and the body is the rest of the message
-            player.sendMessage(Color.prison("Crates", "These crates are pretty cool! Check 'em out on our store!"));
+            player.sendMessage(Color.prison("Crates", "You found bob!"));
         }
         ZNPC christo = ZNPC.find(1002);
 
         if(event.getNpc().equals(christo)) {
-            player.sendMessage(Color.prison("NPC", "Casino up ahead! I've added some pretty fun stuff!"));
+            player.sendMessage(Color.prison("NPC", "Casino up ahead!"));
         }
         ZNPC nurse = ZNPC.find(1003);
 
@@ -62,26 +58,6 @@ public class EasterEggNPCs implements Listener {
 
         if(event.getNpc().equals(cactus)) {
             player.sendMessage(Color.prison("NPC", "Can you believe Zay coded this?!"));
-        }
-        ZNPC food = ZNPC.find(1006);
-
-        if(event.getNpc().equals(food)) {
-            player.sendMessage(Color.prison("NPC", "Meatloaf, again..."));
-        }
-        ZNPC charlie = ZNPC.find(1007);
-
-        if(event.getNpc().equals(charlie)) {
-            player.sendMessage(Color.prison("NPC", "Be careful out there!"));
-        }
-        ZNPC noodles = ZNPC.find(1008);
-
-        if(event.getNpc().equals(noodles)) {
-            player.sendMessage(Color.prison("NPC", "They say the casino is pretty epic! Go check it out!"));
-        }
-        ZNPC zay = ZNPC.find(1009);
-
-        if(event.getNpc().equals(zay)) {
-            player.sendMessage(Color.prison("NPC", "Sorry I can't talk right now, I'm planning season 2!"));
         }
     }
 
