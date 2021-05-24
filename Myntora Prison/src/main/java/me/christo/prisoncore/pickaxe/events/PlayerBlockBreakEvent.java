@@ -24,6 +24,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.Collection;
 import java.util.List;
 
 public class PlayerBlockBreakEvent implements Listener {
@@ -45,16 +46,18 @@ public class PlayerBlockBreakEvent implements Listener {
             }
 
         }
-
+        Collection<ItemStack> drops = e.getBlock().getDrops();
         e.getBlock().getDrops().clear();
 
-      //  Collection<ItemStack> drops = e.getBlock().getDrops();
+
 
         if(e.getPlayer().getItemInHand() != null) {
             if (e.getPlayer().getItemInHand().getType().equals(Material.DIAMOND_PICKAXE)) {
                 if (e.getPlayer().getItemInHand().hasItemMeta()) {
                     if (e.getPlayer().getItemInHand().getItemMeta().hasDisplayName()) {
                         if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().contains(Util.color("&7Right"))) {
+
+                            Bukkit.broadcastMessage("true");
 
                        //     Explosive.executeExplosive(p, e.getBlock());
                             JackHammer.executeJackHammer(p, e.getBlock());
@@ -63,9 +66,13 @@ public class PlayerBlockBreakEvent implements Listener {
 
                             StarterPickaxe.update(p);
 
-                            for(ItemStack i : e.getBlock().getDrops()) {
+                            Bukkit.broadcastMessage("0");
+                            for(ItemStack i : drops) {
+                                Bukkit.broadcastMessage("1");
                                 if(Items.isSellableItem(i)) {
+                                    Bukkit.broadcastMessage("2");
                                     Items item = Items.translateFromMaterial(i.getType());
+                                    Bukkit.broadcastMessage("3");
                                     assert item != null;
                                     double price = Items.getSellPrice(item);
                                     profile.getData().getPrisonMoney().increaseAmount((int) price);

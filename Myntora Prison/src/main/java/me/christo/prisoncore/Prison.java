@@ -7,6 +7,10 @@ import me.christo.prisoncore.boosts.events.CropGrowEvent;
 import me.christo.prisoncore.boosts.events.KillEvent;
 import me.christo.prisoncore.commands.*;
 import me.christo.prisoncore.commands.admin.*;
+import me.christo.prisoncore.commands.admin.warps.CreateWarpCommand;
+
+import me.christo.prisoncore.commands.admin.warps.DeleteWarpCommand;
+import me.christo.prisoncore.commands.admin.warps.ReloadWarpsFileCommand;
 import me.christo.prisoncore.events.*;
 import me.christo.prisoncore.managers.*;
 import me.christo.prisoncore.guis.FormattedGUIs;
@@ -126,6 +130,8 @@ public final class Prison extends JavaPlugin {
         FarmCells.loadFile();
         Gangs.loadFile();
         BlackMarket.loadFile();
+        Warps.loadFile();
+
     }
 
     @Override
@@ -190,7 +196,11 @@ public final class Prison extends JavaPlugin {
                 .register(new GambleCommand())
                 .register(new InfirmaryCommand())
                 .register(new SuicideCommand())
-                .register(new SpawnCommand());
+                .register(new SpawnCommand())
+                .register(new CreateWarpCommand())
+                .register(new DeleteWarpCommand())
+                .register(new WarpCommand())
+                .register(new ReloadWarpsFileCommand());
     }
 
 }
