@@ -1,6 +1,7 @@
 package me.christo.prisoncore.events;
 
 
+import me.christo.prisoncore.Prison;
 import me.christo.prisoncore.pickaxe.StarterPickaxe;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -15,7 +16,11 @@ public class RespawnEvent implements Listener {
     public void onRespawn(PlayerRespawnEvent e) {
 
         e.getPlayer().getInventory().addItem(StarterPickaxe.getPlayersPickaxe(e.getPlayer()));
-        e.getPlayer().teleport(new Location(Bukkit.getWorld("prison_spawn"), 30, 98, -49));
+
+        Bukkit.getScheduler().runTaskLater(Prison.getInstance(), () -> {
+            e.getPlayer().teleport(new Location(Bukkit.getWorld("prison_spawn"), 30.5, 98, -49.5, -90, 0));
+        }, 5);
+
 
     }
 

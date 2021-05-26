@@ -29,7 +29,7 @@ public class FarmShop {
         int dirtPrice = 0;
         int waterBucketPrice = 0;
 
-        for (int i = 0; i < 54; i++) {
+        for (int i = 0; i < 45; i++) {
 
             int random = ThreadLocalRandom.current().nextInt(0, 2);
             if (random == 1) {
@@ -39,13 +39,15 @@ public class FarmShop {
             }
         }
 
-        gui.i(12, Material.SAND, "&e&lSAND", "", "&7Price: &a$" + sandPrice, "", "&7Left-Click for 1", "Right-Click for 64");
-        gui.i(14, Material.SOUL_SAND, "&e&lSOUL SAND", "", "&7Price: &a$" + soulSandPrice, "", "&7Left-Click for 1", "Right-Click for 64");
-        gui.i(30, Material.DIRT, "&e&lDIRT", "", "&7Price: &a$" + dirtPrice, "", "&7Left-Click for 1", "Right-Click for 64");
+        gui.i(12, Material.SAND, "&e&lSAND", "", "&7Price: &a$" + sandPrice, "", "&7Left-Click for 1", "&7Right-Click for 64");
+        gui.i(14, Material.SOUL_SAND, "&e&lSOUL SAND", "", "&7Price: &a$" + soulSandPrice, "", "&7Left-Click for 1", "&7Right-Click for 64");
+        gui.i(30, Material.DIRT, "&e&lDIRT", "", "&7Price: &a$" + dirtPrice, "", "&7Left-Click for 1", "&7Right-Click for 64");
         gui.i(32, Material.WATER_BUCKET, "&e&lWATER BUCKET", "", "&7Price: &a$" + waterBucketPrice);
 
 
         gui.onClick(e -> {
+
+            e.setCancelled(true);
 
             if (e.getSlot() == 12) {
                 if (e.isLeftClick()) {
@@ -73,7 +75,7 @@ public class FarmShop {
                     }
                 }
             }
-            if (e.getSlot() == dirtPrice) {
+            if (e.getSlot() == 30) {
                 if (e.isLeftClick()) {
                     if (balance >= dirtPrice) {
                         profile.getData().getPrisonMoney().decreaseAmount(dirtPrice);
@@ -97,6 +99,8 @@ public class FarmShop {
 
 
         });
+
+        gui.show(p);
 
 
     }

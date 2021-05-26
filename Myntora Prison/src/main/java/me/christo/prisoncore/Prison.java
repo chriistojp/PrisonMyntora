@@ -23,6 +23,7 @@ import me.christo.prisoncore.pickaxe.events.ToolRightClickEvent;
 import me.christo.prisoncore.scoreboard.ScoreboardManager;
 import me.christo.prisoncore.shop.commands.ShopCommand;
 import me.christo.prisoncore.zones.commands.ZonesCommand;
+import net.citizensnpcs.api.event.NPCPushEvent;
 import net.myntora.core.core.Core;
 import net.myntora.core.core.command.CommandLib;
 import net.myntora.core.core.data.Profile;
@@ -64,6 +65,7 @@ public final class Prison extends JavaPlugin {
 
         System.out.println("STARTING NPC GENERATION");
         NPCS.spawnNPCS();
+     //   NPCS.spawnFarmNPC();
         loadManagers();
         loadCommands();
         EasterEggNPCs.spawnEasterEggNPCs();
@@ -200,7 +202,8 @@ public final class Prison extends JavaPlugin {
                 .register(new CreateWarpCommand())
                 .register(new DeleteWarpCommand())
                 .register(new WarpCommand())
-                .register(new ReloadWarpsFileCommand());
+                .register(new ReloadWarpsFileCommand())
+                .register(new StartRouletteCommand());
     }
 
 }
