@@ -3,6 +3,8 @@ package me.christo.prisoncore.events;
 
 import me.christo.prisoncore.managers.Pets;
 import me.christo.prisoncore.pickaxe.StarterPickaxe;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +18,7 @@ public class JoinEvent implements Listener {
 
         Player p = e.getPlayer();
         if(!e.getPlayer().hasPlayedBefore()) {
+            p.teleport(new Location(Bukkit.getWorld("prison_spawn"), 0, 100 ,0));
             e.getPlayer().getInventory().addItem(StarterPickaxe.getPlayersPickaxe(e.getPlayer()));
             Pets.giveItemStack(e.getPlayer());
         } else {
