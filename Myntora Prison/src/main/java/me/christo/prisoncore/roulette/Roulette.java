@@ -1,3 +1,4 @@
+/*
 package me.christo.prisoncore.roulette;
 
 
@@ -18,7 +19,6 @@ public class Roulette {
 
     public static void loadLocations() {
 
-
         Location location;
 
         location = new Location(Bukkit.getWorld("prison_spawn"), -7, 100, -225);
@@ -30,8 +30,6 @@ public class Roulette {
 
             locations.add(location);
         }
-
-
     }
 
     public static void start() {
@@ -80,3 +78,4 @@ public class Roulette {
     }
 
 }
+*/
