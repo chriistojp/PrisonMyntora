@@ -73,6 +73,10 @@
             <id>IntellectualSites</id>
             <url>https://mvn.intellectualsites.com/content/repositories/releases/</url>
         </repository>
+        <repository>
+            <id>HeadDatabase-API</id>
+            <url>https://mvn.intellectualsites.com/content/repositories/thirdparty/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -80,6 +84,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.12</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.arcaniax</groupId>
+            <artifactId>HeadDatabase-API</artifactId>
+            <version>1.1.0</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -137,13 +147,6 @@
             <version>?</version>
             <scope>system</scope>
             <systemPath>${project.basedir}/libs/Citizens.jar</systemPath>
-        </dependency>
-        <dependency>
-            <groupId>head-database</groupId>
-            <artifactId>head</artifactId>
-            <version>?</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/libs/HeadDatabase-4.13.5.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>npcs</groupId>

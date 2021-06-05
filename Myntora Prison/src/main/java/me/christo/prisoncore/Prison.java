@@ -39,55 +39,25 @@ import java.io.File;
 public final class Prison extends JavaPlugin {
 
     public static Prison instance;
-
     @Getter
     private ScoreboardManager scoreboardManager;
-
     @Getter
     public Manager manager;
-
-
 
     @SneakyThrows
     @Override
     public void onEnable() {
-
         // 1 shard digger = 25 shards/min
         // 1 token fetcher = 2500 tokens/min //50
-
         File file = new File(getDataFolder(), "config.yml");
         if (!file.exists())
             saveDefaultConfig();
-
-
-
         instance = this;
-
         System.out.println("STARTING NPC GENERATION");
         NPCS.spawnNPCS();
-     //   NPCS.spawnFarmNPC();
         loadManagers();
         loadCommands();
         EasterEggNPCs.spawnEasterEggNPCs();
-
-
-//        Bukkit.getScheduler().runTaskTimer(this, () -> {
-//            for(Player p : Bukkit.getOnlinePlayers()) {
-//
-//                Profile profile = Core.getInstance().getProfileManager().getProfile(p);
-//                int tokensToAdd = profile.getData().getPrisonPetTokenFinderLevel().getAmount() * 2500;
-//                int shardsToAdd = profile.getData().getPrisonPetShardFinderLevel().getAmount() * 25;
-//
-//
-//                profile.getData().getPrisonShards().increaseAmount(shardsToAdd);
-//                profile.getData().getPrisonMoney().increaseAmount(tokensToAdd);
-//
-//
-//
-//
-//            }
-//        }, 20 * 60, 20 * 60);
-
         getServer().getPluginManager().registerEvents(new JoinEvent(), this);
         getServer().getPluginManager().registerEvents(new CratesCommand(), this);
         getServer().getPluginManager().registerEvents(new CellEvents(), this);
@@ -95,34 +65,22 @@ public final class Prison extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new FishCatchEvent(), this);
         getServer().getPluginManager().registerEvents(new FarmMineSelectorEvent(), this);
         getServer().getPluginManager().registerEvents(new GangChatEvent(), this);
-
         getServer().getPluginManager().registerEvents(new ToolRightClickEvent(), this);
         getServer().getPluginManager().registerEvents(new DropPickaxeEvent(), this);
         getServer().getPluginManager().registerEvents(new PlayerBlockBreakEvent(), this);
         getServer().getPluginManager().registerEvents(new SwitchToPickaxeEvent(), this);
         getServer().getPluginManager().registerEvents(new BoosterRightClickEvent(), this);
         getServer().getPluginManager().registerEvents(new QuickToolEvent(), this);
-
         getServer().getPluginManager().registerEvents(new PetsClickEvent(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);
         getServer().getPluginManager().registerEvents(new RespawnEvent(), this);
-
         getServer().getPluginManager().registerEvents(new EasterEggNPCs(), this);
         getServer().getPluginManager().registerEvents(new NPCS(), this);
-
-
-        //boosters
         getServer().getPluginManager().registerEvents(new CropGrowEvent(), this);
         getServer().getPluginManager().registerEvents(new KillEvent(), this);
-
         getCommand("zone").setExecutor(new ZoneCommand());
         getCommand("crates").setExecutor(new CratesCommand());
         getCommand("format").setExecutor(new FormattedGUIs());
-
-
-        //getServer().getPluginManager().registerEvents(new BlockGoalEvent(), this);
-
-
         Mines.loadFile();
         Zones.loadFile();
         Goals.loadFile();
@@ -133,15 +91,7 @@ public final class Prison extends JavaPlugin {
         Gangs.loadFile();
         BlackMarket.loadFile();
         Warps.loadFile();
-
     }
-
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
-    }
-
-
 
     public static Prison getInstance() {
         return instance;
@@ -205,5 +155,4 @@ public final class Prison extends JavaPlugin {
                 .register(new ReloadWarpsFileCommand())
                 .register(new StartRouletteCommand());
     }
-
 }
